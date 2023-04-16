@@ -3,8 +3,149 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Golden Classic Buttons</title>
+	<title>Forex Signals</title>
 	<style>
+		body {
+			background-color: #87CEEB;
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 50px;
+			background-color: #FFFFFF;
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+			text-align: center;
+			position: relative;
+			overflow: hidden;
+			z-index: 1;
+		}
+		h1 {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 48px;
+			font-weight: bold;
+			color: #0078FF;
+			margin-top: 20px;
+			margin-bottom: 30px;
+		}
+		p {
+			font-family: 'Montserrat', sans-serif;
+			font-size: 24px;
+			color: #666;
+			margin-top: 20px;
+			margin-bottom: 30px;
+		}
+		button {
+			background-color: goldenrod;
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 24px;
+			margin: 0 auto;
+			cursor: pointer;
+			border-radius: 10px;
+			box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+			transition: all 0.3s ease-in-out;
+		}
+		button:hover {
+			background-color: #CDAF95;
+			transform: scale(1.05);
+		}
+		form {
+			margin-top: 50px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		label {
+			font-size: 24px;
+			color: #333;
+			margin-bottom: 10px;
+		}
+		select {
+			font-size: 24px;
+			padding: 10px;
+			border-radius: 10px;
+			border: none;
+			background-color: goldenrod;
+			color: white;
+			margin-top: 10px;
+			box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+		}
+		option {
+			font-size: 24px;
+			color: white;
+			background-color: goldenrod;
+		}
+		button[type="submit"] {
+			background-color: goldenrod;
+			margin-top: 50px;
+			box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+			transition: all 0.3s ease-in-out;
+		}
+		button[type="submit"]:hover {
+			background-color: #CDAF95;
+			transform: scale(1.05);
+		}
+		.disclaimer {
+			font-size: 18px;
+			color: #666;
+			margin-top: 50px;
+			margin-bottom: 20px;
+		}
+		.popup {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			background-color: rgba(0, 0, 0, 0.7);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 2;
+			opacity: 0;
+			visibility: hidden;
+			transition: all 0.3s ease-in-out;
+		}
+		.popup.active {
+			opacity: 1;
+			visibility: visible;
+		}
+		.popup-content {
+			background-color: #FFFFFF;
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+			padding: 50px;
+			text-align: justify;
+			max-width: 80%;
+			max-height: 80%;
+			overflow: auto;
+		}
+		.close {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			font-size: 24px;
+			color: #333;
+			cursor: pointer;
+			transition: all 0.3s ease-in-out;
+		}
+		.close:hover {
+			color: #0078FF;
+		}
+		.button-container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+		}
 		.button {
 			background-color: goldenrod;
 			border: none;
@@ -20,55 +161,95 @@
 			font-family: 'Montserrat', sans-serif;
 			font-weight: bold;
 			transition: all 0.3s ease-in-out;
+			box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 		}
 		.button:hover {
 			background-color: #CDAF95;
 			color: white;
-		}
-		h1 {
-			font-family: 'Montserrat', sans-serif;
-			font-size: 30px;
-			font-weight: bold;
-			text-align: center;
-			color: #CDAF95;
-			margin-top: 50px;
-		}
-		p {
-			font-family: 'Montserrat', sans-serif;
-			font-size: 16px;
-			text-align: center;
-			color: #555;
-			margin-top: 20px;
-		}
-		.button-container {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-			align-items: center;
-			margin-top: 20px;
+			transform: scale(1.05);
 		}
 		@media screen and (max-width: 600px) {
-			.button {
-				padding: 8px 16px;
-				font-size: 14px;
-			}
 			h1 {
-				font-size: 24px;
-			}
-			p {
-				font-size: 14px;
-			}
+				font-size: 24
+px;
+			margin-bottom: 10px;
 		}
+		p {
+			font-size: 16px;
+			margin-bottom: 20px;
+		}
+	}
 	</style>
 </head>
 <body>
-	<h1>Golden Classic Buttons</h1>
-	<p>Select your favorite button:</p>
-	<div class="button-container">
-		<a class="button" href="#">Button 1</a>
-		<a class="button" href="#">Button 2</a>
-		<a class="button" href="#">Button 3</a>
-		<a class="button" href="#">Button 4</a>
+	<div class="container">
+		<h1>Forex Signals</h1>
+		<p>Select your preferred trading instrument:</p>
+		<form>
+			<label for="instrument">Instrument:</label>
+			<select id="instrument" name="instrument">
+				<option value="EURUSD">EUR/USD</option>
+				<option value="GBPUSD">GBP/USD</option>
+				<option value="USDJPY">USD/JPY</option>
+				<option value="USDCAD">USD/CAD</option>
+				<option value="AUDUSD">AUD/USD</option>
+				<option value="NZDUSD">NZD/USD</option>
+				<option value="XAUUSD">Gold</option>
+				<option value="XAGUSD">Silver</option>
+				<option value="BTCUSD">Bitcoin</option>
+				<option value="ETHUSD">Ethereum</option>
+			</select>
+			<button type="submit">Get Signals</button>
+		</form>
+		<p class="disclaimer">Disclaimer: These signals are for educational purposes only and should not be considered as financial advice. Trading in the foreign exchange market carries a high level of risk and may not be suitable for all investors. Past performance is not indicative of future results.</p>
+		<div class="popup">
+			<div class="popup-content">
+				<h2>Trading Signals for EUR/USD</h2>
+				<p>Buy: 1.2000<br>Sell: 1.1950<br>Take Profit: 1.2100<br>Stop Loss: 1.1900</p>
+				<p>Buy: 1.2050<br>Sell: 1.2000<br>Take Profit: 1.2150<br>Stop Loss: 1.1950</p>
+				<p>Buy: 1.2100<br>Sell: 1.2050<br>Take Profit: 1.2200<br>Stop Loss: 1.2000</p>
+				<p>Buy: 1.2150<br>Sell: 1.2100<br>Take Profit: 1.2250<br>Stop Loss: 1.2050</p>
+				<p>Buy: 1.2200<br>Sell: 1.2150<br>Take Profit: 1.2300<br>Stop Loss: 1.2100</p>
+				<p class="close">Close</p>
+			</div>
+		</div>
+		<div class="button-container">
+			<button class="button" onclick="showPopup('EUR/USD')">EUR/USD</button>
+			<button class="button" onclick="showPopup('GBP/USD
+		Apologies for the inconvenience. Here is the rest of the code:
+
+```
+')">GBP/USD</button>
+			<button class="button" onclick="showPopup('USD/JPY')">USD/JPY</button>
+			<button class="button" onclick="showPopup('USD/CAD')">USD/CAD</button>
+			<button class="button" onclick="showPopup('AUD/USD')">AUD/USD</button>
+			<button class="button" onclick="showPopup('NZD/USD')">NZD/USD</button>
+			<button class="button" onclick="showPopup('Gold')">Gold</button>
+			<button class="button" onclick="showPopup('Silver')">Silver</button>
+			<button class="button" onclick="showPopup('Bitcoin')">Bitcoin</button>
+			<button class="button" onclick="showPopup('Ethereum')">Ethereum</button>
+		</div>
 	</div>
+	<script>
+		const popup = document.querySelector('.popup');
+		const close = document.querySelector('.close');
+
+		function showPopup(instrument) {
+			const popupContent = document.querySelector('.popup-content');
+			popupContent.innerHTML = `
+				<h2>Trading Signals for ${instrument}</h2>
+				<p>Buy: 1.2000<br>Sell: 1.1950<br>Take Profit: 1.2100<br>Stop Loss: 1.1900</p>
+				<p>Buy: 1.2050<br>Sell: 1.2000<br>Take Profit: 1.2150<br>Stop Loss: 1.1950</p>
+				<p>Buy: 1.2100<br>Sell: 1.2050<br>Take Profit: 1.2200<br>Stop Loss: 1.2000</p>
+				<p>Buy: 1.2150<br>Sell: 1.2100<br>Take Profit: 1.2250<br>Stop Loss: 1.2050</p>
+				<p>Buy: 1.2200<br>Sell: 1.2150<br>Take Profit: 1.2300<br>Stop Loss: 1.2100</p>
+			`;
+			popup.classList.add('active');
+		}
+
+		close.addEventListener('click', () => {
+			popup.classList.remove('active');
+		});
+	</script>
 </body>
 </html>
