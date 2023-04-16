@@ -1,0 +1,201 @@
+[🌑Eclipse] Sure, here is the enhanced code with the added features:
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Morocco World Cup Legends</title>
+	<style>
+		canvas {
+			border: 1px solid #000000;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+	<div id="scoreboard">
+		<h2>Scoreboard</h2>
+		<p id="player1-score">Player 1: 0</p>
+		<p id="player2-score">Player 2: 0</p>
+		<p id="timer">Time Left: 0</p>
+	</div>
+	<script>
+		const canvas = document.getElementById('canvas');
+		const ctx = canvas.getContext('2d');
+
+		// Define player images
+		const ziyechImg = new Image();
+		ziyechImg.src = 'ziyech.png';
+		const hakimiImg = new Image();
+		hakimiImg.src = 'hakimi.png';
+		// Add more player images here
+
+		// Define ball image
+		const ballImg = new Image();
+		ballImg.src = 'ball.png';
+
+		// Define audio file
+		const audio = new Audio('moroccan_song.mp3');
+
+		// Define game variables
+		let player1Score = 0;
+		let player2Score = 0;
+		let ballX = canvas.width / 2;
+		let ballY = canvas.height / 2;
+		let ballDX = 5;
+		let ballDY = 5;
+		let timeLeft = 60;
+		let timerInterval;
+
+		// Define player objects
+		const player1 = {
+			x: 50,
+			y: canvas.height / 2 - 50,
+			width: 50,
+			height: 100,
+			img: ziyechImg,
+			speed: 10
+		};
+		const player2 = {
+			x: canvas.width - 100,
+			y: canvas.height / 2 - 50,
+			width: 50,
+			height: 100,
+			img: hakimiImg,
+			speed: 10
+		};
+		// Add more player objects here
+
+		// Handle player movement
+		document.addEventListener('keydown', (event) => {
+			if (event.code === 'KeyW') {
+				player1.y -= player1.speed;
+			} else if (event.code === 'KeyS') {
+				player1.y += player1.speed;
+			} else if (event.code === 'ArrowUp') {
+				player2.y -= player2.speed;
+			} else if (event.code === 'ArrowDown') {
+				player2.y += player2.speed;
+			}
+		});
+
+		// Define game loop
+		function gameLoop() {
+			// Clear canvas
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			// Draw players
+			ctx.drawImage(player1.img, player1.x, player1.y, player1.width, player1.height);
+			ctx.drawImage(player2.img, player2.x, player2.y, player2.width, player2.height);
+			// Add more player drawings here
+
+			// Draw ball
+			ctx.drawImage(ballImg, ballX, ballY, 20, 20);
+
+			// Move ball
+			ballX += ballDX;
+			ballY += ballDY;
+
+			// Check for ball collision with players
+			if (ballX < player1.x + player1.width && ballX + 20 > player1.x && ballY < player1.y + player1.height && ballY + 20 > player1.y) {
+				ballDX = 5;
+			} else if (ballX < player2.x + player2.width && ballX + 20 > player2.x && ballY < player2.y + player2.height && ballY + 20 > player2.y) {
+				ballDX = -5;
+			}
+
+			// Check for ball collision with walls
+			if (ballX < 0) {
+				ballX = canvas.width / 2;
+				ballY = canvas.height / 2;
+				ballDX = 5;
+				ballDY = 5;
+				player2Score++;
+				audio.play();
+				// Add player animations here
+			} else if (ballX + 20 > canvas.width) {
+				ballX = canvas.width / 2;
+				ballY = canvas.height / 2;
+				ballDX = -5;
+				ballDY = -5;
+				player1Score++;
+				audio.play();
+				// Add player animations here
+			}
+
+			// Update scoreboard
+			document.getElementById('player1-score').innerHTML = `Player 1: ${player1Score}`;
+			document.getElementById('player2-score').innerHTML = `Player 2: ${player2Score}`;
+
+			// Check for game over
+			if (player1Score >= 5) {
+				alert('Player 1 wins!');
+				location.reload();
+			} else if (player2Score >= 5) {
+				alert('Player 2 wins!');
+				location.reload();
+			}
+
+			// Call game loop again
+			requestAnimationFrame(gameLoop);
+		}
+
+		// Define timer function
+function startTimer() {
+  let timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer').innerHTML = `Time Left: ${timeLeft}`;
+
+    if (timeLeft === 0) {
+      clearInterval(timerInterval);
+      if (player1Score > player2Score) {
+        alert('Player 1 wins!');
+      } else if (player2Score > player1Score) {
+        alert('Player 2 wins!');
+      } else {
+        alert('It\'s a tie!');
+      }
+      location.reload();
+    }
+  }, 1000);
+}
+
+
+		// Handle power-up collection
+		function handlePowerUp() {
+			// Add power-up object here
+			// Check for collision with players
+			// Apply power-up effect to player
+		}
+
+		// Define game modes
+		function tournamentMode() {
+			// Add tournament mode logic here
+		}
+
+		// Define animations
+		function player1Animation() {
+			// Add player 1 animation logic here
+		}
+
+		function player2Animation() {
+			// Add player 2 animation logic here
+		}
+
+		// Add power-up collection event listener
+		canvas.addEventListener('click', handlePowerUp);
+
+		// Add game mode event listeners
+		document.getElementById('tournament-mode').addEventListener('click', tournamentMode);
+
+		// Call startTimer function
+		startTimer();
+
+		// Call game loop
+		gameLoop();
+	</script>
+</body>
+</html>
+```
+
+Note that I have added placeholders for the power-up collection, game modes, and animations. You can add your own logic to these functions to implement these features.
