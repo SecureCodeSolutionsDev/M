@@ -129,9 +129,28 @@
            color: rgba(0, 255, 255, .8); /* Match button text color for analysis titles */
        }
 
+       .artistic-text {
+           font-size: 36px; /* Font size for artistic text */
+           color: #FFD700; /* Gold text color */
+           text-shadow: 0 0 5px rgba(255,215,0,.7), 
+                        0 0 10px rgba(255,215,0,.5), 
+                        0 0 15px rgba(255,215,0,.3); /* Glowing effect for artistic text */
+           animation: flashText 1s infinite alternate; /* Flashing animation for artistic text */
+           cursor: pointer; /* Pointer cursor on hover */
+       }
+
+       @keyframes flashText {
+           from {
+               opacity: 1;
+           }
+           to {
+               opacity: 0.5;
+           }
+       }
+
 </style>
-  </head>
-  <body>
+</head>
+<body>
 
     <h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
 
@@ -180,6 +199,20 @@
 			<!-- Insert your chart images or HTML here -->
 			<img src="[Your Chart Image URL]" alt="Chart Analysis" style="max-width:100%;">
 		</div>
+      </div>
+    </div>
+
+    <!-- Contact Information Section -->
+    <div style="margin-top:30px;">
+      <span class="artistic-text" onclick="showContactPopup()">Coder & Owner Mroane Oitache Contact</span>
+    </div>
+
+    <!-- Contact Popup -->
+    <div class="popup" id="contactPopup">
+      <div class="popup-content">
+          <span class="close" onclick="closeContactPopup()">×</span> <!-- Close button -->
+          <h2 style="color:#FFD700;">Contact Information</h2>
+          <p>Email: <strong>oitache123@gmail.com</strong></p>
       </div>
     </div>
 
@@ -277,7 +310,17 @@
              const toggleButton = document.getElementById('toggleChartBtn');
              toggleButton.textContent = 'Show Chart'; // Reset toggle button text
          }
+
+         function showContactPopup() {
+             const contactPopup = document.getElementById('contactPopup');
+             contactPopup.classList.add('active');
+         }
+
+         function closeContactPopup() {
+             const contactPopup = document.getElementById('contactPopup');
+             contactPopup.classList.remove('active');
+         }
 </script>
 
-  </body>
+</body>
 </html>
