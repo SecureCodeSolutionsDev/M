@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glowing Buttons with Animation</title>
-<style>
+    <style>
         body {
             background-color: #121212; /* Dark background for a modern look */
             margin: 0;
@@ -57,6 +57,8 @@
         .popup {
             width:auto ; 
             height:auto ; 
+            max-width: 600px; /* Set a maximum width for popups */
+            max-height: calc(80vh - 40px); /* Set a maximum height for popups */
             position :fixed ; 
             top :50%; 
             left :50%; 
@@ -203,8 +205,8 @@
     </div>
 
     <!-- Contact Information Section -->
-    <div style="margin-top:30px;">
-      <span class="artistic-text" onclick="showContactPopup()">Coder & Owner Mroane Oitache Contact</span>
+    <div style="margin-top:30px;" id="contactInfo">
+      <span class="artistic-text">Coder & Owner Mroane Oitache Contact</span>
     </div>
 
     <!-- Contact Popup -->
@@ -230,6 +232,9 @@
              
              const signalPopup = document.getElementById('signalPopup');
              const buttons = document.querySelectorAll('.button');
+
+             // Hide contact information
+             document.getElementById('contactInfo').style.display = 'none';
 
              // Remove glow from all buttons
              buttons.forEach(btn => btn.classList.remove('glow'));
@@ -284,22 +289,24 @@
 
               // Show chart toggle button when signal popup is closed
               document.getElementById('toggleChartBtn').style.display = 'inline-block';
+
+              // Show contact information again
+              document.getElementById('contactInfo').style.display = 'block';
          }
 
          function toggleChart(button) {
              const chartPopup = document.getElementById('chartPopup');
-             chartVisible = !chartVisible;
-
+             
              if (!chartVisible) { // If chart is not visible yet
                  chartVisible = true; // Set to visible
                  chartPopup.classList.add('active'); // Show chart popup
-                 document.getElementById('toggleChartBtn').textContent = 'Hide Chart'; // Change button text to Hide Chart
-                 document.getElementById('toggleChartBtn').classList.add('glow'); // Add glow effect on click
+                 button.textContent = 'Hide Chart'; // Change button text to Hide Chart
+                 button.classList.add('glow'); // Add glow effect on click
              } else { // If chart is already visible
                  chartVisible = false; // Set to not visible
                  chartPopup.classList.remove('active'); // Hide chart popup
-                 document.getElementById('toggleChartBtn').textContent = 'Show Chart'; // Change back to Show Chart
-                 document.getElementById('toggleChartBtn').classList.remove('glow'); // Remove glow effect when hiding chart
+                 button.textContent = 'Show Chart'; // Change back to Show Chart
+                 button.classList.remove('glow'); // Remove glow effect when hiding chart
              }
          }
 
@@ -313,6 +320,9 @@
              toggleButton.textContent = 'Show Chart'; // Reset toggle button text
 
              chartVisible = false; // Reset visibility state of the chart
+
+             // Show contact information again after closing chart popup
+             document.getElementById('contactInfo').style.display = 'block';
          }
 
          function showContactPopup() {
