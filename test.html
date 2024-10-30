@@ -67,9 +67,6 @@
 			font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
             position: relative; /* Needed for absolute positioning of random movement */
-            animation-duration: .75s; /* Duration of the movement */
-            animation-iteration-count: infinite; /* Infinite repetitions */
-            animation-direction: alternate; /* Alternate direction on each iteration */
             text-shadow:
                 -2   -2   rgba(255,215,0,.7),
                 -2   -2   rgba(255,215,0,.5); /* Gold glow effect */
@@ -79,15 +76,13 @@
             color: white; 
             transform: scale(1.05);
         }
-        .flashing {
-            animation-name: flashColor;
-            animation-duration: .75s;
-            animation-iteration-count: infinite;
-        }
 
-        @keyframes flashColor {
-          from { color:#FFD700; } /* Start with gold color */
-          to { color:#FFFFFF; }   /* Change to white color */
+        .glow-effect {
+            text-shadow:
+                -2px -2px rgba(255,215,0,.7),
+                -2px -2px rgba(255,215,0,.5),
+                -4px -4px rgba(255,215,0,.3),
+                -6px -6px rgba(255,215,0,.2); /* Glow effect for gold/silver/crypto buttons */
         }
 
         .popup {
@@ -135,14 +130,6 @@
             text-shadow:
                 -2   -2   rgba(255,215,0,.7),
                 -2   -2   rgba(255,215,0,.5); /* Gold glow effect for analysis titles */
-            animation-name: flashGlowAnalysis; /* Flashing glow animation for analysis titles */
-            animation-duration:.75s;
-            animation-iteration-count: infinite;
-        }
-
-        @keyframes flashGlowAnalysis {
-          from { color:#000000; } /* Black color at start */
-          to { color:#FFD700; }   /* Gold color at end of animation */
         }
 
     </style>
@@ -165,16 +152,16 @@
           <button class="button" onclick="showPopup('NZD/USD')">NZD/USD</button>
         </div>
         <div class="row">
-          <button class="button" onclick="showPopup('Gold')">Gold</button>
-          <button class="button" onclick="showPopup('Silver')">Silver</button>
-          <button class="button" onclick="showPopup('Bitcoin')">Bitcoin</button>
-          <button class="button" onclick="showPopup('Ethereum')">Ethereum</button>
+          <button class="button glow-effect" onclick="showPopup('Gold')">Gold</button>
+          <button class="button glow-effect" onclick="showPopup('Silver')">Silver</button>
+          <button class="button glow-effect" onclick="showPopup('Bitcoin')">Bitcoin</button>
+          <button class="button glow-effect" onclick="showPopup('Ethereum')">Ethereum</button>
         </div>
     </div>
 
     <div style="margin-top:20px;">
-        <p class="analysis-title">Coder & Owner:</p>
-        <p style="color:#FFD700;">oitache123@gmail.com</p>
+        <p class="analysis-title">Coder & Owner:</p> <!-- No flashing effect -->
+        <p style="color:#FFD700;">oitache123@gmail.com</p> <!-- Email -->
     </div>
 
     <div class="popup">
