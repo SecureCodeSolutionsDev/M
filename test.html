@@ -21,25 +21,7 @@
 			text-shadow: 
                 0 0 5px rgba(255, 215, 0, 0.7), /* Reduced gold glow */
                 0 0 10px rgba(255, 215, 0, 0.5); /* Brighter gold glow */
-            animation: flashGlow 1.5s infinite alternate; /* Flashing glow animation */
 		}
-		@keyframes flashGlow {
-            0% {
-                text-shadow: 
-                    0 0 5px rgba(255, 215, 0, 0.7), 
-                    0 0 10px rgba(255, 215, 0, 0.5);
-            }
-            50% {
-                text-shadow: 
-                    0 0 15px rgba(255, 215, 0, 1), 
-                    0 0 30px rgba(255, 215, 0, 1);
-            }
-            100% {
-                text-shadow: 
-                    0 0 5px rgba(255, 215, 0, 0.7), 
-                    0 0 10px rgba(255,215,0,.5);
-            }
-        }
 		.button-container {
 			display: flex;
 			flex-direction: column; /* Arrange in a column for pyramid shape */
@@ -52,44 +34,28 @@
 			width: fit-content; /* Fit to content width */
 		}
 		.button {
-			background-color: goldenrod; /* Gold color for buttons */
-			border: none;
-			color: white;
-			padding: 10px 20px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 16px;
-			margin: 4px; /* Margin around buttons */
-			cursor: pointer;
-			border-radius: 5px;
-			font-family: 'Montserrat', sans-serif;
-			font-weight: bold;
+            background-color: #007BFF; /* Elegant blue color */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px; /* Margin around buttons */
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* Shadow effect */
             transition: all .3s ease-in-out; /* Transition for hover effect */
-            position: relative; /* Needed for absolute positioning of random movement */
-            animation-duration: .75s; /* Duration of the movement */
-            animation-iteration-count: infinite; /* Infinite repetitions */
-            animation-direction: alternate; /* Alternate direction on each iteration */
-            text-shadow:
-                -2   -2   rgba(255,215,0,.7),
-                -2   -2   rgba(255,215,0,.5); /* Gold glow effect */
-		}
+            text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Blue glow effect */
+        }
         .button:hover {
-            background-color: #CDAF95; /* Lighter color on hover */
+            background-color: #0056b3; /* Darker blue on hover */
             color: white; 
             transform: scale(1.05);
         }
-        .flashing {
-            animation-name: flashColor;
-            animation-duration: .75s;
-            animation-iteration-count: infinite;
-        }
-
-        @keyframes flashColor {
-          from { color:#FFD700; } /* Start with gold color */
-          to { color:#FFFFFF; }   /* Change to white color */
-        }
-
         .popup {
             width: calc(100%); /* Full width for popup */
             height: calc(100%); /* Full height for popup */
@@ -110,16 +76,16 @@
             visibility:visible; 
         }
         .popup-content {
-            border-radius :10 px; 
-            box-shadow :rgba(255 ,255 ,255 ,.2) -1 px -1 px ,rgba(255 ,255 ,255 ,.2) -2 px -2 px ,rgba(255 ,255 ,255 ,.2) -3 px -3 px ; /* Soft shadow for popup */
-            padding :20 px ; 
+            border-radius :10px; 
+            box-shadow :rgba(255 ,255 ,255 ,.2) -1px -1px ,rgba(255 ,255 ,255 ,.2) -2px -2px ,rgba(255 ,255 ,255 ,.2) -3px -3px ; /* Soft shadow for popup */
+            padding :20px ; 
             text-align :justify ; 
         }
         .close {
            position:absolute; 
-           top :20 px; 
-           right :20 px; 
-           font-size :24 px; 
+           top :20px; 
+           right :20px; 
+           font-size :24px; 
            color :#333; 
            cursor:pointer; 
            transition :all .3s ease-in-out; 
@@ -132,17 +98,6 @@
             font-family:'Montserrat', sans-serif;
             font-size:24px;
             color:#000000; /* Black color for analysis titles */
-            text-shadow:
-                -2   -2   rgba(255,215,0,.7),
-                -2   -2   rgba(255,215,0,.5); /* Gold glow effect for analysis titles */
-            animation-name: flashGlowAnalysis; /* Flashing glow animation for analysis titles */
-            animation-duration:.75s;
-            animation-iteration-count: infinite;
-        }
-
-        @keyframes flashGlowAnalysis {
-          from { color:#000000; } /* Black color at start */
-          to { color:#FFD700; }   /* Gold color at end of animation */
         }
 
     </style>
@@ -153,7 +108,7 @@
 
     <div class="button-container">
         <div class="row">
-          <button class="button" onclick="showPopup('EUR/USD')"><span class="flashing">EUR/USD</span></button>
+          <button class="button" onclick="showPopup('EUR/USD')">EUR/USD</button>
         </div>
         <div class="row">
           <button class="button" onclick="showPopup('GBP/USD')">GBP/USD</button>
@@ -173,8 +128,7 @@
     </div>
 
     <div style="margin-top:20px;">
-        <p class="analysis-title">Coder & Owner:</p>
-        <p style="color:#FFD700;">oitache123@gmail.com</p>
+        <p class="analysis-title"></p>
     </div>
 
     <div class="popup">
@@ -196,19 +150,39 @@
     <script>
         function showPopup(instrument) {
             const popupTitle = document.getElementById('popup-title');
-            
-            // Update the title based on the selected instrument
             popupTitle.textContent = `Trading Signals for ${instrument}`;
             
             const popup = document.querySelector('.popup');
+            const buttons = document.querySelectorAll('.button');
+
+            // Hide all buttons and show only the clicked button
+            buttons.forEach(button => {
+                button.style.display = 'none';
+            });
+            
+            // Show only the clicked button
+            document.querySelector(`button[onclick*='${instrument}']`).style.display = 'inline-block';
+
             popup.classList.add('active');
         }
 
         function closePopup() {
             const popup = document.querySelector('.popup');
+            
+            // Hide the popup
             popup.classList.remove('active');
-        }
+            
+            const buttons = document.querySelectorAll('.button');
 
+            // Show all buttons again
+            buttons.forEach(button => {
+                button.style.display = 'inline-block';
+                button.style.visibility = 'visible'; // Ensure visibility is reset
+                button.style.opacity = '1'; // Ensure opacity is reset
+                button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
+                setTimeout(() => { button.style.opacity = '1'; }, 10); // Reset opacity after a short delay
+             });
+        }
     </script>
 
 </body>
