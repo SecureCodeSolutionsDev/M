@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glowing Buttons with Animation</title>
-<style>
+    <style>
         body {
-            background-color: #000000; /* Black background */
+            background-color: #121212; /* Dark background for a modern look */
             margin: 0;
             padding: 0;
             text-align: center; /* Center text */
+            font-family: 'Montserrat', sans-serif; /* Consistent font */
         }
         h1 {
-            font-family: 'Montserrat', sans-serif;
             font-size: 48px;
             font-weight: bold;
             color: #FFD700; /* Gold text color */
@@ -32,67 +32,36 @@
         }
         .button {
             background-color: transparent; /* Transparent background */
-            border: 2px solid rgba(0, 0, 255, 0.8); /* Blue border */
-            color: rgba(0, 0, 255, 0.8); /* Change to EUR/USD blue */
+            border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
+            color: rgba(0, 255, 255, 0.8); /* Cyan text color */
             padding: 15px 30px; /* Increased padding for larger buttons */
             font-size: 18px; /* Increased font size for better readability */
             text-align: center;
             text-decoration: none;
             display: inline-block;
             width: 150px; /* Fixed width for uniform button size */
-            margin: 0; /* Remove margin to allow touching */
+            margin: 10px; /* Add margin for spacing between buttons */
             cursor: pointer;
-            border-radius: 5px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: bold;
+            border-radius: 10px; /* Rounded corners for buttons */
             transition: all .3s ease-in-out; /* Transition for hover effect */
         }
-        .eur-button {
-            color: rgba(0, 0, 255, 0.8); /* Keep EUR/USD in blue */
-        }
-        @keyframes moveButton {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(15px); } /* Move right slightly more for collision effect */
-            100% { transform: translateX(0); } /* Move back to original position */
-        }
-        .eur-button { animation: moveButton 2s infinite alternate; }
-        .gbp-button { animation: moveButton 2s infinite alternate; animation-delay: 0.2s; }
-        .usd-button { animation: moveButton 2s infinite alternate; animation-delay: 0.4s; }
-        .gold-button { animation: moveButton 2s infinite alternate; animation-delay: 0.6s; }
-        .aud-button { animation: moveButton 2s infinite alternate; animation-delay: 0.8s; }
-        .nzd-button { animation: moveButton 2s infinite alternate; animation-delay: 1s; }
-        .eth-button { animation: moveButton 2s infinite alternate; animation-delay: 1.2s; }
-        .silver-button { animation: moveButton 2s infinite alternate; animation-delay: 1.4s; }
-        .bitcoin-button { animation: moveButton 2s infinite alternate; animation-delay: 1.6s; }
-        .cad-button { animation: moveButton 2s infinite alternate; animation-delay: 1.8s; }
-
         .button:hover {
             color: white; /* Change text color on hover */
             border-color: white; /* Change border color on hover */
         }
-
-        /* Glowing effect for EUR/USD button specifically */
-        .eur-button:hover {
-            text-shadow:
-                0 0 5px rgba(0, 0, 255, 1),
-                0 0 10px rgba(0, 0, 255, 1),
-                0 0 15px rgba(0, 0, 255, 1); /* Glowing text effect for EUR/USD */
+        .glow {
+            box-shadow: 0 0 5px rgba(0, 255, 255, .8), 
+                        0 0 10px rgba(0, 255, 255, .8), 
+                        0 0 15px rgba(0, 255, 255, .8); /* Glowing effect */
         }
-
-        .button:hover:not(.eur-button) {
-            text-shadow:
-                0 0 5px rgba(135,206 ,250 ,1),
-                0 0 10px rgba(135,206 ,250 ,1),
-                0 0 15px rgba(135,206 ,250 ,1); /* Glowing text effect for other buttons */
-        }
-
         .popup {
-            width:auto ; /* Auto width for popup to fit content */ 
-            height:auto ; /* Auto height to fit content */ 
+            width:auto ; 
+            height:auto ; 
             position :fixed ; 
-            top : -20px ; 
-            left : -20px ; 
-            background-color :rgba(255 ,255 ,255 ,.95); 
+            top :50%; 
+            left :50%; 
+            transform: translate(-50%, -50%); /* Center the popup */
+            background-color :rgba(30 ,30 ,30 ,.95); 
             display :flex ; 
             justify-content :center ; 
             align-items :center ; 
@@ -115,6 +84,7 @@
            padding :20px ; 
            text-align :justify ; 
            overflow-y:auto ;
+           background-color: rgba(50, 50, 50, 0.9); /* Darker background for popup content */
        }
 
        .close {
@@ -122,20 +92,20 @@
            top :20px ; 
            right :20px ; 
            font-size :24px ; 
-           color :#333 ; 
+           color :#FFD700; /* Gold close button color */
            cursor:pointer ; 
            transition :all .3s ease-in-out ; 
        }
 
        .close:hover { 
-           color:#0078FF ;
+           color:#FF4500; /* Change close button color on hover */
        }
 
        @keyframes flashGlow {
            from {
                text-shadow:
                    none;
-               color: rgba(0,0,255,1);
+               color: rgba(0,255,255,1);
            }
            to {
                text-shadow:
@@ -150,32 +120,37 @@
            margin-top:20px;
        }
 
-</style>
-  </head>
-  <body>
+       .popup-content p {
+           font-size: 20px; /* Making the analysis text larger */
+           color: white; /* Changing analysis text color to white */
+       }
+
+       .popup-content strong {
+           color: rgba(0, 255, 255, .8); /* Match button text color for analysis titles */
+       }
+
+    </style>
+</head>
+<body>
 
     <h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
 
     <div class="button-container">
       <div class="row">
-        <button class="button eur-button" onclick="showPopup('EUR/USD')">EUR</button>
+        <button class="button eur-button" onclick="showPopup('EUR/USD', this)">EUR</button>
       </div>
       <div class="row">
-        <button class="button gbp-button" onclick="showPopup('GBP/USD')">GBP</button>
-        <button class="button usd-button" onclick="showPopup('USD/JPY')">USD/JPY</button>
+        <button class="button gbp-button" onclick="showPopup('GBP/USD', this)">GBP</button>
+        <button class="button usd-button" onclick="showPopup('USD/JPY', this)">USD/JPY</button>
       </div>
       <div class="row">
-        <button class="button gold-button" onclick="showPopup('Gold')">XAUUSD</button>
-        <button class="button aud-button" onclick="showPopup('AUD/USD')">AUD</button>
-        <button class="button nzd-button" onclick="showPopup('NZD/USD')">NZD</button>
+        <button class="button gold-button" onclick="showPopup('Gold', this)">XAUUSD</button>
+        <button class="button aud-button" onclick="showPopup('AUD/USD', this)">AUD</button>
+        <button class="button nzd-button" onclick="showPopup('NZD/USD', this)">NZD</button>
       </div>
       <div class="row">
-		<!-- Removed Ethereum button -->
-		<!-- <button class="button eth-button" onclick="showPopup('Ethereum')">ETHUSD</button> -->
-		<button class="button silver-button" onclick="showPopup('Silver')">Silver/USD</button>
-		<button class="button bitcoin-button" onclick="showPopup('Bitcoin')">BTCUSD</button>
-		<!-- Removed USD/CAD button -->
-		<!-- <button class="button cad-button" onclick="showPopup('USD/CAD')">USD/CAD</button> -->
+		<button class="button silver-button" onclick="showPopup('Silver', this)">Silver/USD</button>
+		<button class="button bitcoin-button" onclick="showPopup('Bitcoin', this)">BTCUSD</button>
       </div>
     </div>
 
@@ -186,12 +161,11 @@
     <div class="popup">
       <div class="popup-content">
 		<span class="close" onclick="closePopup()">×</span> <!-- Close button -->
-		<!-- Added analysis sections -->
-		<h2 id="popup-title">Trading Signals for </h2>
-		<p><strong>Fundamental Analysis:</strong></p>
+		<h2 id="popup-title" style="color:#FFD700;">Trading Signals for </h2> <!-- Gold title -->
+		<p><strong style="color:#FFD700;">Fundamental Analysis:</strong></p>
 		<p>[Insert your fundamental analysis here]</p>
 
-		<p><strong>Technical Analysis:</strong></p>
+		<p><strong style="color:#FFD700;">Technical Analysis:</strong></p>
 		<p>[Insert your technical analysis here]</p>
 
       </div>
@@ -199,14 +173,14 @@
 
     <!-- Chart Toggle Button -->
     <div id="chartToggleButton">
-      <button class="button" id="toggleChartBtn" onclick="toggleChart()">Show Chart</button>
+      <button class="button" id="toggleChartBtn" onclick="toggleChart(this)">Show Chart</button>
     </div>
 
     <!-- TradingView Widget BEGIN -->
     <div id="chartContainer" style="margin-top:20px; display:none;"> <!-- Set display to none by default -->
       <div id="tradingview_8ba84"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-<script type="text/javascript">
+      <script type="text/javascript">
           new TradingView.widget({
               "autosize": true,
               "symbol": "NASDAQ:AAPL",
@@ -220,19 +194,22 @@
               "allow_symbol_change": true,
               "container_id": "tradingview_8ba84"
           });
-</script>
+      </script>
     </div>
     <!-- TradingView Widget END -->
 
 <script>
-         let chartVisible = false; // Set initial state to false
+         let chartVisible = false;
 
-         function showPopup(instrument) {
+         function showPopup(instrument, button) {
              const popupTitle = document.getElementById('popup-title');
              popupTitle.textContent = `Trading Signals for ${instrument}`;
              
              const popup = document.querySelector('.popup');
              const buttons = document.querySelectorAll('.button');
+
+             // Remove glow from all buttons
+             buttons.forEach(btn => btn.classList.remove('glow'));
 
              // Hide all buttons and show only the clicked button
              buttons.forEach(button => {
@@ -242,9 +219,9 @@
               });
               
               // Show only the clicked button
-              const clickedButton = document.querySelector(`button[onclick*='${instrument}']`);
-              clickedButton.style.display = 'inline-block';
-              clickedButton.style.opacity = '1'; // Fade in clicked button
+              button.style.display = 'inline-block';
+              button.style.opacity = '1'; // Fade in clicked button
+              button.classList.add('glow'); // Add glow effect
 
               popup.classList.add('active');
 
@@ -266,10 +243,11 @@
              
              const buttons = document.querySelectorAll('.button');
 
-             // Show all buttons again
+             // Show all buttons again and remove glow effect
              buttons.forEach(button => {
                  button.style.display = 'inline-block';
                  button.style.opacity = '1'; // Ensure opacity is reset
+                 button.classList.remove('glow'); // Remove glow effect
                  button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
                  setTimeout(() => { button.style.opacity = '1'; },100); // Reset opacity after a short delay
               });
@@ -285,16 +263,18 @@
               document.getElementById('toggleChartBtn').style.display = 'inline-block';
          }
 
-         function toggleChart() {
+         function toggleChart(button) {
              const chartContainer = document.getElementById('chartContainer');
              chartVisible = !chartVisible;
 
              if (chartVisible) {
                  chartContainer.style.display = 'block';
-                 document.getElementById('toggleChartBtn').textContent = 'Hide Chart';
+                 button.textContent = 'Hide Chart';
+                 button.classList.add('glow'); // Add glow effect on click
              } else {
                  chartContainer.style.display = 'none';
-                 document.getElementById('toggleChartBtn').textContent = 'Show Chart';
+                 button.textContent = 'Show Chart';
+                 button.classList.remove('glow'); // Remove glow effect when hiding chart
              }
          }
 
@@ -302,5 +282,5 @@
 
 </script>
 
-  </body>
+</body>
 </html>
