@@ -146,6 +146,10 @@
            }
        }
 
+       #chartToggleButton {
+           margin-top:20px;
+       }
+
 </style>
   </head>
   <body>
@@ -153,24 +157,24 @@
     <h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
 
     <div class="button-container">
-	  <div class="row">
-		<button class="button eur-button" onclick="showPopup('EUR/USD')">EUR</button>
-	  </div>
-	  <div class="row">
-		<button class="button gbp-button" onclick="showPopup('GBP/USD')">GBP</button>
-		<button class="button usd-button" onclick="showPopup('USD/JPY')">USD/JPY</button>
-	  </div>
-	  <div class="row">
-		<button class="button gold-button" onclick="showPopup('Gold')">XAUUSD</button>
-		<button class="button aud-button" onclick="showPopup('AUD/USD')">AUD</button>
-		<button class="button nzd-button" onclick="showPopup('NZD/USD')">NZD</button>
-	  </div>
-	  <div class="row">
-		<button class="button eth-button" onclick="showPopup('Ethereum')">ETHUSD</button>
-		<button class="button silver-button" onclick="showPopup('Silver')">Silver/USD</button>
-		<button class="button bitcoin-button" onclick="showPopup('Bitcoin')">BTCUSD</button>
-		<button class="button cad-button" onclick="showPopup('USD/CAD')">USD/CAD</button>
-	  </div>
+      <div class="row">
+        <button class="button eur-button" onclick="showPopup('EUR/USD')">EUR</button>
+      </div>
+      <div class="row">
+        <button class="button gbp-button" onclick="showPopup('GBP/USD')">GBP</button>
+        <button class="button usd-button" onclick="showPopup('USD/JPY')">USD/JPY</button>
+      </div>
+      <div class="row">
+        <button class="button gold-button" onclick="showPopup('Gold')">XAUUSD</button>
+        <button class="button aud-button" onclick="showPopup('AUD/USD')">AUD</button>
+        <button class="button nzd-button" onclick="showPopup('NZD/USD')">NZD</button>
+      </div>
+      <div class="row">
+        <button class="button eth-button" onclick="showPopup('Ethereum')">ETHUSD</button>
+        <button class="button silver-button" onclick="showPopup('Silver')">Silver/USD</button>
+        <button class="button bitcoin-button" onclick="showPopup('Bitcoin')">BTCUSD</button>
+        <button class="button cad-button" onclick="showPopup('USD/CAD')">USD/CAD</button>
+      </div>
     </div>
 
     <div style="margin-top:20px;">
@@ -178,7 +182,7 @@
     </div>
 
     <div class="popup">
-	  <div class="popup-content">
+      <div class="popup-content">
 		<span class="close" onclick="closePopup()">×</span> <!-- Close button -->
 		<!-- Added analysis sections -->
 		<h2 id="popup-title">Trading Signals for </h2>
@@ -188,32 +192,39 @@
 		<p><strong>Technical Analysis:</strong></p>
 		<p>[Insert your technical analysis here]</p>
 
-	  </div>
-	</div>
+      </div>
+    </div>
 
-	<!-- TradingView Widget BEGIN -->
-	<div class="tradingview-widget-container" style="margin-top:20px;">
-	  <div id="tradingview_8ba84"></div>
-	  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <!-- Chart Toggle Button -->
+    <div id="chartToggleButton">
+      <button class="button" id="toggleChartBtn" onclick="toggleChart()">Show Chart</button>
+    </div>
+
+    <!-- TradingView Widget BEGIN -->
+    <div id="chartContainer" style="margin-top:20px;">
+      <div id="tradingview_8ba84"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script type="text/javascript">
-             new TradingView.widget({
-                 "autosize": true,
-                 "symbol": "NASDAQ:AAPL",
-                 "interval": "D",
-                 "timezone": "Etc/UTC",
-                 "theme": "dark",
-                 "style": "1",
-                 "locale": "en",
-                 "toolbar_bg": "#f1f3f6",
-                 "enable_publishing": true,
-                 "allow_symbol_change": true,
-                 "container_id": "tradingview_8ba84"
-             });
+          new TradingView.widget({
+              "autosize": true,
+              "symbol": "NASDAQ:AAPL",
+              "interval": "D",
+              "timezone": "Etc/UTC",
+              "theme": "dark",
+              "style": "1",
+              "locale": "en",
+              "toolbar_bg": "#f1f3f6",
+              "enable_publishing": true,
+              "allow_symbol_change": true,
+              "container_id": "tradingview_8ba84"
+          });
 </script>
-	</div>
-	<!-- TradingView Widget END -->
+    </div>
+    <!-- TradingView Widget END -->
 
 <script>
+         let chartVisible = true;
+
          function showPopup(instrument) {
              const popupTitle = document.getElementById('popup-title');
              popupTitle.textContent = `Trading Signals for ${instrument}`;
@@ -240,6 +251,9 @@
               setTimeout(() => {
                   popupTitle.style.animation = ''; // Reset the animation
               },500);
+
+              // Hide chart toggle button when popup is active
+              document.getElementById('toggleChartBtn').style.display = 'none';
          }
 
          function closePopup() {
@@ -264,7 +278,27 @@
               setTimeout(() => {
                   popupTitle.style.animation = ''; // Reset the animation
               },500);
+
+              // Show chart toggle button when popup is closed
+              document.getElementById('toggleChartBtn').style.display = 'inline-block';
          }
+
+         function toggleChart() {
+             const chartContainer = document.getElementById('chartContainer');
+             chartVisible = !chartVisible;
+
+             if (chartVisible) {
+                 chartContainer.style.display = 'block';
+                 document.getElementById('toggleChartBtn').textContent = 'Hide Chart';
+             } else {
+                 chartContainer.style.display = 'none';
+                 document.getElementById('toggleChartBtn').textContent = 'Show Chart';
+             }
+         }
+
+         // Initialize chart container visibility
+         document.getElementById('chartContainer').style.display = 'block'; // Start with chart visible
+
 </script>
 
   </body>
