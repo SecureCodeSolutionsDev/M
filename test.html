@@ -158,7 +158,7 @@
       <!-- Removed analysis title -->
     </div>
 
-    <div class="popup">
+    <div class="popup" id="signalPopup">
       <div class="popup-content">
 		<span class="close" onclick="closePopup()">×</span> <!-- Close button -->
 		<h2 id="popup-title" style="color:#FFD700;">Trading Signals for </h2> <!-- Gold title -->
@@ -168,6 +168,18 @@
 		<p><strong style="color:#FFD700;">Technical Analysis:</strong></p>
 		<p>[Insert your technical analysis here]</p>
 
+      </div>
+    </div>
+
+    <!-- Chart Popup -->
+    <div class="popup" id="chartPopup">
+      <div class="popup-content">
+		<span class="close" onclick="closeChartPopup()">×</span> <!-- Close button -->
+		<h2 style="color:#FFD700;">Chart Analysis</h2> <!-- Chart title -->
+		<div id="chartContent">
+			<!-- Insert your chart images or HTML here -->
+			<img src="[Your Chart Image URL]" alt="Chart Analysis" style="max-width:100%;">
+		</div>
       </div>
     </div>
 
@@ -183,7 +195,7 @@
              const popupTitle = document.getElementById('popup-title');
              popupTitle.textContent = `Trading Signals for ${instrument}`;
              
-             const popup = document.querySelector('.popup');
+             const signalPopup = document.getElementById('signalPopup');
              const buttons = document.querySelectorAll('.button');
 
              // Remove glow from all buttons
@@ -201,7 +213,7 @@
               button.style.opacity = '1'; // Fade in clicked button
               button.classList.add('glow'); // Add glow effect
 
-              popup.classList.add('active');
+              signalPopup.classList.add('active');
 
               // Flashing glow effect on title
               popupTitle.style.animation = 'flashGlow .5s forwards';
@@ -209,15 +221,15 @@
                   popupTitle.style.animation = ''; // Reset the animation
               },500);
 
-              // Hide chart toggle button when popup is active
+              // Hide chart toggle button when signal popup is active
               document.getElementById('toggleChartBtn').style.display = 'none';
          }
 
          function closePopup() {
-             const popup = document.querySelector('.popup');
+             const signalPopup = document.getElementById('signalPopup');
              
-             // Hide the popup
-             popup.classList.remove('active');
+             // Hide the signal popup
+             signalPopup.classList.remove('active');
              
              const buttons = document.querySelectorAll('.button');
 
@@ -237,27 +249,34 @@
                   popupTitle.style.animation = ''; // Reset the animation
               },500);
 
-              // Show chart toggle button when popup is closed
+              // Show chart toggle button when signal popup is closed
               document.getElementById('toggleChartBtn').style.display = 'inline-block';
          }
 
          function toggleChart(button) {
-             const chartContainer = document.getElementById('chartContainer');
+             const chartPopup = document.getElementById('chartPopup');
              chartVisible = !chartVisible;
 
              if (chartVisible) {
-                 chartContainer.style.display = 'block';
-                 button.textContent = 'Hide Chart';
+                 chartPopup.classList.add('active'); // Show chart popup
+                 button.textContent = 'Hide Chart'; // Change button text to Hide Chart
                  button.classList.add('glow'); // Add glow effect on click
              } else {
-                 chartContainer.style.display = 'none';
-                 button.textContent = 'Show Chart';
+                 chartPopup.classList.remove('active'); // Hide chart popup
+                 button.textContent = 'Show Chart'; // Change back to Show Chart
                  button.classList.remove('glow'); // Remove glow effect when hiding chart
              }
          }
 
-         // Initialize chart container visibility (already set in HTML)
+         function closeChartPopup() {
+             const chartPopup = document.getElementById('chartPopup');
+             
+             // Hide the chart popup
+             chartPopup.classList.remove('active');
 
+             const toggleButton = document.getElementById('toggleChartBtn');
+             toggleButton.textContent = 'Show Chart'; // Reset toggle button text
+         }
 </script>
 
   </body>
