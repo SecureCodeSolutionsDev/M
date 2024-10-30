@@ -6,7 +6,7 @@
 	<title>Forex Signals</title>
 	<style>
 		body {
-			background-color: #000000; /* Black background */
+			background-color: #FFFFFF; /* White background */
 			margin: 0;
 			padding: 0;
 			text-align: center; /* Center text */
@@ -47,14 +47,14 @@
             border-radius: 5px;
             font-family: 'Montserrat', sans-serif;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* Shadow effect */
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2), 
+                        inset 0 -3px rgba(255,255,255,0.3); /* Floating effect with shadow */
             transition: all .3s ease-in-out; /* Transition for hover effect */
             text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Blue glow effect */
         }
         .button:hover {
             background-color: #0056b3; /* Darker blue on hover */
-            color: white; 
-            transform: scale(1.05);
+            transform: translateY(-2px) scale(1.05); /* Floating effect on hover */
         }
         .popup {
             width: calc(100%); /* Full width for popup */
