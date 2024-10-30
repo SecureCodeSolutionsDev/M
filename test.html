@@ -129,6 +129,10 @@
            color: rgba(0, 255, 255, .8); /* Match button text color for analysis titles */
        }
 
+       #chartContainer {
+           height: 800px; /* Increased height for better visibility of the chart */
+       }
+
     </style>
 </head>
 <body>
@@ -177,7 +181,7 @@
     </div>
 
     <!-- TradingView Widget BEGIN -->
-    <div id="chartContainer" style="margin-top:20px; display:none;"> <!-- Set display to none by default -->
+    <div id="chartContainer" style="margin-top:20px;"> <!-- Set display to none by default -->
       <div id="tradingview_8ba84"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
       <script type="text/javascript">
