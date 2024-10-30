@@ -63,18 +63,17 @@
 			font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
             position: relative; /* Needed for absolute positioning of random movement */
-            animation: flashGlowButton .75s infinite alternate; /* Flashing glow animation for buttons */
+            animation-name: luxuriousMove; /* Animation for luxurious movements */
+            animation-duration: .8s; /* Duration of the movement */
+            animation-iteration-count: infinite; /* Infinite repetitions */
+            animation-direction: alternate; /* Alternate direction on each iteration */
+            text-shadow:
+                0 0 5px rgba(255,215,0,1), /* Gold glow */
+                0 0 10px rgba(255,215,0,.5); /* Brighter gold glow */
 		}
-        @keyframes flashGlowButton {
-            from {
-                text-shadow:
-                    0 0 5px rgba(255,215,0,1),
-                    0 0 10px rgba(255,215,0,.5);
-            }
-            to {
-                text-shadow:
-                    none; /* No shadow at the end of animation */
-            }
+        @keyframes luxuriousMove {
+          from { transform: translate(1px, -1px); }
+          to { transform: translate(-1px, -2px); }
         }
         .button:hover {
             background-color: #CDAF95; /* Lighter color on hover */
@@ -82,17 +81,17 @@
             transform: scale(1.05);
         }
         .popup {
-            width: 100%;
-            height: 100%;
+            width: calc(80%); /* Increased width for popup */
+            height: calc(70%); /* Increased height for popup */
             position: fixed; 
-            top: 0; 
-            left: 0; 
-            background-color: rgba(0, 0, 0, .7); /* Semi-transparent background */
+            top: calc(15%); /* Center vertically */
+            left: calc(10%); /* Center horizontally */
+            background-color: rgba(255,255,255,.9); /* Semi-transparent white background */
             display: flex; 
             justify-content: center; 
             align-items: center; 
             z-index:2; 
-            opacity:.7; 
+            opacity:.9; 
             visibility:hidden; 
             transition:.3s ease-in-out; 
         }
@@ -101,14 +100,10 @@
             visibility:visible; 
         }
         .popup-content {
-            background-color:#FFFFFF; /* White background for popup */
             border-radius :10 px; 
             box-shadow :rgba(255 ,255 ,255 ,.2) -1 px -1 px ,rgba(255 ,255 ,255 ,.2) -2 px -2 px ,rgba(255 ,255 ,255 ,.2) -3 px -3 px ; /* Soft shadow for popup */
-            padding :50 px ; 
+            padding :20 px ; 
             text-align :justify ; 
-            max-width :80%; 
-            max-height :80%; 
-            overflow-y:auto ; /* Added for overflow */
         }
         .close {
            position:absolute; 
@@ -121,6 +116,15 @@
         }
         .close:hover { 
            color:#0078FF; /* Change color on hover */
+        }
+
+        .analysis-title {
+            font-family:'Montserrat', sans-serif;
+            font-size:24px;
+            color:#FFD700;
+            text-shadow:
+                0 0 5px rgba(255,215,0,.7),
+                0 0 10px rgba(255,215,0,.5);
         }
 
     </style>
@@ -143,7 +147,7 @@
 
     <div class="contact">
         <h2 style="color:#FFD700;">Contact:</h2>
-        <p style="color:#CCCCCC;">Coder & Owner:</p>
+        <p class="analysis-title">Coder & Owner:</p>
         <p style="color:#FFD700;">oitache123@gmail.com</p>
     </div>
 
@@ -151,33 +155,23 @@
         <div class="popup-content">
             <span class="close" onclick="closePopup()">×</span> <!-- Close button -->
             <h2 id="popup-title">Trading Signals for </h2>
-            <p id="popup-signals"></p> <!-- Placeholder for signals -->
+            
+            <!-- Added sections for analysis -->
+            <p class="analysis-title">Fundamental Analysis:</p>
+            <p id="fundamental-analysis">[Insert your fundamental analysis here]</p>
+
+            <p class="analysis-title">Technical Analysis:</p>
+            <p id="technical-analysis">[Insert your technical analysis here]</p>
+
         </div>
     </div>
 
     <script>
         function showPopup(instrument) {
             const popupTitle = document.getElementById('popup-title');
-            const popupSignals = document.getElementById('popup-signals');
-
-            // Update the title and signals based on the selected instrument
-            popupTitle.textContent = `Trading Signals for ${instrument}`;
             
-            // Example signals - you can customize these
-            const signals = {
-                'EUR/USD': 'Buy at $1.2000, Sell at $1.1950',
-                'GBP/USD': 'Buy at $1.4000, Sell at $1.3950',
-                'USD/JPY': 'Buy at ¥110.00, Sell at ¥109.50',
-                'USD/CAD': 'Buy at $1.2500, Sell at $1.2450',
-                'AUD/USD': 'Buy at $0.7500, Sell at $0.7450',
-                'NZD/USD': 'Buy at $0.7000, Sell at $0.6950',
-                'Gold': 'Buy at $1800, Sell at $1795',
-                'Silver': 'Buy at $25.00, Sell at $24.50',
-                'Bitcoin': 'Buy at $40,000, Sell at $39,500',
-                'Ethereum': 'Buy at $2,500, Sell at $2,450'
-            };
-
-            popupSignals.textContent = signals[instrument] || "No signals available.";
+            // Update the title based on the selected instrument
+            popupTitle.textContent = `Trading Signals for ${instrument}`;
             
             const popup = document.querySelector('.popup');
             popup.classList.add('active');
