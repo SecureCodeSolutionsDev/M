@@ -202,27 +202,40 @@
       <button id="toggle-chart-btn" onclick="toggleChart()">Show TradingView Chart</button>
     </div>
 
-    <!-- TradingView Widget BEGIN -->
-    <div id="chart-container">
-      <div id="tradingview_8ba84"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-      <script type="text/javascript">
-             new TradingView.widget({
-                 "autosize": true,
-                 "symbol": "NASDAQ:AAPL",
-                 "interval": "D",
-                 "timezone": "Etc/UTC",
-                 "theme": "dark",
-                 "style": "1",
-                 "locale": "en",
-                 "toolbar_bg": "#f1f3f6",
-                 "enable_publishing": true,
-                 "allow_symbol_change": true,
-                 "container_id": "tradingview_8ba84"
-             });
-      </script>
-    </div>
-    <!-- TradingView Widget END -->
+   <!-- TradingView Widget BEGIN -->
+<div id="chart-container">
+    <div id="tradingview_8ba84"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script type="text/javascript">
+        new TradingView.widget({
+            "autosize": false, // Set to false to use custom dimensions
+            "width": 800, // Adjust width as needed
+            "height": 600, // Adjust height as needed
+            "symbol": "NASDAQ:AAPL",
+            "interval": "D",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "toolbar_bg": "#f1f3f6",
+            "enable_publishing": true,
+            "allow_symbol_change": true,
+            "container_id": "tradingview_8ba84"
+        });
+    </script>
+</div>
+<!-- TradingView Widget END -->
+
+<style>
+    #chart-container {
+        width: 80%; /* Decrease width */
+        margin: auto; /* Center the container */
+    }
+
+    #tradingview_8ba84 {
+        height: 600px; /* Increase height */
+    }
+</style>
 
     <script>
          function showPopup(instrument) {
