@@ -21,15 +21,12 @@
             margin-bottom: 30px;
         }
         .button-container {
-            display: flex;
-            flex-direction: column; /* Arrange in a column for pyramid shape */
-            align-items: center; /* Center items horizontally */
+            position: relative; /* Allow absolute positioning of buttons */
             margin-top: 20px;
-        }
-        .row {
-            display: flex;
-            justify-content: center; /* Center items in each row */
-            width: fit-content; /* Fit to content width */
+            height: 300px; /* Set height for circular arrangement */
+            width: 300px; /* Set width for circular arrangement */
+            border-radius: 50%; /* Make container circular */
+            overflow: hidden; /* Hide overflow for perfect circle */
         }
         .button {
             background-color: #4CAF50; /* Green background for buttons */
@@ -40,20 +37,19 @@
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            width: calc(100% - 40px); /* Full width minus margin for mobile */
-            max-width: 140px; /* Reduced maximum width for buttons */
+            width: 100px; /* Fixed width for buttons */
             margin: 5px; /* Reduced margin for spacing between buttons */
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 50%; /* Make buttons circular */
             font-family: 'Montserrat', sans-serif;
             font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
-            animation: flashText 1.5s infinite alternate; /* Flashing text animation */
+            animation: flashText 1s infinite alternate; /* Flashing text animation with increased speed */
         }
 
         @keyframes flashText {
             0% { color: white; }
-            100% { color: rgba(255, 255, 255, 0.7); } /* Slightly transparent white */
+            100% { color: rgba(255, 255, 255, 0.9); } /* Slightly transparent white */
         }
 
         .button:hover {
@@ -71,12 +67,31 @@
         .bitcoin-button { animation-delay: 1.4s; }
 
         @keyframes moveButton {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); } /* Move up slightly for effect */
-            100% { transform: translateY(0); } /* Move back to original position */
+            from {
+                transform: rotate(0deg) translate(120px) rotate(0deg); /* Move outwards in a circle */
+                opacity: 1;
+            }
+            to {
+                transform: rotate(360deg) translate(120px) rotate(-360deg); /* Complete a full circle while rotating */
+                opacity: 1;
+            }
         }
 
-        .popup {
+       .row {
+           position:absolute;
+           top:50%;
+           left:50%;
+           transform-origin:center center; /* Center of the circle as origin */
+       }
+
+       .row:nth-child(1) { transform: rotate(0deg) translateY(-120px); } 
+       .row:nth-child(2) { transform: rotate(60deg) translateY(-120px); } 
+       .row:nth-child(3) { transform: rotate(120deg) translateY(-120px); } 
+       .row:nth-child(4) { transform: rotate(180deg) translateY(-120px); } 
+       .row:nth-child(5) { transform: rotate(240deg) translateY(-120px); } 
+       .row:nth-child(6) { transform: rotate(300deg) translateY(-120px); } 
+
+       .popup {
            width:auto ; /* Auto width for popup to fit content */ 
            height:auto ; /* Auto height to fit content */ 
            position :fixed ; 
