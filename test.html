@@ -35,38 +35,45 @@
             background-color: #4CAF50; /* Green background for buttons */
             border: 2px solid #388E3C; /* Darker green border */
             color: white; /* White text color */
-            padding: 15px 30px; /* Adjusted padding for smaller buttons */
+            padding: 10px 20px; /* Adjusted padding for smaller buttons */
             font-size: 16px; /* Adjusted font size for better readability */
             text-align: center;
             text-decoration: none;
             display: inline-block;
             width: calc(100% - 40px); /* Full width minus margin for mobile */
-            max-width: 160px; /* Reduced maximum width for buttons */
+            max-width: 140px; /* Reduced maximum width for buttons */
             margin: 5px; /* Reduced margin for spacing between buttons */
             cursor: pointer;
             border-radius: 5px;
             font-family: 'Montserrat', sans-serif;
             font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
+            animation: flashText 1.5s infinite alternate; /* Flashing text animation */
         }
+
+        @keyframes flashText {
+            0% { color: white; }
+            100% { color: rgba(255, 255, 255, 0.7); } /* Slightly transparent white */
+        }
+
         .button:hover {
             background-color: #45A049; /* Lighter green on hover */
             border-color: #2E7D32; /* Darker border on hover */
         }
 
-        .eur-button { animation: moveButton 2s infinite alternate; }
-        .gbp-button { animation: moveButton 2s infinite alternate; animation-delay: 0.2s; }
-        .usd-button { animation: moveButton 2s infinite alternate; animation-delay: 0.4s; }
-        .gold-button { animation: moveButton 2s infinite alternate; animation-delay: 0.6s; }
-        .aud-button { animation: moveButton 2s infinite alternate; animation-delay: 0.8s; }
-        .eth-button { animation: moveButton 2s infinite alternate; animation-delay: 1.2s; }
-        .silver-button { animation: moveButton 2s infinite alternate; animation-delay: 1.4s; }
-        .bitcoin-button { animation: moveButton 2s infinite alternate; animation-delay: 1.6s; }
+        .eur-button { animation-delay: 0s; }
+        .gbp-button { animation-delay: 0.2s; }
+        .usd-button { animation-delay: 0.4s; }
+        .gold-button { animation-delay: 0.6s; }
+        .aud-button { animation-delay: 0.8s; }
+        .eth-button { animation-delay: 1s; }
+        .silver-button { animation-delay: 1.2s; }
+        .bitcoin-button { animation-delay: 1.4s; }
 
         @keyframes moveButton {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(15px); } /* Move right slightly more for collision effect */
-            100% { transform: translateX(0); } /* Move back to original position */
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); } /* Move up slightly for effect */
+            100% { transform: translateY(0); } /* Move back to original position */
         }
 
         .popup {
