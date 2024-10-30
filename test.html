@@ -23,10 +23,9 @@
         .button-container {
             position: relative; /* Allow absolute positioning of buttons */
             margin-top: 20px;
-            height: 300px; /* Set height for circular arrangement */
-            width: 300px; /* Set width for circular arrangement */
-            border-radius: 50%; /* Make container circular */
-            overflow: hidden; /* Hide overflow for perfect circle */
+            height: 300px; /* Set height for hexagonal arrangement */
+            width: 300px; /* Set width for hexagonal arrangement */
+            overflow: hidden; /* Hide overflow for perfect shape */
         }
         .button {
             background-color: #4CAF50; /* Green background for buttons */
@@ -38,9 +37,10 @@
             text-decoration: none;
             display: inline-block;
             width: 100px; /* Fixed width for buttons */
+            height: 100px; /* Fixed height for buttons to make them hexagonal */
             margin: 5px; /* Reduced margin for spacing between buttons */
             cursor: pointer;
-            border-radius: 50%; /* Make buttons circular */
+            border-radius: 10%; /* Slightly round corners for hexagonal effect */
             font-family: 'Montserrat', sans-serif;
             font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
@@ -48,8 +48,11 @@
         }
 
         @keyframes flashText {
-            0% { color: white; }
-            100% { color: rgba(255, 255, 255, 0.9); } /* Slightly transparent white */
+            0% { color: white; text-shadow: none; }
+            100% { color: rgba(255, 255, 255, 0.9); text-shadow:
+                0 0 10px rgba(255,255,255,1),
+                0 0 20px rgba(255,255,255,1),
+                0 0 30px rgba(255,255,255,1); } /* Glowing effect */
         }
 
         .button:hover {
@@ -57,28 +60,23 @@
             border-color: #2E7D32; /* Darker border on hover */
         }
 
-        .eur-button { animation-delay: 0s; }
-        .gbp-button { animation-delay: 0.2s; }
-        .usd-button { animation-delay: 0.4s; }
-        .gold-button { animation-delay: 0.6s; }
-        .aud-button { animation-delay: 0.8s; }
-        .eth-button { animation-delay: 1s; }
-        .silver-button { animation-delay: 1.2s; }
-        .bitcoin-button { animation-delay: 1.4s; }
-
-        .button-container > div {
+        .row {
            position:absolute;
            top:50%;
            left:50%;
-           transform-origin:center center; /* Center of the circle as origin */
+           transform-origin:center center; /* Center of the hexagon as origin */
+           display:flex;
+           flex-wrap: wrap;
+           justify-content:center;
+           align-items:center;
        }
 
-       .row:nth-child(1) { transform: rotate(0deg) translateY(-120px); } 
-       .row:nth-child(2) { transform: rotate(60deg) translateY(-120px); } 
-       .row:nth-child(3) { transform: rotate(120deg) translateY(-120px); } 
-       .row:nth-child(4) { transform: rotate(180deg) translateY(-120px); } 
-       .row:nth-child(5) { transform: rotate(240deg) translateY(-120px); } 
-       .row:nth-child(6) { transform: rotate(300deg) translateY(-120px); } 
+       .row:nth-child(1) { transform: translate(-50%, -120px); } 
+       .row:nth-child(2) { transform: translate(-90px, -60px); } 
+       .row:nth-child(3) { transform: translate(-90px, 60px); } 
+       .row:nth-child(4) { transform: translate(0,120px); } 
+       .row:nth-child(5) { transform: translate(90px, 60px); } 
+       .row:nth-child(6) { transform: translate(90px, -60px); } 
 
        .popup {
            width:auto ; /* Auto width for popup to fit content */ 
@@ -154,16 +152,10 @@
     <div class="button-container">
       <div class="row">
           <button class="button eur-button" onclick="showPopup('EUR/USD')">EUR/USD</button>
-      </div>
-      <div class="row">
           <button class="button gbp-button" onclick="showPopup('GBP/USD')">GBP/USD</button>
           <button class="button usd-button" onclick="showPopup('USD/JPY')">USD/JPY</button>
-      </div>
-      <div class="row">
           <button class="button gold-button" onclick="showPopup('Gold')">Gold</button>
           <button class="button aud-button" onclick="showPopup('AUD/USD')">AUD/USD</button>
-      </div>
-      <div class="row">
           <button class="button eth-button" onclick="showPopup('Ethereum')">Ethereum</button>
           <button class="button silver-button" onclick="showPopup('Silver')">Silver</button>
           <button class="button bitcoin-button" onclick="showPopup('Bitcoin')">Bitcoin</button>
