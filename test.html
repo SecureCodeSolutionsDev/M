@@ -49,21 +49,18 @@
 			border-radius: 5px;
 			font-family: 'Montserrat', sans-serif;
 			font-weight: bold;
-			transition: all 0.3s ease-in-out, transform 0.3s ease; /* Added transform transition */
-            animation: moveButton 2s infinite alternate; /* Animation for movement */
+            transition: all 0.3s ease-in-out; /* Transition for hover effect */
             text-shadow:
                 0 0 5px rgba(255, 215, 0, 1), /* Gold glow */
                 0 0 10px rgba(255, 215, 0, 0.5); /* Brighter gold glow */
+            animation: moveButton randomMove infinite alternate; /* Animation for movement */
+            animation-duration: calc(1s + (random() * 2s)); /* Random duration for each button */
+            animation-timing-function: ease-in-out; /* Smooth movement */
 		}
         .button:hover {
             background-color: #CDAF95; /* Lighter color on hover */
             color: white; 
             transform: scale(1.05);
-        }
-        .button-glow-eur {
-            text-shadow:
-                0 0 10px rgba(255, 215, 0, 1), /* Stronger gold glow for EUR/USD */
-                0 0 20px rgba(255, 215, 0, 0.8); /* Even brighter glow */
         }
         .popup {
             width: 100%;
@@ -106,10 +103,10 @@
         .close:hover { 
             color:#0078FF; /* Change color on hover */
         }
-        
-        @keyframes moveButton {
-          from { transform: translateY(0); }
-          to { transform: translateY(-5px); }
+
+        @keyframes randomMove {
+          from { transform: translate(0); }
+          to { transform: translate(calc(-5px + (random() * (10px))), calc(-5px + (random() * (10px)))); }
         }
 
     </style>
@@ -119,7 +116,7 @@
     <p class="disclaimer">Disclaimer: These signals are for educational purposes only and should not be considered as financial advice. Trading in the foreign exchange market carries a high level of risk and may not be suitable for all investors. Past performance is not indicative of future results.</p>
 
     <div class="button-container">
-        <button class="button button-glow-eur" onclick="showPopup('EUR/USD')">EUR/USD</button>
+        <button class="button" onclick="showPopup('EUR/USD')">EUR/USD</button>
         <button class="button" onclick="showPopup('GBP/USD')">GBP/USD</button>
         <button class="button" onclick="showPopup('USD/JPY')">USD/JPY</button>
         <button class="button" onclick="showPopup('USD/CAD')">USD/CAD</button>
