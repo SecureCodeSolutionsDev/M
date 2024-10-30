@@ -1,13 +1,9 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glowing Buttons with Animation</title>
+    <title>Quick Trading Pair Selection</title>
     <style>
         body {
             background-color: #000000; /* Black background */
@@ -27,8 +23,8 @@
         .button-container {
             position: relative; /* Allow absolute positioning of buttons */
             margin-top: 20px;
-            height: 300px; /* Set height for hexagonal arrangement */
-            width: 300px; /* Set width for hexagonal arrangement */
+            height: 100px; /* Set height for button container */
+            width: 300px; /* Set width for button container */
             overflow: hidden; /* Hide overflow for perfect shape */
         }
         .button {
@@ -41,47 +37,16 @@
             text-decoration: none;
             display: inline-block;
             width: 100px; /* Fixed width for buttons */
-            height: 100px; /* Fixed height for buttons to make them hexagonal */
+            height: 100%; /* Full height for button container */
             margin: 5px; /* Reduced margin for spacing between buttons */
             cursor: pointer;
             border-radius: 10%; /* Slightly round corners for hexagonal effect */
             font-family: 'Montserrat', sans-serif;
             font-weight: bold;
-            transition: all .3s ease-in-out; /* Transition for hover effect */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Transition for hover effect */
         }
 
-        @keyframes flashText {
-            0% { color: white; text-shadow: none; }
-            100% { color: rgba(255, 255, 255, 0.9); text-shadow:
-                0 0 10px rgba(255,255,255,1),
-                0 0 20px rgba(255,255,255,1),
-                0 0 30px rgba(255,255,255,1); } /* Glowing effect */
-        }
-
-        .button:hover {
-            background-color: #45A049; /* Lighter green on hover */
-            border-color: #2E7D32; /* Darker border on hover */
-        }
-
-        .row {
-           position:absolute;
-           top:50%;
-           left:50%;
-           transform-origin:center center; /* Center of the hexagon as origin */
-           display:flex;
-           flex-wrap: wrap;
-           justify-content:center;
-           align-items:center;
-       }
-
-       .row:nth-child(1) { transform: translate(-50%, -120px); } 
-       .row:nth-child(2) { transform: translate(-90px, -60px); } 
-       .row:nth-child(3) { transform: translate(-90px, 60px); } 
-       .row:nth-child(4) { transform: translate(0,120px); } 
-       .row:nth-child(5) { transform: translate(90px, 60px); } 
-       .row:nth-child(6) { transform: translate(90px, -60px); } 
-
-       .popup {
+        .popup {
            width:auto ; /* Auto width for popup to fit content */ 
            height:auto ; /* Auto height to fit content */ 
            position :fixed ; 
@@ -126,26 +91,10 @@
            color:#0078FF ;
        }
 
-       @keyframes flashGlow {
-           from {
-               text-shadow:
-                   none;
-               color: rgba(0,0,255,1);
-           }
-           to {
-               text-shadow:
-                   0 0 5px rgba(135,206,250,1),
-                   0 0 10px rgba(135,206,250,1),
-                   0 0 15px rgba(135,206,250,.7);
-               color:white;
-           }
-       }
-
        #chart-container {
            display:none; /* Initially hide the chart container */
            margin-top:20px;
        }
-
     </style>
 </head>
 <body>
@@ -153,26 +102,19 @@
     <h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
 
     <div class="button-container">
-      <div class="row">
-          <button class="button eur-button" onclick="showPopup('EUR/USD')">EUR/USD</button>
-          <button class="button gbp-button" onclick="showPopup('GBP/USD')">GBP/USD</button>
-          <button class="button usd-button" onclick="showPopup('USD/JPY')">USD/JPY</button>
-          <button class="button gold-button" onclick="showPopup('Gold')">Gold</button>
-          <button class="button aud-button" onclick="showPopup('AUD/USD')">AUD/USD</button>
-          <button class="button eth-button" onclick="showPopup('Ethereum')">Ethereum</button>
-          <button class="button silver-button" onclick="showPopup('Silver')">Silver</button>
-          <button class="button bitcoin-button" onclick="showPopup('Bitcoin')">Bitcoin</button>
-      </div>
-    </div>
-
-    <div style="margin-top:20px;">
-      <!-- Removed analysis title -->
+      <button class="button" onclick="showPopup('EUR/USD')">EUR/USD</button>
+      <button class="button" onclick="showPopup('GBP/USD')">GBP/USD</button>
+      <button class="button" onclick="showPopup('USD/JPY')">USD/JPY</button>
+      <button class="button" onclick="showPopup('Gold')">Gold</button>
+      <button class="button" onclick="showPopup('AUD/USD')">AUD/USD</button>
+      <button class="button" onclick="showPopup('Ethereum')">Ethereum</button>
+      <button class="button" onclick="showPopup('Silver')">Silver</button>
+      <button class="button" onclick="showPopup('Bitcoin')">Bitcoin</button>
     </div>
 
     <div class="popup">
       <div class="popup-content">
           <span class="close" onclick="closePopup()">×</span> <!-- Close button -->
-          <!-- Added analysis sections -->
           <h2 id="popup-title">Trading Signals for </h2>
           <p><strong>Fundamental Analysis:</strong></p>
           <p>[Insert your fundamental analysis here]</p>
@@ -213,86 +155,69 @@
 <!-- TradingView Widget END -->
 
 <script>
-function showPopup(instrument) {
-    const popupTitle = document.getElementById('popup-title');
-    popupTitle.textContent = `Trading Signals for ${instrument}`;
-    
-    const popup = document.querySelector('.popup');
-    const buttons = document.querySelectorAll('.button');
+     function showPopup(instrument) {
+         const popupTitle = document.getElementById('popup-title');
+         popupTitle.textContent = `Trading Signals for ${instrument}`;
+         
+         const popup = document.querySelector('.popup');
+         const buttons = document.querySelectorAll('.button');
 
-    // Hide all buttons and show only the clicked button
-    buttons.forEach(button => {
-        button.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out'; // Smooth transition
-        button.style.transform = 'translateY(-50px)'; // Move up
-        button.style.opacity = '0'; // Fade out
+         // Fade out all buttons
+         buttons.forEach(button => {
+             button.style.opacity = '0'; // Fade out
+             button.style.transition = 'opacity 0.3s ease-in-out'; // Transition effect
+         });
 
-        // Set a timeout to remove the button from display after it fades out
-        setTimeout(() => {
-            button.style.display = 'none'; // Hide after transition
-        }, 500); // Match this with the transition duration
-    });
-    
-    // Show only the clicked button
-    const clickedButton = document.querySelector(`button[onclick*='${instrument}']`);
-    
-    // Reposition clicked button below and make it visible
-    clickedButton.style.display = 'inline-block';
-    clickedButton.style.opacity = '0'; // Start hidden
-    clickedButton.style.transform = 'translateY(50px)'; // Start below
-    setTimeout(() => {
-        clickedButton.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out'; // Smooth transition
-        clickedButton.style.transform = 'translateY(0)'; // Move to original position
-        clickedButton.style.opacity = '1'; // Fade in
-    }, 50); // Slight delay to ensure it's displayed before animating
+         // After fading out, switch to the clicked button
+         setTimeout(() => {
+             buttons.forEach(button => {
+                 button.style.display = 'none'; // Hide all buttons
+             });
 
-    // Hide the toggle chart button
-    document.getElementById('toggle-chart-btn').style.display = 'none';
+             // Show only the clicked button
+             const clickedButton = document.querySelector(`button[onclick*='${instrument}']`);
+             clickedButton.style.display = 'inline-block';
+             clickedButton.style.opacity = '1'; // Fade in clicked button
 
-    popup.classList.add('active');
+             popup.classList.add('active');
+         }, 300); // Match this with the fade-out duration
 
-    // Flashing glow effect on title
-    popupTitle.style.animation = 'flashGlow .5s forwards';
-    setTimeout(() => {
-        popupTitle.style.animation = ''; // Reset the animation
-    }, 500);
-}
+         // Flashing glow effect on title
+         popupTitle.style.animation = 'flashGlow .5s forwards';
+         setTimeout(() => {
+             popupTitle.style.animation = ''; // Reset the animation
+         },500);
+     }
 
-function closePopup() {
-    const popup = document.querySelector('.popup');
-    
-    // Hide the popup
-    popup.classList.remove('active');
-    
-    const buttons = document.querySelectorAll('.button');
+     function closePopup() {
+         const popup = document.querySelector('.popup');
+         
+         // Hide the popup
+         popup.classList.remove('active');
+         
+         const buttons = document.querySelectorAll('.button');
 
-    // Show all buttons again with animation
-    buttons.forEach(button => {
-        button.style.display = 'inline-block';
-        button.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out'; // Smooth transition
-        button.style.transform = 'translateY(50px)'; // Start below
-        button.style.opacity = '0'; // Start hidden
+         // Show all buttons again with fade-in effect
+         buttons.forEach(button => {
+             button.style.display = 'inline-block';
+             button.style.opacity = '0'; // Start hidden
 
-        // Set a timeout to fade in after being shown again
-        setTimeout(() => {
-            button.style.display = 'inline-block'; 
-            button.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out'; 
-            button.style.transform = 'translateY(0)'; // Move to original position
-            button.style.opacity = '1'; // Fade in
-        }, 100); // Delay before showing again
+             setTimeout(() => {
+                 button.style.opacity = '1'; // Fade in
+                 button.style.transition = 'opacity 0.3s ease-in-out'; // Transition effect
+             }, 100); // Delay before showing again
+         });
 
-    });
+         // Show the toggle chart button again
+         document.getElementById('toggle-chart-btn').style.display = 'block';
 
-    // Show the toggle chart button again
-    document.getElementById('toggle-chart-btn').style.display = 'block';
-
-    // Flashing glow effect on title after closing
-    const popupTitle = document.getElementById('popup-title');
-    popupTitle.style.animation = 'flashGlow .5s forwards';
-    setTimeout(() => {
-        popupTitle.style.animation = ''; // Reset the animation
-    }, 500);
-}
-}
+         // Flashing glow effect on title after closing
+         const popupTitle = document.getElementById('popup-title');
+         popupTitle.style.animation = 'flashGlow .5s forwards';
+         setTimeout(() => {
+             popupTitle.style.animation = ''; // Reset the animation
+         },500);
+     }
 
      function toggleChart() {
          const chartContainer = document.getElementById('chart-container');
