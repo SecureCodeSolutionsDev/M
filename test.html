@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glowing Buttons with Animation</title>
-    <style>
+<style>
         body {
             background-color: #121212; /* Dark background for a modern look */
             margin: 0;
@@ -129,9 +129,9 @@
            color: rgba(0, 255, 255, .8); /* Match button text color for analysis titles */
        }
 
-    </style>
-</head>
-<body>
+</style>
+  </head>
+  <body>
 
     <h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
 
@@ -177,13 +177,13 @@
     </div>
 
     <!-- TradingView Widget BEGIN -->
-    <div id="chartContainer" style="margin-top:20px;"> <!-- Set display to none by default -->
+    <div id="chartContainer" style="margin-top:20px; display:none;"> <!-- Set display to none by default -->
       <div id="tradingview_8ba84"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-      <script type="text/javascript">
+<script type="text/javascript">
           new TradingView.widget({
               "autosize": true,
-              "height": "800", // Set a fixed height for better visibility
+              "height": "1000", // Set a fixed height for better visibility
               "symbol": "NASDAQ:AAPL",
               "interval": "D",
               "timezone": "Etc/UTC",
@@ -195,7 +195,7 @@
               "allow_symbol_change": true,
               "container_id": "tradingview_8ba84"
           });
-      </script>
+</script>
     </div>
     <!-- TradingView Widget END -->
 
@@ -283,5 +283,5 @@
 
 </script>
 
-</body>
+  </body>
 </html>
