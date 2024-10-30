@@ -22,12 +22,6 @@
                 0 0 5px rgba(255, 215, 0, 0.7), /* Reduced gold glow */
                 0 0 10px rgba(255, 215, 0, 0.5); /* Brighter gold glow */
 		}
-		.disclaimer {
-			font-size: 18px;
-			color: #CCCCCC; /* Light gray for better contrast */
-			margin-top: 50px;
-			margin-bottom: 20px;
-		}
 		.button-container {
 			display: flex;
 			flex-wrap: wrap;
@@ -56,6 +50,9 @@
             position: relative; /* Needed for absolute positioning of random movement */
             animation-duration: calc(1s + (random() * 2s)); /* Random duration for each button */
             animation-timing-function: ease-in-out; /* Smooth movement */
+            animation-name: moveButton; /* Animation for movement */
+            animation-iteration-count: infinite; /* Infinite repetitions */
+            animation-direction: alternate; /* Alternate direction on each iteration */
 		}
         .button:hover {
             background-color: #CDAF95; /* Lighter color on hover */
@@ -104,11 +101,15 @@
             color:#0078FF; /* Change color on hover */
         }
 
+        @keyframes moveButton {
+          from { transform: translate(0); }
+          to { transform: translate(calc(-2px + (random() * (4px))), calc(-2px + (random() * (4px)))); } /* Reduced movement range */
+        }
+
     </style>
 </head>
 <body>
     <h1>Forex Signals</h1>
-    <p class="disclaimer">Disclaimer: These signals are for educational purposes only and should not be considered as financial advice. Trading in the foreign exchange market carries a high level of risk and may not be suitable for all investors. Past performance is not indicative of future results.</p>
 
     <div class="button-container">
         <button class="button" onclick="showPopup('EUR/USD')">EUR/USD</button>
@@ -121,6 +122,12 @@
         <button class="button" onclick="showPopup('Silver')">Silver</button>
         <button class="button" onclick="showPopup('Bitcoin')">Bitcoin</button>
         <button class="button" onclick="showPopup('Ethereum')">Ethereum</button>
+    </div>
+
+    <div class="contact">
+        <h2 style="color:#FFD700;">Contact:</h2>
+        <p style="color:#CCCCCC;">Coder & Owner:</p>
+        <p style="color:#FFD700;">oitache123@gmail.com</p>
     </div>
 
     <div class="popup">
@@ -163,21 +170,6 @@
             const popup = document.querySelector('.popup');
             popup.classList.remove('active');
         }
-
-        // Function to apply random movement to buttons
-        function applyRandomMovement() {
-          const buttons = document.querySelectorAll('.button');
-          buttons.forEach(button => {
-              const randomX = Math.random() * (10) -5 + "px"; // Random X offset between -5 and +5
-              const randomY = Math.random() * (10) -5 + "px"; // Random Y offset between -5 and +5
-              button.style.transform = `translate(${randomX}, ${randomY})`;
-          });
-          setTimeout(applyRandomMovement, 1000); // Repeat every second
-        }
-
-        // Start the random movement when the page loads
-        window.onload = applyRandomMovement;
-
     </script>
 
 </body>
