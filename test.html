@@ -66,18 +66,7 @@
         .silver-button { animation-delay: 1.2s; }
         .bitcoin-button { animation-delay: 1.4s; }
 
-        @keyframes moveButton {
-            from {
-                transform: rotate(0deg) translate(120px) rotate(0deg); /* Move outwards in a circle */
-                opacity: 1;
-            }
-            to {
-                transform: rotate(360deg) translate(120px) rotate(-360deg); /* Complete a full circle while rotating */
-                opacity: 1;
-            }
-        }
-
-       .row {
+        .button-container > div {
            position:absolute;
            top:50%;
            left:50%;
