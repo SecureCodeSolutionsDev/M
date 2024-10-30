@@ -79,6 +79,17 @@
             color: white; 
             transform: scale(1.05);
         }
+        .flashing {
+            animation-name: flashColor;
+            animation-duration: .75s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes flashColor {
+          from { color:#FFD700; } /* Start with gold color */
+          to { color:#FFFFFF; }   /* Change to white color */
+        }
+
         .popup {
             width: calc(100%); /* Full width for popup */
             height: calc(100%); /* Full height for popup */
@@ -142,7 +153,7 @@
 
     <div class="button-container">
         <div class="row">
-          <button class="button" onclick="showPopup('EUR/USD')">EUR/USD</button>
+          <button class="button" onclick="showPopup('EUR/USD')"><span class="flashing">EUR/USD</span></button>
         </div>
         <div class="row">
           <button class="button" onclick="showPopup('GBP/USD')">GBP/USD</button>
