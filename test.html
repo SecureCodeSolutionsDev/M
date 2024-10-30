@@ -44,7 +44,6 @@
             font-family: 'Montserrat', sans-serif;
             font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
-            animation: flashText 1s infinite alternate; /* Flashing text animation with increased speed */
         }
 
         @keyframes flashText {
@@ -228,6 +227,8 @@
          const clickedButton = document.querySelector(`button[onclick*='${instrument}']`);
          clickedButton.style.display = 'inline-block';
          clickedButton.style.opacity = '1'; // Fade in clicked button
+         clickedButton.style.transform = 'translateY(-10px) rotate(-5deg)'; // Move up and rotate
+         clickedButton.style.transition = 'transform .5s ease-in-out'; // Add transition
 
          // Hide the toggle chart button
          document.getElementById('toggle-chart-btn').style.display = 'none';
@@ -255,6 +256,7 @@
              button.style.opacity = '1'; // Ensure opacity is reset
              button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
              setTimeout(() => { button.style.opacity = '1'; },100); // Reset opacity after a short delay
+             button.style.transform = ''; // Reset transformation
          });
 
          // Show the toggle chart button again
