@@ -147,6 +147,11 @@
            }
        }
 
+       #chart-container {
+           display:none; /* Initially hide the chart container */
+           margin-top:20px;
+       }
+
     </style>
 </head>
 <body>
@@ -192,8 +197,13 @@
       </div>
     </div>
 
+    <!-- Toggle Chart Button -->
+    <div style="margin-top:20px;">
+      <button id="toggle-chart-btn" onclick="toggleChart()">Show TradingView Chart</button>
+    </div>
+
     <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container" style="margin-top:20px;">
+    <div id="chart-container">
       <div id="tradingview_8ba84"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
       <script type="text/javascript">
@@ -265,6 +275,19 @@
               setTimeout(() => {
                   popupTitle.style.animation = ''; // Reset the animation
               },500);
+         }
+
+         function toggleChart() {
+             const chartContainer = document.getElementById('chart-container');
+             const toggleChartBtn = document.getElementById('toggle-chart-btn');
+
+             if (chartContainer.style.display === "none") {
+                 chartContainer.style.display = "block"; // Show chart
+                 toggleChartBtn.textContent = "Hide TradingView Chart"; // Update button text
+             } else {
+                 chartContainer.style.display = "none"; // Hide chart
+                 toggleChartBtn.textContent = "Show TradingView Chart"; // Update button text
+             }
          }
     </script>
 
