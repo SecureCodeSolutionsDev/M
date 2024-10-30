@@ -10,6 +10,7 @@
             margin: 0;
             padding: 0;
             text-align: center; /* Center text */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
         h1 {
             font-family: 'Montserrat', sans-serif;
@@ -28,7 +29,7 @@
         .row {
             display: flex;
             justify-content: center; /* Center items in each row */
-            width: fit-content; /* Fit to content width */
+            width: 100%; /* Use full width of the container */
         }
         .button {
             background-color: transparent; /* Transparent background */
@@ -48,62 +49,33 @@
             font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
         }
-        .eur-button {
-            color: rgba(0, 0, 255, 0.8); /* Keep EUR/USD in blue */
-        }
-        @keyframes moveButton {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(15px); } /* Move right slightly more for collision effect */
-            100% { transform: translateX(0); } /* Move back to original position */
-        }
-        .eur-button { animation: moveButton 2s infinite alternate; }
-        .gbp-button { animation: moveButton 2s infinite alternate; animation-delay: 0.2s; }
-        .usd-button { animation: moveButton 2s infinite alternate; animation-delay: 0.4s; }
-        .gold-button { animation: moveButton 2s infinite alternate; animation-delay: 0.6s; }
-        .aud-button { animation: moveButton 2s infinite alternate; animation-delay: 0.8s; }
-        .nzd-button { animation: moveButton 2s infinite alternate; animation-delay: 1s; }
-        .eth-button { animation: moveButton 2s infinite alternate; animation-delay: 1.2s; }
-        .silver-button { animation: moveButton 2s infinite alternate; animation-delay: 1.4s; }
-        .bitcoin-button { animation: moveButton 2s infinite alternate; animation-delay: 1.6s; }
-        .cad-button { animation: moveButton 2s infinite alternate; animation-delay: 1.8s; }
-
-        .button:hover {
-            color: white; /* Change text color on hover */
-            border-color: white; /* Change border color on hover */
-        }
-
-        /* Glowing effect for EUR/USD button specifically */
-        .eur-button:hover {
-            text-shadow:
-                0 0 5px rgba(0, 0, 255, 1),
-                0 0 10px rgba(0, 0, 255, 1),
-                0 0 15px rgba(0, 0, 255, 1); /* Glowing text effect for EUR/USD */
-        }
-
-        .button:hover:not(.eur-button) {
-            text-shadow:
-                0 0 5px rgba(135,206 ,250 ,1),
-                0 0 10px rgba(135,206 ,250 ,1),
-                0 0 15px rgba(135,206 ,250 ,1); /* Glowing text effect for other buttons */
+        
+        @media (max-width: 600px) {
+            .button {
+                padding: 15px; /* Adjust padding for smaller screens */
+                font-size: 16px; /* Adjust font size for better readability on small screens */
+                max-width: none; /* Remove max-width to allow full width on small screens */
+                width: calc(100% - 20px); /* Full width minus margin for mobile */
+            }
         }
 
         .popup {
-            width:auto ; /* Auto width for popup to fit content */ 
-            height:auto ; /* Auto height to fit content */ 
-            position :fixed ; 
-            top : -20px ; 
-            left : -20px ; 
-            background-color :rgba(255 ,255 ,255 ,.95); 
-            display :flex ; 
-            justify-content :center ; 
-            align-items :center ; 
-            z-index :2 ; 
-            opacity:.9 ; 
-            visibility:hidden ; 
-            transition:.3s ease-in-out ; 
-        }
+           width:auto ; /* Auto width for popup to fit content */ 
+           height:auto ; /* Auto height to fit content */ 
+           position :fixed ; 
+           top : -20px ; 
+           left : -20px ; 
+           background-color :rgba(255 ,255 ,255 ,.95); 
+           display :flex ; 
+           justify-content :center ; 
+           align-items :center ; 
+           z-index :2 ; 
+           opacity:.9 ; 
+           visibility:hidden ; 
+           transition:.3s ease-in-out ; 
+       }
 
-        .popup.active {
+       .popup.active {
            opacity:.9 ; 
            visibility :visible ; 
        }
@@ -151,7 +123,6 @@
            display:none; /* Initially hide the chart container */
            margin-top:20px;
        }
-
     </style>
 </head>
 <body>
@@ -208,9 +179,9 @@
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script type="text/javascript">
         new TradingView.widget({
-            "autosize": false, // Set to false to use custom dimensions
-            "width": 800, // Adjust width as needed
-            "height": 600, // Adjust height as needed
+            "autosize": false, // Keep this as false to use custom dimensions
+            "width": 800, // Keep this as is
+            "height": 600, // Keep this as is
             "symbol": "NASDAQ:AAPL",
             "interval": "D",
             "timezone": "Etc/UTC",
@@ -226,83 +197,72 @@
 </div>
 <!-- TradingView Widget END -->
 
-<style>
-    #chart-container {
-        width: 80%; /* Decrease width */
-        margin: auto; /* Center the container */
-    }
+<script>
+     function showPopup(instrument) {
+         const popupTitle = document.getElementById('popup-title');
+         popupTitle.textContent = `Trading Signals for ${instrument}`;
+         
+         const popup = document.querySelector('.popup');
+         const buttons = document.querySelectorAll('.button');
 
-    #tradingview_8ba84 {
-        height: 600px; /* Increase height */
-    }
-</style>
+         // Hide all buttons and show only the clicked button
+         buttons.forEach(button => {
+             button.style.display = 'none';
+             button.style.opacity = '0'; // Fade out buttons
+             button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
+          });
+          
+          // Show only the clicked button
+          const clickedButton = document.querySelector(`button[onclick*='${instrument}']`);
+          clickedButton.style.display = 'inline-block';
+          clickedButton.style.opacity = '1'; // Fade in clicked button
 
-    <script>
-         function showPopup(instrument) {
-             const popupTitle = document.getElementById('popup-title');
-             popupTitle.textContent = `Trading Signals for ${instrument}`;
-             
-             const popup = document.querySelector('.popup');
-             const buttons = document.querySelectorAll('.button');
+          popup.classList.add('active');
 
-             // Hide all buttons and show only the clicked button
-             buttons.forEach(button => {
-                 button.style.display = 'none';
-                 button.style.opacity = '0'; // Fade out buttons
-                 button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
-              });
-              
-              // Show only the clicked button
-              const clickedButton = document.querySelector(`button[onclick*='${instrument}']`);
-              clickedButton.style.display = 'inline-block';
-              clickedButton.style.opacity = '1'; // Fade in clicked button
+          // Flashing glow effect on title
+          popupTitle.style.animation = 'flashGlow .5s forwards';
+          setTimeout(() => {
+              popupTitle.style.animation = ''; // Reset the animation
+          },500);
+     }
 
-              popup.classList.add('active');
+     function closePopup() {
+         const popup = document.querySelector('.popup');
+         
+         // Hide the popup
+         popup.classList.remove('active');
+         
+         const buttons = document.querySelectorAll('.button');
 
-              // Flashing glow effect on title
-              popupTitle.style.animation = 'flashGlow .5s forwards';
-              setTimeout(() => {
-                  popupTitle.style.animation = ''; // Reset the animation
-              },500);
+         // Show all buttons again
+         buttons.forEach(button => {
+             button.style.display = 'inline-block';
+             button.style.opacity = '1'; // Ensure opacity is reset
+             button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
+             setTimeout(() => { button.style.opacity = '1'; },100); // Reset opacity after a short delay
+          });
+
+          // Flashing glow effect on title after closing
+          const popupTitle = document.getElementById('popup-title');
+          popupTitle.style.animation = 'flashGlow .5s forwards';
+          setTimeout(() => {
+              popupTitle.style.animation = ''; // Reset the animation
+          },500);
+     }
+
+     function toggleChart() {
+         const chartContainer = document.getElementById('chart-container');
+         const toggleChartBtn = document.getElementById('toggle-chart-btn');
+
+         if (chartContainer.style.display === "none") {
+             chartContainer.style.display = "block"; // Show chart
+             toggleChartBtn.textContent = "Hide TradingView Chart"; // Update button text
+         } else {
+             chartContainer.style.display = "none"; // Hide chart
+             toggleChartBtn.textContent = "Show TradingView Chart"; // Update button text
          }
-
-         function closePopup() {
-             const popup = document.querySelector('.popup');
-             
-             // Hide the popup
-             popup.classList.remove('active');
-             
-             const buttons = document.querySelectorAll('.button');
-
-             // Show all buttons again
-             buttons.forEach(button => {
-                 button.style.display = 'inline-block';
-                 button.style.opacity = '1'; // Ensure opacity is reset
-                 button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
-                 setTimeout(() => { button.style.opacity = '1'; },100); // Reset opacity after a short delay
-              });
-
-              // Flashing glow effect on title after closing
-              const popupTitle = document.getElementById('popup-title');
-              popupTitle.style.animation = 'flashGlow .5s forwards';
-              setTimeout(() => {
-                  popupTitle.style.animation = ''; // Reset the animation
-              },500);
-         }
-
-         function toggleChart() {
-             const chartContainer = document.getElementById('chart-container');
-             const toggleChartBtn = document.getElementById('toggle-chart-btn');
-
-             if (chartContainer.style.display === "none") {
-                 chartContainer.style.display = "block"; // Show chart
-                 toggleChartBtn.textContent = "Hide TradingView Chart"; // Update button text
-             } else {
-                 chartContainer.style.display = "none"; // Hide chart
-                 toggleChartBtn.textContent = "Show TradingView Chart"; // Update button text
-             }
-         }
-    </script>
+     }
+</script>
 
 </body>
 </html>
