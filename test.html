@@ -67,18 +67,13 @@
 			font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
             position: relative; /* Needed for absolute positioning of random movement */
-            animation-name: luxuriousMove; /* Animation for luxurious movements */
-            animation-duration: .8s; /* Duration of the movement */
+            animation-duration: .75s; /* Duration of the movement */
             animation-iteration-count: infinite; /* Infinite repetitions */
             animation-direction: alternate; /* Alternate direction on each iteration */
             text-shadow:
                 0   -2px   rgba(255,215,0,.7),
                 -2   -2px   rgba(255,215,0,.5); /* Gold glow effect */
 		}
-        @keyframes luxuriousMove {
-          from { transform: translate(1px, -1px); }
-          to { transform: translate(-1px, -2px); }
-        }
         .button:hover {
             background-color: #CDAF95; /* Lighter color on hover */
             color: white; 
@@ -201,6 +196,30 @@
             const popup = document.querySelector('.popup');
             popup.classList.remove('active');
         }
+
+        // Function to apply movement to buttons
+        function applyButtonMovement() {
+          const buttons = document.querySelectorAll('.button');
+          
+          // Calculate positions and move buttons
+          buttons.forEach(button => {
+              const originalPosition = button.getBoundingClientRect();
+              const targetX = Math.random() * (10) -5 + "px"; // Random X offset between -5 and +5
+              const targetY = Math.random() * (10) -5 + "px"; // Random Y offset between -5 and +5
+              
+              button.style.transform = `translate(${targetX}, ${targetY})`;
+              
+              // Return to original position after a short delay
+              setTimeout(() => {
+                  button.style.transform = `translate(0, 0)`;
+              }, Math.random() * (500) + (500)); // Random delay between movements
+          });
+          
+          setTimeout(applyButtonMovement, Math.random() * (2000) + (2000)); // Repeat every few seconds
+        }
+
+        // Start the button movement when the page loads
+        window.onload = applyButtonMovement;
 
     </script>
 
