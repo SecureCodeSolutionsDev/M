@@ -53,7 +53,7 @@
             text-shadow:
                 0 0 5px rgba(255, 215, 0, 1), /* Gold glow */
                 0 0 10px rgba(255, 215, 0, 0.5); /* Brighter gold glow */
-            animation: moveButton randomMove infinite alternate; /* Animation for movement */
+            position: relative; /* Needed for absolute positioning of random movement */
             animation-duration: calc(1s + (random() * 2s)); /* Random duration for each button */
             animation-timing-function: ease-in-out; /* Smooth movement */
 		}
@@ -102,11 +102,6 @@
         }
         .close:hover { 
             color:#0078FF; /* Change color on hover */
-        }
-
-        @keyframes randomMove {
-          from { transform: translate(0); }
-          to { transform: translate(calc(-5px + (random() * (10px))), calc(-5px + (random() * (10px)))); }
         }
 
     </style>
@@ -168,6 +163,21 @@
             const popup = document.querySelector('.popup');
             popup.classList.remove('active');
         }
+
+        // Function to apply random movement to buttons
+        function applyRandomMovement() {
+          const buttons = document.querySelectorAll('.button');
+          buttons.forEach(button => {
+              const randomX = Math.random() * (10) -5 + "px"; // Random X offset between -5 and +5
+              const randomY = Math.random() * (10) -5 + "px"; // Random Y offset between -5 and +5
+              button.style.transform = `translate(${randomX}, ${randomY})`;
+          });
+          setTimeout(applyRandomMovement, 1000); // Repeat every second
+        }
+
+        // Start the random movement when the page loads
+        window.onload = applyRandomMovement;
+
     </script>
 
 </body>
