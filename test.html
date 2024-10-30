@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -209,66 +213,86 @@
 <!-- TradingView Widget END -->
 
 <script>
-     function showPopup(instrument) {
-         const popupTitle = document.getElementById('popup-title');
-         popupTitle.textContent = `Trading Signals for ${instrument}`;
-         
-         const popup = document.querySelector('.popup');
-         const buttons = document.querySelectorAll('.button');
+function showPopup(instrument) {
+    const popupTitle = document.getElementById('popup-title');
+    popupTitle.textContent = `Trading Signals for ${instrument}`;
+    
+    const popup = document.querySelector('.popup');
+    const buttons = document.querySelectorAll('.button');
 
-         // Hide all buttons and show only the clicked button
-         buttons.forEach(button => {
-             button.style.display = 'none';
-             button.style.opacity = '0'; // Fade out buttons
-             button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
-         });
-         
-         // Show only the clicked button
-         const clickedButton = document.querySelector(`button[onclick*='${instrument}']`);
-         clickedButton.style.display = 'inline-block';
-         clickedButton.style.opacity = '1'; // Fade in clicked button
-         clickedButton.style.transform = 'translateY(-10px) rotate(-5deg)'; // Move up and rotate
-         clickedButton.style.transition = 'transform .5s ease-in-out'; // Add transition
+    // Hide all buttons and show only the clicked button
+    buttons.forEach(button => {
+        button.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out'; // Smooth transition
+        button.style.transform = 'translateY(-50px)'; // Move up
+        button.style.opacity = '0'; // Fade out
 
-         // Hide the toggle chart button
-         document.getElementById('toggle-chart-btn').style.display = 'none';
+        // Set a timeout to remove the button from display after it fades out
+        setTimeout(() => {
+            button.style.display = 'none'; // Hide after transition
+        }, 500); // Match this with the transition duration
+    });
+    
+    // Show only the clicked button
+    const clickedButton = document.querySelector(`button[onclick*='${instrument}']`);
+    
+    // Reposition clicked button below and make it visible
+    clickedButton.style.display = 'inline-block';
+    clickedButton.style.opacity = '0'; // Start hidden
+    clickedButton.style.transform = 'translateY(50px)'; // Start below
+    setTimeout(() => {
+        clickedButton.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out'; // Smooth transition
+        clickedButton.style.transform = 'translateY(0)'; // Move to original position
+        clickedButton.style.opacity = '1'; // Fade in
+    }, 50); // Slight delay to ensure it's displayed before animating
 
-         popup.classList.add('active');
+    // Hide the toggle chart button
+    document.getElementById('toggle-chart-btn').style.display = 'none';
 
-         // Flashing glow effect on title
-         popupTitle.style.animation = 'flashGlow .5s forwards';
-         setTimeout(() => {
-             popupTitle.style.animation = ''; // Reset the animation
-         },500);
-     }
+    popup.classList.add('active');
 
-     function closePopup() {
-         const popup = document.querySelector('.popup');
-         
-         // Hide the popup
-         popup.classList.remove('active');
-         
-         const buttons = document.querySelectorAll('.button');
+    // Flashing glow effect on title
+    popupTitle.style.animation = 'flashGlow .5s forwards';
+    setTimeout(() => {
+        popupTitle.style.animation = ''; // Reset the animation
+    }, 500);
+}
 
-         // Show all buttons again
-         buttons.forEach(button => {
-             button.style.display = 'inline-block';
-             button.style.opacity = '1'; // Ensure opacity is reset
-             button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
-             setTimeout(() => { button.style.opacity = '1'; },100); // Reset opacity after a short delay
-             button.style.transform = ''; // Reset transformation
-         });
+function closePopup() {
+    const popup = document.querySelector('.popup');
+    
+    // Hide the popup
+    popup.classList.remove('active');
+    
+    const buttons = document.querySelectorAll('.button');
 
-         // Show the toggle chart button again
-         document.getElementById('toggle-chart-btn').style.display = 'block';
+    // Show all buttons again with animation
+    buttons.forEach(button => {
+        button.style.display = 'inline-block';
+        button.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out'; // Smooth transition
+        button.style.transform = 'translateY(50px)'; // Start below
+        button.style.opacity = '0'; // Start hidden
 
-         // Flashing glow effect on title after closing
-         const popupTitle = document.getElementById('popup-title');
-         popupTitle.style.animation = 'flashGlow .5s forwards';
-         setTimeout(() => {
-             popupTitle.style.animation = ''; // Reset the animation
-         },500);
-     }
+        // Set a timeout to fade in after being shown again
+        setTimeout(() => {
+            button.style.display = 'inline-block'; 
+            button.style.transition = 'transform 0.5s ease-in-out, opacity 0.5s ease-in-out'; 
+            button.style.transform = 'translateY(0)'; // Move to original position
+            button.style.opacity = '1'; // Fade in
+        }, 100); // Delay before showing again
+
+    });
+
+    // Show the toggle chart button again
+    document.getElementById('toggle-chart-btn').style.display = 'block';
+
+    // Flashing glow effect on title after closing
+    const popupTitle = document.getElementById('popup-title');
+    popupTitle.style.animation = 'flashGlow .5s forwards';
+    setTimeout(() => {
+        popupTitle.style.animation = ''; // Reset the animation
+    }, 500);
+}
+}
 
      function toggleChart() {
          const chartContainer = document.getElementById('chart-container');
