@@ -139,6 +139,8 @@
                         0 0 15px rgba(255,215,0,.3); /* Glowing effect for artistic text */
            animation: flashText 1s infinite alternate; /* Flashing animation for artistic text */
            cursor: pointer; /* Pointer cursor on hover */
+           background-color: transparent; /* Background color for button style */
+           border: none; /* No border for button style */
        }
 
        @keyframes flashText {
@@ -150,7 +152,7 @@
            }
        }
 
-</style>
+    </style>
 </head>
 <body>
 
@@ -204,16 +206,16 @@
       </div>
     </div>
 
-    <!-- Contact Information Section -->
+    <!-- Contact Information Button -->
     <div style="margin-top:30px;" id="contactInfo">
-      <span class="artistic-text">Coder & Owner Mroane Oitache Contact</span>
+      <button class='artistic-text' onclick="showContactPopup()">Coder & Owner Mroane Oitache</button>
     </div>
 
     <!-- Contact Popup -->
-    <div class="popup" id="contactPopup">
-      <div class="popup-content">
-          <span class="close" onclick="closeContactPopup()">×</span> <!-- Close button -->
-          <h2 style="color:#FFD700;">Contact Information</h2>
+    <div class='popup' id='authorPopup'>
+      <div class='popup-content'>
+          <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
+          <h2 style='color:#FFD700;'>Contact Information</h2>
           <p>Email: <strong>oitache123@gmail.com</strong></p>
       </div>
     </div>
@@ -326,13 +328,16 @@
          }
 
          function showContactPopup() {
-             const contactPopup = document.getElementById('contactPopup');
+             const contactPopup = document.getElementById('authorPopup');
              contactPopup.classList.add('active');
          }
 
          function closeContactPopup() {
-             const contactPopup = document.getElementById('contactPopup');
+             const contactPopup = document.getElementById('authorPopup');
              contactPopup.classList.remove('active');
+
+             // Show contact information again after closing contact popup
+             document.getElementById('contactInfo').style.display = 'block';
          }
 </script>
 
