@@ -130,7 +130,7 @@
        }
 
        .artistic-text {
-           font-size: 36px; /* Font size for artistic text */
+           font-size: 18px; /* Match font size with other texts */
            color: #FFD700; /* Gold text color */
            text-shadow: 0 0 5px rgba(255,215,0,.7), 
                         0 0 10px rgba(255,215,0,.5), 
@@ -290,14 +290,16 @@
              const chartPopup = document.getElementById('chartPopup');
              chartVisible = !chartVisible;
 
-             if (chartVisible) {
+             if (!chartVisible) { // If chart is not visible yet
+                 chartVisible = true; // Set to visible
                  chartPopup.classList.add('active'); // Show chart popup
-                 button.textContent = 'Hide Chart'; // Change button text to Hide Chart
-                 button.classList.add('glow'); // Add glow effect on click
-             } else {
+                 document.getElementById('toggleChartBtn').textContent = 'Hide Chart'; // Change button text to Hide Chart
+                 document.getElementById('toggleChartBtn').classList.add('glow'); // Add glow effect on click
+             } else { // If chart is already visible
+                 chartVisible = false; // Set to not visible
                  chartPopup.classList.remove('active'); // Hide chart popup
-                 button.textContent = 'Show Chart'; // Change back to Show Chart
-                 button.classList.remove('glow'); // Remove glow effect when hiding chart
+                 document.getElementById('toggleChartBtn').textContent = 'Show Chart'; // Change back to Show Chart
+                 document.getElementById('toggleChartBtn').classList.remove('glow'); // Remove glow effect when hiding chart
              }
          }
 
@@ -309,6 +311,8 @@
 
              const toggleButton = document.getElementById('toggleChartBtn');
              toggleButton.textContent = 'Show Chart'; // Reset toggle button text
+
+             chartVisible = false; // Reset visibility state of the chart
          }
 
          function showContactPopup() {
