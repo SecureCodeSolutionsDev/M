@@ -6,7 +6,7 @@
 	<title>Forex Signals</title>
 	<style>
 		body {
-			background-color: #87CEEB;
+			background-color: #FFFFFF; /* White background */
 			margin: 0;
 			padding: 0;
 			text-align: center; /* Center text */
@@ -18,6 +18,8 @@
 			color: #0078FF;
 			margin-top: 20px;
 			margin-bottom: 30px;
+			text-shadow: 0 0 10px rgba(0, 120, 255, 0.7), /* Blue glow */
+						0 0 20px rgba(0, 120, 255, 0.5); /* Brighter blue glow */
 		}
 		.disclaimer {
 			font-size: 18px;
@@ -50,23 +52,23 @@
 			box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 		}
 		.button:hover {
-			background-color: #CDAF95;
-			color: white;
+			background-color: #CDAF95; /* Lighter color on hover */
+			color: white; 
 			transform: scale(1.05);
 		}
         .popup {
             width: 100%;
             height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-            opacity: 0;
-            visibility: hidden;
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 2; 
+            opacity: 0; 
+            visibility: hidden; 
             transition: all 0.3s ease-in-out; 
         }
         .popup.active {
@@ -74,7 +76,7 @@
             visibility: visible; 
         }
         .popup-content {
-            background-color: #FFFFFF; 
+            background-color: #FFFFFF; /* White background for popup */
             border-radius: 10px; 
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
             padding: 50px; 
@@ -93,7 +95,7 @@
             transition :all .3s ease-in-out; 
         }
         .close:hover { 
-            color:#0078FF; 
+            color:#0078FF; /* Change color on hover */
         }
     </style>
 </head>
