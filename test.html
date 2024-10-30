@@ -129,10 +129,6 @@
            color: rgba(0, 255, 255, .8); /* Match button text color for analysis titles */
        }
 
-       #chartContainer {
-           height: 800px; /* Increased height for better visibility of the chart */
-       }
-
     </style>
 </head>
 <body>
@@ -187,6 +183,7 @@
       <script type="text/javascript">
           new TradingView.widget({
               "autosize": true,
+              "height": "800", // Set a fixed height for better visibility
               "symbol": "NASDAQ:AAPL",
               "interval": "D",
               "timezone": "Etc/UTC",
