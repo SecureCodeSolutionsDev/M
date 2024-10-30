@@ -32,9 +32,9 @@
             width: fit-content; /* Fit to content width */
         }
         .button {
-            background-color: transparent; /* Transparent background */
-            border: 2px solid rgba(0, 0, 255, 0.8); /* Blue border */
-            color: rgba(0, 0, 255, 0.8); /* Change to EUR/USD blue */
+            background-color: #4CAF50; /* Green background for buttons */
+            border: 2px solid #388E3C; /* Darker green border */
+            color: white; /* White text color */
             padding: 15px 30px; /* Adjusted padding for smaller buttons */
             font-size: 16px; /* Adjusted font size for better readability */
             text-align: center;
@@ -49,43 +49,24 @@
             font-weight: bold;
             transition: all .3s ease-in-out; /* Transition for hover effect */
         }
-        .eur-button {
-            color: rgba(0, 0, 255, 0.8); /* Keep EUR/USD in blue */
+        .button:hover {
+            background-color: #45A049; /* Lighter green on hover */
+            border-color: #2E7D32; /* Darker border on hover */
         }
-        @keyframes moveButton {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(15px); } /* Move right slightly more for collision effect */
-            100% { transform: translateX(0); } /* Move back to original position */
-        }
+
         .eur-button { animation: moveButton 2s infinite alternate; }
         .gbp-button { animation: moveButton 2s infinite alternate; animation-delay: 0.2s; }
         .usd-button { animation: moveButton 2s infinite alternate; animation-delay: 0.4s; }
         .gold-button { animation: moveButton 2s infinite alternate; animation-delay: 0.6s; }
         .aud-button { animation: moveButton 2s infinite alternate; animation-delay: 0.8s; }
-        .nzd-button { animation: moveButton 2s infinite alternate; animation-delay: 1s; }
         .eth-button { animation: moveButton 2s infinite alternate; animation-delay: 1.2s; }
         .silver-button { animation: moveButton 2s infinite alternate; animation-delay: 1.4s; }
         .bitcoin-button { animation: moveButton 2s infinite alternate; animation-delay: 1.6s; }
-        .cad-button { animation: moveButton 2s infinite alternate; animation-delay: 1.8s; }
 
-        .button:hover {
-            color: white; /* Change text color on hover */
-            border-color: white; /* Change border color on hover */
-        }
-
-        /* Glowing effect for EUR/USD button specifically */
-        .eur-button:hover {
-            text-shadow:
-                0 0 5px rgba(0, 0, 255, 1),
-                0 0 10px rgba(0, 0, 255, 1),
-                0 0 15px rgba(0, 0, 255, 1); /* Glowing text effect for EUR/USD */
-        }
-
-        .button:hover:not(.eur-button) {
-            text-shadow:
-                0 0 5px rgba(135,206 ,250 ,1),
-                0 0 10px rgba(135,206 ,250 ,1),
-                0 0 15px rgba(135,206 ,250 ,1); /* Glowing text effect for other buttons */
+        @keyframes moveButton {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(15px); } /* Move right slightly more for collision effect */
+            100% { transform: translateX(0); } /* Move back to original position */
         }
 
         .popup {
@@ -170,13 +151,11 @@
       <div class="row">
           <button class="button gold-button" onclick="showPopup('Gold')">Gold</button>
           <button class="button aud-button" onclick="showPopup('AUD/USD')">AUD/USD</button>
-          <button class="button nzd-button" onclick="showPopup('NZD/USD')">NZD/USD</button>
       </div>
       <div class="row">
           <button class="button eth-button" onclick="showPopup('Ethereum')">Ethereum</button>
           <button class="button silver-button" onclick="showPopup('Silver')">Silver</button>
           <button class="button bitcoin-button" onclick="showPopup('Bitcoin')">Bitcoin</button>
-          <button class="button cad-button" onclick="showPopup('USD/CAD')">USD/CAD</button>
       </div>
     </div>
 
