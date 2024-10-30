@@ -19,8 +19,8 @@
 			margin-top: 20px;
 			margin-bottom: 30px;
 			text-shadow: 
-                0 0 10px rgba(255, 215, 0, 0.7), /* Gold glow */
-                0 0 20px rgba(255, 215, 0, 0.5); /* Brighter gold glow */
+                0 0 5px rgba(255, 215, 0, 0.7), /* Reduced gold glow */
+                0 0 10px rgba(255, 215, 0, 0.5); /* Brighter gold glow */
 		}
 		.disclaimer {
 			font-size: 18px;
@@ -49,18 +49,16 @@
 			border-radius: 5px;
 			font-family: 'Montserrat', sans-serif;
 			font-weight: bold;
-			transition: all 0.3s ease-in-out;
-			box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+			transition: all 0.3s ease-in-out, transform 0.3s ease; /* Added transform transition */
+            animation: moveButton 2s infinite alternate; /* Animation for movement */
+            text-shadow:
+                0 0 5px rgba(255, 215, 0, 1), /* Gold glow */
+                0 0 10px rgba(255, 215, 0, 0.5); /* Brighter gold glow */
 		}
         .button:hover {
             background-color: #CDAF95; /* Lighter color on hover */
             color: white; 
             transform: scale(1.05);
-        }
-        .button-glow {
-            text-shadow:
-                0 0 5px rgba(255, 215, 0, 1), /* Gold glow */
-                0 0 10px rgba(255, 215, 0, 0.8); /* Brighter gold glow */
         }
         .button-glow-eur {
             text-shadow:
@@ -108,6 +106,12 @@
         .close:hover { 
             color:#0078FF; /* Change color on hover */
         }
+        
+        @keyframes moveButton {
+          from { transform: translateY(0); }
+          to { transform: translateY(-5px); }
+        }
+
     </style>
 </head>
 <body>
@@ -116,15 +120,15 @@
 
     <div class="button-container">
         <button class="button button-glow-eur" onclick="showPopup('EUR/USD')">EUR/USD</button>
-        <button class="button button-glow" onclick="showPopup('GBP/USD')">GBP/USD</button>
-        <button class="button button-glow" onclick="showPopup('USD/JPY')">USD/JPY</button>
-        <button class="button button-glow" onclick="showPopup('USD/CAD')">USD/CAD</button>
-        <button class="button button-glow" onclick="showPopup('AUD/USD')">AUD/USD</button>
-        <button class="button button-glow" onclick="showPopup('NZD/USD')">NZD/USD</button>
-        <button class="button button-glow" onclick="showPopup('Gold')">Gold</button>
-        <button class="button button-glow" onclick="showPopup('Silver')">Silver</button>
-        <button class="button button-glow" onclick="showPopup('Bitcoin')">Bitcoin</button>
-        <button class="button button-glow" onclick="showPopup('Ethereum')">Ethereum</button>
+        <button class="button" onclick="showPopup('GBP/USD')">GBP/USD</button>
+        <button class="button" onclick="showPopup('USD/JPY')">USD/JPY</button>
+        <button class="button" onclick="showPopup('USD/CAD')">USD/CAD</button>
+        <button class="button" onclick="showPopup('AUD/USD')">AUD/USD</button>
+        <button class="button" onclick="showPopup('NZD/USD')">NZD/USD</button>
+        <button class="button" onclick="showPopup('Gold')">Gold</button>
+        <button class="button" onclick="showPopup('Silver')">Silver</button>
+        <button class="button" onclick="showPopup('Bitcoin')">Bitcoin</button>
+        <button class="button" onclick="showPopup('Ethereum')">Ethereum</button>
     </div>
 
     <div class="popup">
