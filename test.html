@@ -201,17 +201,21 @@
     <h2 style="color:#FFD700;">Chart Analysis</h2> <!-- Chart title -->
     
     <!-- Text Input Area -->
-    <textarea id="userNotes" placeholder="Add your notes here... To close the chart, click the 'X' symbol on the right side. >>>     If you have suggestions contact the owner." rows="4" style="width: 100%;"></textarea>
+    <textarea id="userNotes" placeholder="Add your notes here... To close the chart, click the 'X' symbol on the right side. >>> If you have suggestions contact the owner." rows="4" style="width: 100%; border: none; border-radius: 10px; padding: 10px; font-size: 16px; color: #FFD700; background-color: rgba(50, 50, 50, 0.9); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); resize: none;" readonly></textarea>
     
-    <div id="chartContent">
+    <!-- Button to enable keyboard -->
+    <button class="button glow" id="enableKeyboardButton" onclick="enableKeyboard()">Enable Keyboard</button>
+    
+    <!-- Button to disable keyboard -->
+    <button class="button glow" id="disableKeyboardButton" onclick="disableKeyboard()">Disable Keyboard</button>
+
+    <div id="chartContent" onclick="preventKeyboard(event)">
       <!-- Insert your chart images or HTML here -->
       <!-- TradingView Widget BEGIN -->
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
         <div class="tradingview-widget-copyright">
-          
-            <span class="blue-text">SignalSharp</span>
-          </a>
+          <span class="blue-text">SignalSharp</span>
         </div>
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
           {
@@ -240,6 +244,92 @@
         </script>
       </div>
       <!-- TradingView Widget END -->
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Additional styles for glowing buttons and textarea */
+  
+  .button {
+      background-color: transparent; /* Transparent background */
+      border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
+      color: rgba(0, 255, 255, 0.8); /* Cyan text color */
+      padding: 15px 30px; /* Increased padding for larger buttons */
+      font-size: 18px; /* Increased font size for better readability */
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      width: 150px; /* Fixed width for uniform button size */
+      margin: 10px; /* Add margin for spacing between buttons */
+      cursor: pointer;
+      border-radius: 10px; /* Rounded corners for buttons */
+      transition: all .3s ease-in-out; /* Transition for hover effect */
+      box-shadow: 0 0 5px rgba(0,255,255,.8), 
+                  0 0 10px rgba(0,255,255,.8), 
+                  inset 0 0 5px rgba(135,206,250,.7); /* Inner glow effect */
+      animation: flashGlow .5s infinite alternate; /* Flashing animation */
+  }
+
+  .button:hover {
+      color: white; /* Change text color on hover */
+      border-color: white; /* Change border color on hover */
+      box-shadow: 
+          0 0 20px rgba(135,206,250,.8), 
+          inset 0 0 20px rgba(135,206,250,.5); /* Enhanced glow on hover */
+  }
+
+  @keyframes flashGlow {
+      from {
+          text-shadow:
+              none;
+          color: rgba(0,255,255,1);
+      }
+      to {
+          text-shadow:
+              0 0 5px rgba(135,206,250,1),
+              0 0 10px rgba(135,206,250,1),
+              0 0 15px rgba(135,206,250,.7);
+          color:white;
+      }
+   }
+
+   textarea {
+       transition: all .3s ease-in-out; /* Smooth transition for textarea focus */
+   }
+
+   textarea:focus {
+       outline: none; /* Remove default outline */
+       box-shadow: 
+           inset 0 0 5px rgba(135,206,250,.8), 
+           inset 0 0 10px rgba(135,206,250,.5); /* Inner glow effect on focus */
+   }
+</style>
+
+<script>
+    function enableKeyboard() {
+        const textArea = document.getElementById('userNotes');
+        textArea.removeAttribute('readonly'); // Allow input
+        textArea.focus(); // Focus on the text area
+    }
+
+    function disableKeyboard() {
+        const textArea = document.getElementById('userNotes');
+        textArea.setAttribute('readonly', 'readonly'); // Disable input
+        textArea.blur(); // Remove focus from the textarea
+    }
+
+    function preventKeyboard(event) {
+        event.stopPropagation(); // Prevent click events from bubbling up
+    }
+
+    // Optional: Reapply readonly after focus is lost to prevent keyboard
+    document.getElementById('userNotes').addEventListener('blur', function() {
+        if (!this.hasAttribute('readonly')) {
+            this.setAttribute('readonly', 'readonly');
+        }
+    });
+</script>
     </div>
   </div>
 </div>
