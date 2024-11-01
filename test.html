@@ -480,37 +480,53 @@ function stopDrag() {
               document.getElementById('contactInfo').style.display = 'block';
          }
 
-         function toggleChart(button) {
-             const chartPopup = document.getElementById('chartPopup');
-             
-             if (!chartVisible) { // If chart is not visible yet
-                 chartVisible = true; // Set to visible
-                 chartPopup.classList.add('active'); // Show chart popup
-                 button.textContent = 'Hide Chart'; // Change button text to Hide Chart
-                 button.classList.add('glow'); // Add glow effect on click
-             } else { // If chart is already visible
-                 chartVisible = false; // Set to not visible
-                 chartPopup.classList.remove('active'); // Hide chart popup
-                 button.textContent = 'Show Chart'; // Change back to Show Chart
-                 button.classList.remove('glow'); // Remove glow effect when hiding chart
-             }
-         }
+       function toggleChart(button) {
+    const chartPopup = document.getElementById('chartPopup');
+    const buttons = document.querySelectorAll('.button'); // Select all buttons except keyboard buttons
 
-         function closeChartPopup() {
-             const chartPopup = document.getElementById('chartPopup');
-             
-             // Hide the chart popup
-             chartPopup.classList.remove('active');
+    if (!chartVisible) { // If chart is not visible yet
+        chartVisible = true; // Set to visible
+        chartPopup.classList.add('active'); // Show chart popup
+        button.textContent = 'Hide Chart'; // Change button text to Hide Chart
+        button.classList.add('glow'); // Add glow effect on click
 
-             const toggleButton = document.getElementById('toggleChartBtn');
-             toggleButton.textContent = 'Show Chart'; // Reset toggle button text
+        // Hide all buttons except keyboard buttons
+        buttons.forEach(btn => {
+            if (!btn.id.includes('enableKeyboard') && !btn.id.includes('disableKeyboard')) {
+                btn.style.display = 'none'; // Hide each button
+            }
+        });
+    } else { // If chart is already visible
+        chartVisible = false; // Set to not visible
+        chartPopup.classList.remove('active'); // Hide chart popup
+        button.textContent = 'Show Chart'; // Change back to Show Chart
+        button.classList.remove('glow'); // Remove glow effect when hiding chart
+    }
+}
 
-             chartVisible = false; // Reset visibility state of the chart
+function closeChartPopup() {
+    const chartPopup = document.getElementById('chartPopup');
 
-             // Show contact information again after closing chart popup
-             document.getElementById('contactInfo').style.display = 'block';
-         }
+    // Hide the chart popup
+    chartPopup.classList.remove('active');
 
+    const toggleButton = document.getElementById('toggleChartBtn');
+    toggleButton.textContent = 'Show Chart'; // Reset toggle button text
+
+    chartVisible = false; // Reset visibility state of the chart
+
+    const buttons = document.querySelectorAll('.button'); // Select all buttons
+
+    // Show all buttons again except keyboard buttons
+    buttons.forEach(btn => {
+        if (!btn.id.includes('enableKeyboard') && !btn.id.includes('disableKeyboard')) {
+            btn.style.display = 'inline-block'; // Show each button
+        }
+    });
+
+    // Show contact information again after closing chart popup
+    document.getElementById('contactInfo').style.display = 'block';
+}
          function showContactPopup() {
              const contactPopup = document.getElementById('authorPopup');
              contactPopup.classList.add('active');
