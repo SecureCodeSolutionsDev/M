@@ -251,17 +251,36 @@
 <style>
   /* Additional styles for glowing buttons and textarea */
   
+  .button-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Three buttons per row */
+      gap: 10px; /* Space between buttons */
+      margin-top: 20px;
+  }
+
+  @media (max-width: 600px) {
+      .button-container {
+          grid-template-columns: repeat(2, 1fr); /* Two buttons per row on smaller screens */
+      }
+  }
+
+  @media (max-width: 400px) {
+      .button-container {
+          grid-template-columns: 1fr; /* One button per row on very small screens */
+      }
+  }
+
   .button {
       background-color: transparent; /* Transparent background */
       border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
       color: rgba(0, 255, 255, 0.8); /* Cyan text color */
-      padding: 15px 30px; /* Increased padding for larger buttons */
+      padding: 15px; /* Adjust padding for consistent button height */
       font-size: 18px; /* Increased font size for better readability */
       text-align: center;
       text-decoration: none;
-      display: inline-block;
-      width: 150px; /* Fixed width for uniform button size */
-      margin: 10px; /* Add margin for spacing between buttons */
+      width: auto; /* Allow width to be determined by content */
+      max-width: 150px; /* Limit button width */
+      margin: auto; /* Center buttons in their grid cell */
       cursor: pointer;
       border-radius: 10px; /* Rounded corners for buttons */
       transition: all .3s ease-in-out; /* Transition for hover effect */
