@@ -194,7 +194,9 @@
     </style>
 </head>
 <body>
-
+<div id="offline-message" style="display: none; background-color: #f44336; color: white; padding: 20px; text-align: center;">
+    Oops! It seems you are offline. Please check your internet connection.
+</div>
     <h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
 
     <div class="button-container">
@@ -578,6 +580,23 @@ function closeChartPopup() {
              // Show contact information again after closing contact popup
              document.getElementById('contactInfo').style.display = 'block';
          }
+</script>
+<script>
+    function updateOnlineStatus() {
+        const offlineMessage = document.getElementById('offline-message');
+        if (navigator.onLine) {
+            offlineMessage.style.display = 'none'; // Hide message when online
+        } else {
+            offlineMessage.style.display = 'block'; // Show message when offline
+        }
+    }
+
+    // Check initial status
+    updateOnlineStatus();
+
+    // Listen for online and offline events
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
 </script>
 
 </body>
