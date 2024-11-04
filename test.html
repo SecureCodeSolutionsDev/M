@@ -202,6 +202,29 @@
     animation: moveRight 0.7s forwards; /* Adjust duration as needed */
 }
     </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Button Animation</title>
+    <style>
+        /* Style for the button container */
+        #chartToggleButton {
+            position: relative; /* Needed for absolute positioning */
+            margin: 20px; /* Add some margin for visual spacing */
+        }
+
+        /* Style for the button */
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 2s ease; /* Smooth transition */
+        }
+
+        /* Class to move the button down */
+        .move-down {
+            transform: translateY(110px); /* Move down by 100 pixels */
+        }
+    </style>
 </head>
 <body>
 <div id="offline-message" style="display: none; background-color: #f44336; color: white; padding: 20px; text-align: center;">
@@ -451,6 +474,19 @@ function stopDrag() {
     <div style="margin-top:30px;" id="contactInfo">
       <button class='artistic-text' onclick="showContactPopup()">CONTACT </button>
     </div>
+
+    <script>
+        // Function to move the button down automatically
+        function moveButton() {
+            const button = document.getElementById('toggleChartBtn');
+            button.classList.add('move-down'); // Add the class to move the button
+        }
+
+        // Call the moveButton function with a delay when the window loads
+        window.onload = function() {
+            setTimeout(moveButton, 500); // Delay of 500 milliseconds (0.5 seconds)
+        };
+    </script>
 
     <!-- Contact Popup -->
     <div class='popup' id='authorPopup'>
