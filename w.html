@@ -275,35 +275,16 @@
     <h2 style="color:#FFD700;">Chart Analysis</h2> <!-- Chart title -->
     
 
-  <!-- Button to enable keyboard -->
-<button class="button glow" id="enableKeyboardButton" onclick="enableKeyboard()">Enable Keyboard</button>
+    <!-- Button to enable keyboard -->
+    <button class="button glow" id="enableKeyboardButton" onclick="enableKeyboard()">on</button>
+    
+    <!-- Button to disable keyboard -->
+    <button class="button glow" id="disableKeyboardButton" onclick="disableKeyboard()">off</button>
 
-<!-- Button to disable keyboard -->
-<button class="button glow" id="disableKeyboardButton" onclick="disableKeyboard()">Disable Keyboard</button>
-
-<div id="chartContent" onclick="preventKeyboard(event)">
-    <!-- Text Input Area -->
-    <textarea id="userNotes" placeholder="Add your notes here..." rows="4" style="width: 100%; border: none; border-radius: 10px; padding: 10px; font-size: 16px; color: #FFD700; background-color: rgba(50, 50, 50, 0.9); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); resize: none; display: none;" readonly></textarea>
-</div>
-
-<script>
-    function enableKeyboard() {
-        const textArea = document.getElementById('userNotes');
-        textArea.removeAttribute('readonly'); // Allow input
-        textArea.style.display = 'block'; // Show textarea
-        textArea.focus(); // Focus on the text area
-    }
-
-    function disableKeyboard() {
-        const textArea = document.getElementById('userNotes');
-        textArea.setAttribute('readonly', 'readonly'); // Disable input
-        // Do not hide textarea to keep the content visible
-        // Optionally, you could set it to display: none if you want to hide it completely
-    }
-
-    // Initially hide the textarea
-    document.getElementById('userNotes').style.display = 'none';
-</script>
+    <div id="chartContent" onclick="preventKeyboard(event)">
+        <!-- Text Input Area -->
+    <textarea id="userNotes" placeholder="Add your notes here...'.                   On' button to activate the keyboard for input. 
+ 'Off' button will enable read-only mode, ensuring that the keyboard does not appear when interacting with the chart.   To exit the chart view, simply click the 'X' icon located on the right side." rows="4" style="width: 100%; border: none; border-radius: 10px; padding: 10px; font-size: 16px; color: #FFD700; background-color: rgba(50, 50, 50, 0.9); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); resize: none;" readonly></textarea>
     
       <!-- Insert your chart images or HTML here -->
       <!-- TradingView Widget BEGIN -->
