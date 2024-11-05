@@ -146,6 +146,20 @@
             padding: 10px;
             border-radius: 5px;
         }
+        .popup {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            z-index: 30; /* Above everything else */
+            display: none; /* Hidden by default */
+        }
+        .popup button {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -153,32 +167,57 @@
 <div class="controls">
     <button id="add-line">Add Line</button>
     <button id="remove-last-line">Remove Last Line</button>
-    <button id="rotate-line">Rotate Line</button>
     <button id="done">Done</button>
+</div>
+
+<div class="popup" id="popup">
+    <p>Click where you want the line to start.</p>
+    <label><input type="checkbox" id="hidePopup"> Don't show again</label>
+    <button id="close-popup">Close</button>
 </div>
 
 <script>
     let lines = [];
-    let selectedLineIndex = null;
     let isLineFrozen = false; // Flag to indicate if the current line is frozen
+    let hidePopup = false; // Flag for hiding popup
 
     document.getElementById('add-line').addEventListener('click', () => {
+        if (!hidePopup) {
+            document.getElementById('popup').style.display = 'block'; // Show popup
+        } else {
+            createLine(); // Directly create line if popup is hidden
+        }
+    });
+
+    document.getElementById('close-popup').addEventListener('click', () => {
+        const checkbox = document.getElementById('hidePopup');
+        hidePopup = checkbox.checked; // Update hidePopup flag
+        document.getElementById('popup').style.display = 'none'; // Hide popup
+    });
+
+    function createLine(startX = null, startY = null) {
         const line = document.createElement('div');
         line.className = 'line';
         line.style.width = '100px'; // Default length
         line.style.height = '2px'; // Thickness
-        line.style.left = '100px'; // Starting position
-        line.style.top = '100px'; // Starting position
         line.dataset.angle = 0; // Initial angle
 
-        // Make the line draggable only if not frozen
-        if (!isLineFrozen) {
-            makeDraggable(line);
+        if (startX !== null && startY !== null) {
+            // Set position based on click
+            line.style.left = `${startX}px`;
+            line.style.top = `${startY}px`;
+        } else {
+            // Default starting position
+            line.style.left = '100px';
+            line.style.top = '100px';
         }
 
         document.body.appendChild(line);
         lines.push(line);
-    });
+
+        // Make the new line draggable and rotatable
+        makeDraggable(line);
+    }
 
     function makeDraggable(element) {
         let isDragging = false;
@@ -186,7 +225,6 @@
         element.addEventListener('mousedown', (event) => {
             if (isLineFrozen) return; // Prevent dragging if frozen
             isDragging = true;
-            selectedLineIndex = lines.indexOf(element);
             event.preventDefault(); // Prevent text selection
         });
 
@@ -204,50 +242,33 @@
         document.addEventListener('mouseup', () => {
             isDragging = false;
         });
-        
+
         element.addEventListener('click', () => {
-            if (selectedLineIndex === lines.indexOf(element)) {
-                selectedLineIndex = null; // Deselect if clicked again
-                element.style.borderColor = 'black'; // Reset color
-            } else {
-                selectedLineIndex = lines.indexOf(element); // Select this line
-                resetLineColors(); // Reset others' colors
-                element.style.borderColor = 'red'; // Highlight selected line
+            if (!isLineFrozen) {
+                rotateLine(element); // Rotate on click without selection
             }
         });
     }
 
-    function resetLineColors() {
-        lines.forEach((line) => {
-            line.style.borderColor = 'black'; // Reset color for all lines
-        });
+    function rotateLine(line) {
+        let angle = parseFloat(line.dataset.angle);
+        angle += Math.PI / 18; // Rotate by 10 degrees
+        line.dataset.angle = angle;
+
+        const centerX = parseFloat(line.style.left) + (parseFloat(line.style.width) / 2);
+        const centerY = parseFloat(line.style.top) + (parseFloat(line.style.height) / 2);
+
+        line.style.transform = `rotate(${angle}rad)`;
+        line.style.left = `${centerX - (parseFloat(line.style.width) / 2)}px`; // Adjust left position
+        line.style.top = `${centerY - (parseFloat(line.style.height) / 2)}px`; // Adjust top position
     }
 
     document.getElementById('remove-last-line').addEventListener('click', () => {
         if (lines.length > 0) {
             const lastLine = lines.pop(); // Remove last line from array
             document.body.removeChild(lastLine); // Remove from DOM
-            selectedLineIndex = null; // Reset selection after removal
         } else {
             alert("No lines to remove.");
-        }
-    });
-
-    document.getElementById('rotate-line').addEventListener('click', () => {
-        if (selectedLineIndex !== null) {
-            const line = lines[selectedLineIndex];
-            let angle = parseFloat(line.dataset.angle);
-            angle += Math.PI / 18; // Rotate by 10 degrees
-            line.dataset.angle = angle;
-
-            const centerX = parseFloat(line.style.left) + (parseFloat(line.style.width) / 2);
-            const centerY = parseFloat(line.style.top) + (parseFloat(line.style.height) / 2);
-
-            line.style.transform = `rotate(${angle}rad)`;
-            line.style.left = `${centerX - (parseFloat(line.style.width) / 2)}px`; // Adjust left position
-            line.style.top = `${centerY - (parseFloat(line.style.height) / 2)}px`; // Adjust top position
-        } else {
-            alert("No line selected to rotate.");
         }
     });
 
@@ -255,14 +276,16 @@
         isLineFrozen = !isLineFrozen; // Toggle frozen state
         const buttonText = isLineFrozen ? "Edit Line" : "Done";
         document.getElementById('done').innerText = buttonText;
-
-        if (!isLineFrozen && selectedLineIndex !== null) {
-            const currentLine = lines[selectedLineIndex];
-            makeDraggable(currentLine); // Allow dragging again when editing
-        }
     });
+
+    document.body.addEventListener('click', (event) => {
+        if (event.target === document.body && !isLineFrozen && !hidePopup) { 
+          const rect = document.body.getBoundingClientRect();
+          createLine(event.clientX - rect.left, event.clientY - rect.top); 
+          document.getElementById('popup').style.display='none'; 
+      }
+   });
 </script>
 
 </body>
 </html>
-
