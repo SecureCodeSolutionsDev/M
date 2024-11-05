@@ -118,8 +118,6 @@
 
 
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -137,6 +135,7 @@
             position: absolute;
             background-color: black;
             cursor: pointer;
+            transform-origin: 0% 50%; /* Rotate around start point */
         }
         .controls {
             position: absolute;
@@ -153,26 +152,29 @@
 
 <div class="controls">
     <button id="add-line">Add Line</button>
-    <button id="remove-line">Remove Line</button>
+    <button id="remove-last-line">Remove Last Line</button>
     <button id="rotate-line">Rotate Line</button>
+    <button id="done">Done</button>
 </div>
 
 <script>
     let lines = [];
     let selectedLineIndex = null;
+    let isLineFrozen = false; // Flag to indicate if the current line is frozen
 
     document.getElementById('add-line').addEventListener('click', () => {
         const line = document.createElement('div');
         line.className = 'line';
         line.style.width = '100px'; // Default length
         line.style.height = '2px'; // Thickness
-        line.style.transformOrigin = '0% 50%'; // Rotate around the start point
         line.style.left = '100px'; // Starting position
         line.style.top = '100px'; // Starting position
         line.dataset.angle = 0; // Initial angle
 
-        // Make the line draggable
-        makeDraggable(line);
+        // Make the line draggable only if not frozen
+        if (!isLineFrozen) {
+            makeDraggable(line);
+        }
 
         document.body.appendChild(line);
         lines.push(line);
@@ -182,13 +184,14 @@
         let isDragging = false;
 
         element.addEventListener('mousedown', (event) => {
+            if (isLineFrozen) return; // Prevent dragging if frozen
             isDragging = true;
             selectedLineIndex = lines.indexOf(element);
             event.preventDefault(); // Prevent text selection
         });
 
         document.addEventListener('mousemove', (event) => {
-            if (isDragging) {
+            if (isDragging && !isLineFrozen) {
                 const rect = element.getBoundingClientRect();
                 const offsetX = event.clientX - rect.width / 2; // Center the line on the cursor
                 const offsetY = event.clientY - rect.height / 2;
@@ -208,8 +211,8 @@
                 element.style.borderColor = 'black'; // Reset color
             } else {
                 selectedLineIndex = lines.indexOf(element); // Select this line
-                element.style.borderColor = 'red'; // Highlight selected line
                 resetLineColors(); // Reset others' colors
+                element.style.borderColor = 'red'; // Highlight selected line
             }
         });
     }
@@ -220,14 +223,13 @@
         });
     }
 
-    document.getElementById('remove-line').addEventListener('click', () => {
-        if (selectedLineIndex !== null) {
-            const lineToRemove = lines[selectedLineIndex];
-            document.body.removeChild(lineToRemove);
-            lines.splice(selectedLineIndex, 1);
-            selectedLineIndex = null; // Deselect after removal
+    document.getElementById('remove-last-line').addEventListener('click', () => {
+        if (lines.length > 0) {
+            const lastLine = lines.pop(); // Remove last line from array
+            document.body.removeChild(lastLine); // Remove from DOM
+            selectedLineIndex = null; // Reset selection after removal
         } else {
-            alert("No line selected to remove.");
+            alert("No lines to remove.");
         }
     });
 
@@ -248,7 +250,19 @@
             alert("No line selected to rotate.");
         }
     });
+
+    document.getElementById('done').addEventListener('click', () => {
+        isLineFrozen = !isLineFrozen; // Toggle frozen state
+        const buttonText = isLineFrozen ? "Edit Line" : "Done";
+        document.getElementById('done').innerText = buttonText;
+
+        if (!isLineFrozen && selectedLineIndex !== null) {
+            const currentLine = lines[selectedLineIndex];
+            makeDraggable(currentLine); // Allow dragging again when editing
+        }
+    });
 </script>
 
 </body>
 </html>
+
