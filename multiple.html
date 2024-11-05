@@ -1,31 +1,100 @@
-<div class="widget-container">
-    <canvas id="drawingCanvas" width="800" height="400" style="border:1px solid #000;"></canvas>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+  {
+  "autosize": true,
+  "symbol": "CAPITALCOM:USDJPY",
+  "interval": "1",
+  "timezone": "Etc/UTC",
+  "theme": "light",
+  "style": "3",
+  "locale": "en",
+  "hide_legend": true,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": false,
+  "save_image": false,
+  "calendar": false,
+  "hide_volume": true,
+  "support_host": "https://www.tradingview.com"
+}
+  </script>
 </div>
+<!-- TradingView Widget END -->
 
-<script>
-const canvas = document.getElementById('drawingCanvas');
-const ctx = canvas.getContext('2d');
-let painting = false;
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+  {
+  "autosize": true,
+  "symbol": "CAPITALCOM:USDJPY",
+  "interval": "3",
+  "timezone": "Etc/UTC",
+  "theme": "light",
+  "style": "3",
+  "locale": "en",
+  "hide_legend": true,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": false,
+  "save_image": false,
+  "calendar": false,
+  "hide_volume": true,
+  "support_host": "https://www.tradingview.com"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+  {
+  "autosize": true,
+  "symbol": "CAPITALCOM:USDJPY",
+  "interval": "5",
+  "timezone": "Etc/UTC",
+  "theme": "light",
+  "style": "3",
+  "locale": "en",
+  "hide_legend": true,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": false,
+  "save_image": false,
+  "calendar": false,
+  "hide_volume": true,
+  "support_host": "https://www.tradingview.com"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
 
-canvas.addEventListener('mousedown', (e) => {
-    painting = true;
-    ctx.moveTo(e.offsetX, e.offsetY);
-});
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+  {
+  "autosize": true,
+  "symbol": "CAPITALCOM:USDJPY",
+  "interval": "15",
+  "timezone": "Etc/UTC",
+  "theme": "light",
+  "style": "3",
+  "locale": "en",
+  "hide_legend": true,
+  "hide_side_toolbar": false,
+  "allow_symbol_change": false,
+  "save_image": false,
+  "calendar": false,
+  "hide_volume": true,
+  "support_host": "https://www.tradingview.com"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
 
-canvas.addEventListener('mousemove', (e) => {
-    if (painting) {
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
-    }
-});
 
-canvas.addEventListener('mouseup', () => {
-    painting = false;
-    ctx.beginPath();
-});
-
-canvas.addEventListener('mouseout', () => {
-    painting = false;
-    ctx.beginPath();
-});
-</script>
