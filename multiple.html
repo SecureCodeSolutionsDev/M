@@ -117,7 +117,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -192,6 +191,7 @@
     document.getElementById('clear-lines').addEventListener('click', () => {
         lines.forEach(line => document.body.removeChild(line)); // Remove all lines from the document
         lines.length = 0; // Clear the lines array
+        points = []; // Reset points array to clear click count
     });
 </script>
 
