@@ -123,7 +123,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Line Drawing Tool</title>
+    <title>Line Drawing Tool</title>
     <style>
         body {
             margin: 0;
@@ -134,8 +134,8 @@
         .line {
             position: absolute;
             background-color: black;
-            cursor: pointer;
-            transform-origin: 0% 50%; /* Rotate around start point */
+            height: 2px; /* Thickness of the line */
+            transform-origin: 0% 50%; /* Rotate around the start point */
         }
         .controls {
             position: absolute;
@@ -146,204 +146,53 @@
             padding: 10px;
             border-radius: 5px;
         }
-        .popup {
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 20px;
-            z-index: 30; /* Above everything else */
-            display: none; /* Hidden by default */
-        }
-        .popup button {
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
 
 <div class="controls">
-    <button id="add-line">Add Line</button>
-    <button id="remove-last-line">Remove Last Line</button>
-    <button id="done">Done</button>
-</div>
-
-<div class="popup" id="popup">
-    <p>Click where you want the line to start.</p>
-    <label><input type="checkbox" id="hidePopup"> Don't show again</label>
-    <button id="close-popup">Close</button>
+    <button id="clear-lines">Clear All Lines</button>
 </div>
 
 <script>
-    let lines = [];
-    let isLineFrozen = false; // Flag to indicate if the current line is frozen
-    let hidePopup = false; // Flag for hiding popup
+    let points = []; // Store clicked points
+    const lines = []; // Store lines
 
-    document.getElementById('add-line').addEventListener('click', () => {
-        if (!hidePopup) {
-            document.getElementById('popup').style.display = 'block'; // Show popup
-        } else {
-            createLine(); // Directly create line if popup is hidden
+    document.body.addEventListener('click', (event) => {
+        const rect = document.body.getBoundingClientRect();
+        const x = event.clientX - rect.left; // Get x coordinate
+        const y = event.clientY - rect.top; // Get y coordinate
+
+        points.push({ x, y }); // Store the clicked point
+
+        if (points.length === 2) {
+            drawLine(points[0], points[1]); // Draw line between the two points
+            points = []; // Reset points for next line
         }
     });
 
-    document.getElementById('close-popup').addEventListener('click', () => {
-        const checkbox = document.getElementById('hidePopup');
-        hidePopup = checkbox.checked; // Update hidePopup flag
-        document.getElementById('popup').style.display = 'none'; // Hide popup
-    });
-
-    function createLine(startX = null, startY = null) {
+    function drawLine(point1, point2) {
         const line = document.createElement('div');
         line.className = 'line';
-        line.style.width = '100px'; // Default length
-        line.style.height = '2px'; // Thickness
-        line.dataset.angle = 0; // Initial angle
 
-        if (startX !== null && startY !== null) {
-            // Set position based on click
-            line.style.left = `${startX}px`;
-            line.style.top = `${startY}px`;
-        } else {
-            // Default starting position
-            line.style.left = '100px';
-            line.style.top = '100px';
-        }
+        const dx = point2.x - point1.x; // Calculate change in x
+        const dy = point2.y - point1.y; // Calculate change in y
+        const length = Math.sqrt(dx * dx + dy * dy); // Calculate length of the line
+        const angle = Math.atan2(dy, dx); // Calculate angle of rotation
 
-        document.body.appendChild(line);
-        lines.push(line);
+        line.style.width = `${length}px`; // Set width to length of the line
+        line.style.left = `${point1.x}px`; // Set starting x position
+        line.style.top = `${point1.y}px`; // Set starting y position
+        line.style.transform = `rotate(${angle}rad)`; // Rotate the line
 
-        // Make the new line draggable and rotatable
-        makeDraggable(line);
+        document.body.appendChild(line); // Add line to the document
+        lines.push(line); // Store the line for future reference
     }
 
-    function makeDraggable(element) {
-        let isDraggingStart = false;
-        let isDraggingEnd = false;
-
-        element.addEventListener('mousedown', (event) => {
-            const rect = element.getBoundingClientRect();
-            const startX = parseFloat(element.style.left);
-            const startY = parseFloat(element.style.top);
-            
-            const endX = startX + parseFloat(element.style.width) * Math.cos(parseFloat(element.dataset.angle));
-            const endY = startY + parseFloat(element.style.width) * Math.sin(parseFloat(element.dataset.angle));
-
-            const distanceToStart = Math.hypot(event.clientX - startX, event.clientY - startY);
-            const distanceToEnd = Math.hypot(event.clientX - endX, event.clientY - endY);
-
-            if (distanceToStart < distanceToEnd) {
-                isDraggingStart = true; // Clicked near start point
-                event.preventDefault(); // Prevent text selection
-                element.dataset.draggingPoint = "start"; // Mark dragging point
-                return; 
-            } else {
-                isDraggingEnd = true; // Clicked near end point
-                event.preventDefault(); // Prevent text selection
-                element.dataset.draggingPoint = "end"; // Mark dragging point
-                return; 
-            }
-        });
-
-        document.addEventListener('mousemove', (event) => {
-            if (isDraggingStart || isDraggingEnd) {
-                const rect = element.getBoundingClientRect();
-                const currentAngle = parseFloat(element.dataset.angle);
-                
-                if (isDraggingStart) { 
-                    const newStartX = event.clientX - rect.width / 2; 
-                    const newStartY = event.clientY - rect.height / 2;
-
-                    const lengthChange = Math.hypot(newStartX - parseFloat(element.style.left), newStartY - parseFloat(element.style.top));
-                    element.style.width = `${lengthChange}px`; 
-                    element.style.left = `${newStartX}px`;
-                    element.style.top = `${newStartY}px`;
-                    element.dataset.angle = currentAngle; 
-                } else if (isDraggingEnd) { 
-                    const startX = parseFloat(element.style.left);
-                    const startY = parseFloat(element.style.top);
-
-                    const newEndX = event.clientX - rect.width / 2; 
-                    const newEndY = event.clientY - rect.height / 2;
-
-                    const dx = newEndX - startX;
-                    const dy = newEndY - startY;
-
-                    element.style.width = `${Math.hypot(dx, dy)}px`; 
-                    element.dataset.angle = Math.atan2(dy, dx); 
-
-                    element.style.transformOrigin = "0% 50%"; 
-                    element.style.transform = `rotate(${element.dataset.angle}rad)`; 
-
-                    element.style.left += `${dx}px`; 
-                    element.style.top += `${dy}px`; 
-                }
-                
-                adjustLinePosition(element); // Adjust visual position based on angle and length
-                return; 
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDraggingStart = false;
-            isDraggingEnd = false;
-        });
-        
-        element.addEventListener('click', (event) => {
-          if (!isLineFrozen) rotateLine(element); // Rotate on click without selection
-      });
-    }
-
-    function adjustLinePosition(line) {
-      const angleRad = parseFloat(line.dataset.angle);
-      const lengthPx = parseFloat(line.style.width);
-
-      const centerX = parseFloat(line.style.left) + (lengthPx / 2);
-      const centerY = parseFloat(line.style.top) + (line.offsetHeight / 2);
-
-      line.style.left += `${(lengthPx / 2) * Math.cos(angleRad)}px`;
-      line.style.top += `${(lengthPx / 2) * Math.sin(angleRad)}px`;
-
-      line.style.transformOrigin= "0% 50%";
-      line.style.transform= `rotate(${angleRad}rad)`; 
-      
-      return; 
-   }
-
-   function rotateLine(line) {
-       let angle= parseFloat(line.dataset.angle);
-       angle += Math.PI / 18; // Rotate by 10 degrees
-       line.dataset.angle= angle;
-
-       adjustLinePosition(line); 
-
-       return; 
-   }
-
-   document.getElementById('remove-last-line').addEventListener('click', () => {
-       if (lines.length > 0) {
-           const lastLine= lines.pop(); // Remove last line from array
-           document.body.removeChild(lastLine); // Remove from DOM
-       } else {
-           alert("No lines to remove.");
-       }
-   });
-
-   document.getElementById('done').addEventListener('click', () => {
-       isLineFrozen= !isLineFrozen; // Toggle frozen state
-       const buttonText= isLineFrozen ? "Edit Line" : "Done";
-       document.getElementById('done').innerText= buttonText;
-   });
-
-   document.body.addEventListener('click', (event) => {
-       if (event.target === document.body && !isLineFrozen && !hidePopup) { 
-         const rect= document.body.getBoundingClientRect();
-         createLine(event.clientX - rect.left, event.clientY - rect.top); 
-         document.getElementById('popup').style.display='none'; 
-     }
-   });
+    document.getElementById('clear-lines').addEventListener('click', () => {
+        lines.forEach(line => document.body.removeChild(line)); // Remove all lines from the document
+        lines.length = 0; // Clear the lines array
+    });
 </script>
 
 </body>
