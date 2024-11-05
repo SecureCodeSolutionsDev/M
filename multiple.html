@@ -120,6 +120,51 @@
 
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Line Drawing App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        canvas {
+            border: 1px solid #000;
+            cursor: crosshair;
+        }
+        .controls {
+            margin-bottom: 10px;
+        }
+        .control-point {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Draw and Adjust Lines on Canvas</h1>
+
+<div class="controls">
+    <button id="add-line">Add Line</button>
+    <button id="remove-line">Remove Line</button>
+    <button id="increase-thickness">Increase Thickness</button>
+    <button id="decrease-thickness">Decrease Thickness</button>
+    <button id="done">Done</button>
+    <span>Thickness: <span id="thickness-value">2</span></span>
+</div>
+
+<canvas id="drawingCanvas" width="800" height="600"></canvas>
+
 <script>
     const canvas = document.getElementById('drawingCanvas');
     const ctx = canvas.getContext('2d');
@@ -220,8 +265,60 @@
         }
     });
 
-    // Increase and decrease thickness logic remains unchanged...
+    // Increase line thickness
+    document.getElementById('increase-thickness').addEventListener('click', () => {
+        currentThickness++;
+        document.getElementById('thickness-value').innerText = currentThickness;
+        drawLines();
+    });
+
+    // Decrease line thickness
+    document.getElementById('decrease-thickness').addEventListener('click', () => {
+        if (currentThickness > 1) {
+            currentThickness--;
+            document.getElementById('thickness-value').innerText = currentThickness;
+            drawLines();
+        }
+    });
+
+    // Toggle moving capability with "Done" button
+    document.getElementById('done').addEventListener('click', () => {
+        isMovingEnabled = !isMovingEnabled; 
+        const buttonText = isMovingEnabled ? "Done" : "Move";
+        document.getElementById('done').innerText = buttonText; 
+        if (!isMovingEnabled) {
+            selectedLineIndex = null; 
+        }
+    });
+
+   // Select and move lines on mouse click
+   canvas.addEventListener('click', (event) => {
+       const rect = canvas.getBoundingClientRect();
+       const mouseX = event.clientX - rect.left;
+       const mouseY = event.clientY - rect.top;
+
+       if (isMovingEnabled) { 
+           selectedLineIndex = null; 
+           lines.forEach((line, index) => {
+               if (isPointOnLine(mouseX, mouseY, line)) {
+                   selectedLineIndex = index; 
+               }
+           });
+           drawLines(); 
+       }
+   });
+
+   function isPointOnLine(x, y, line) {
+       const { startX, startY, endX, endY } = line;
+       const distanceToStart = Math.hypot(x - startX, y - startY);
+       const distanceToEnd = Math.hypot(x - endX, y - endY);
+       
+       const lineLength = Math.hypot(endX - startX, endY - startY);
+       
+       return distanceToStart + distanceToEnd >= lineLength - 5 && distanceToStart + distanceToEnd <= lineLength + 5; 
+   }
 
 </script>
+
 </body>
 </html>
