@@ -114,3 +114,88 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Drawing App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        canvas {
+            border: 1px solid #000;
+            cursor: crosshair;
+        }
+        .controls {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Draw Lines on Canvas</h1>
+
+<div class="controls">
+    <button id="add-line">Add Line</button>
+    <button id="increase-thickness">Increase Thickness</button>
+    <button id="decrease-thickness">Decrease Thickness</button>
+    <span>Thickness: <span id="thickness-value">2</span></span>
+</div>
+
+<canvas id="drawingCanvas" width="800" height="600"></canvas>
+
+<script>
+    const canvas = document.getElementById('drawingCanvas');
+    const ctx = canvas.getContext('2d');
+    let lines = [];
+    let currentThickness = 2;
+
+    // Function to draw all lines
+    function drawLines() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.lineWidth = currentThickness; // Set line thickness
+        lines.forEach(line => {
+            ctx.beginPath();
+            ctx.moveTo(line.startX, line.startY);
+            ctx.lineTo(line.endX, line.endY);
+            ctx.stroke();
+        });
+    }
+
+    // Add a new line
+    document.getElementById('add-line').addEventListener('click', () => {
+        const startX = Math.random() * canvas.width;
+        const startY = Math.random() * canvas.height;
+        const endX = Math.random() * canvas.width;
+        const endY = Math.random() * canvas.height;
+
+        lines.push({ startX, startY, endX, endY });
+        drawLines();
+    });
+
+    // Increase line thickness
+    document.getElementById('increase-thickness').addEventListener('click', () => {
+        currentThickness++;
+        document.getElementById('thickness-value').innerText = currentThickness;
+        drawLines();
+    });
+
+    // Decrease line thickness
+    document.getElementById('decrease-thickness').addEventListener('click', () => {
+        if (currentThickness > 1) {
+            currentThickness--;
+            document.getElementById('thickness-value').innerText = currentThickness;
+            drawLines();
+        }
+    });
+
+</script>
+
+</body>
+</html>
