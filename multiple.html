@@ -19,46 +19,79 @@
             height: 400px; /* Adjust height as needed */
             border: none;
         }
+        .input-container {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
 <h1>Comprehensive Financial Dashboard</h1>
 
+<div class="input-container">
+    <label for="symbol-input">Enter Stock Symbol (e.g., AAPL, TSLA): </label>
+    <input type="text" id="symbol-input" placeholder="Enter symbol here">
+    <button id="update-button">Update</button>
+</div>
+
 <div class="widget-container">
     <!-- Ticker Tape Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12345&symbol=NASDAQ:AAPL&interval=D&hidesidetoolbar=1&theme=light" title="Ticker Tape"></iframe>
+    <iframe id="ticker-tape" src="" title="Ticker Tape"></iframe>
 </div>
 
 <div class="widget-container">
     <!-- Symbol Info Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12346&symbol=NASDAQ:AAPL&theme=light" title="Symbol Info"></iframe>
+    <iframe id="symbol-info" src="" title="Symbol Info"></iframe>
 </div>
 
 <div class="widget-container">
     <!-- Advanced Chart Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12347&symbol=NASDAQ:AAPL&interval=D&theme=light" title="Advanced Chart"></iframe>
+    <iframe id="advanced-chart" src="" title="Advanced Chart"></iframe>
 </div>
 
 <div class="widget-container">
     <!-- Company Profile Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12348&symbol=NASDAQ:AAPL&theme=light" title="Company Profile"></iframe>
+    <iframe id="company-profile" src="" title="Company Profile"></iframe>
 </div>
 
 <div class="widget-container">
     <!-- Fundamental Data Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12349&symbol=NASDAQ:AAPL&theme=light" title="Fundamental Data"></iframe>
+    <iframe id="fundamental-data" src="" title="Fundamental Data"></iframe>
 </div>
 
 <div class="widget-container">
     <!-- Technical Analysis Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12350&symbol=NASDAQ:AAPL&theme=light" title="Technical Analysis"></iframe>
+    <iframe id="technical-analysis" src="" title="Technical Analysis"></iframe>
 </div>
 
 <div class="widget-container">
     <!-- Top Stories Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12351&symbol=NASDAQ:AAPL&theme=light" title="Top Stories"></iframe>
+    <iframe id="top-stories" src="" title="Top Stories"></iframe>
 </div>
+
+<script>
+    // Function to update all iframe sources based on the entered stock symbol
+    function updateWidgets(symbol) {
+        const baseUrl = "https://s.tradingview.com/widgetembed/?frameElementId=tradingview_";
+        document.getElementById("ticker-tape").src = `${baseUrl}12345&symbol=NASDAQ:${symbol}&interval=D&hidesidetoolbar=1&theme=light`;
+        document.getElementById("symbol-info").src = `${baseUrl}12346&symbol=NASDAQ:${symbol}&theme=light`;
+        document.getElementById("advanced-chart").src = `${baseUrl}12347&symbol=NASDAQ:${symbol}&interval=D&theme=light`;
+        document.getElementById("company-profile").src = `${baseUrl}12348&symbol=NASDAQ:${symbol}&theme=light`;
+        document.getElementById("fundamental-data").src = `${baseUrl}12349&symbol=NASDAQ:${symbol}&theme=light`;
+        document.getElementById("technical-analysis").src = `${baseUrl}12350&symbol=NASDAQ:${symbol}&theme=light`;
+        document.getElementById("top-stories").src = `${baseUrl}12351&symbol=NASDAQ:${symbol}&theme=light`;
+    }
+
+    // Event listener for the button click
+    document.getElementById("update-button").addEventListener("click", function() {
+        const symbolInput = document.getElementById("symbol-input").value.trim();
+        if (symbolInput) {
+            updateWidgets(symbolInput);
+        } else {
+            alert("Please enter a valid stock symbol.");
+        }
+    });
+</script>
 
 </body>
 </html>
