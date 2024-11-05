@@ -220,70 +220,129 @@
     }
 
     function makeDraggable(element) {
-        let isDragging = false;
+        let isDraggingStart = false;
+        let isDraggingEnd = false;
 
         element.addEventListener('mousedown', (event) => {
-            if (isLineFrozen) return; // Prevent dragging if frozen
-            isDragging = true;
-            event.preventDefault(); // Prevent text selection
+            const rect = element.getBoundingClientRect();
+            const startX = parseFloat(element.style.left);
+            const startY = parseFloat(element.style.top);
+            
+            const endX = startX + parseFloat(element.style.width) * Math.cos(parseFloat(element.dataset.angle));
+            const endY = startY + parseFloat(element.style.width) * Math.sin(parseFloat(element.dataset.angle));
+
+            const distanceToStart = Math.hypot(event.clientX - startX, event.clientY - startY);
+            const distanceToEnd = Math.hypot(event.clientX - endX, event.clientY - endY);
+
+            if (distanceToStart < distanceToEnd) {
+                isDraggingStart = true; // Clicked near start point
+                event.preventDefault(); // Prevent text selection
+                element.dataset.draggingPoint = "start"; // Mark dragging point
+                return; 
+            } else {
+                isDraggingEnd = true; // Clicked near end point
+                event.preventDefault(); // Prevent text selection
+                element.dataset.draggingPoint = "end"; // Mark dragging point
+                return; 
+            }
         });
 
         document.addEventListener('mousemove', (event) => {
-            if (isDragging && !isLineFrozen) {
+            if (isDraggingStart || isDraggingEnd) {
                 const rect = element.getBoundingClientRect();
-                const offsetX = event.clientX - rect.width / 2; // Center the line on the cursor
-                const offsetY = event.clientY - rect.height / 2;
+                const currentAngle = parseFloat(element.dataset.angle);
+                
+                if (isDraggingStart) { 
+                    const newStartX = event.clientX - rect.width / 2; 
+                    const newStartY = event.clientY - rect.height / 2;
 
-                element.style.left = `${offsetX}px`;
-                element.style.top = `${offsetY}px`;
+                    const lengthChange = Math.hypot(newStartX - parseFloat(element.style.left), newStartY - parseFloat(element.style.top));
+                    element.style.width = `${lengthChange}px`; 
+                    element.style.left = `${newStartX}px`;
+                    element.style.top = `${newStartY}px`;
+                    element.dataset.angle = currentAngle; 
+                } else if (isDraggingEnd) { 
+                    const startX = parseFloat(element.style.left);
+                    const startY = parseFloat(element.style.top);
+
+                    const newEndX = event.clientX - rect.width / 2; 
+                    const newEndY = event.clientY - rect.height / 2;
+
+                    const dx = newEndX - startX;
+                    const dy = newEndY - startY;
+
+                    element.style.width = `${Math.hypot(dx, dy)}px`; 
+                    element.dataset.angle = Math.atan2(dy, dx); 
+
+                    element.style.transformOrigin = "0% 50%"; 
+                    element.style.transform = `rotate(${element.dataset.angle}rad)`; 
+
+                    element.style.left += `${dx}px`; 
+                    element.style.top += `${dy}px`; 
+                }
+                
+                adjustLinePosition(element); // Adjust visual position based on angle and length
+                return; 
             }
         });
 
         document.addEventListener('mouseup', () => {
-            isDragging = false;
+            isDraggingStart = false;
+            isDraggingEnd = false;
         });
-
-        element.addEventListener('click', () => {
-            if (!isLineFrozen) {
-                rotateLine(element); // Rotate on click without selection
-            }
-        });
+        
+        element.addEventListener('click', (event) => {
+          if (!isLineFrozen) rotateLine(element); // Rotate on click without selection
+      });
     }
 
-    function rotateLine(line) {
-        let angle = parseFloat(line.dataset.angle);
-        angle += Math.PI / 18; // Rotate by 10 degrees
-        line.dataset.angle = angle;
+    function adjustLinePosition(line) {
+      const angleRad = parseFloat(line.dataset.angle);
+      const lengthPx = parseFloat(line.style.width);
 
-        const centerX = parseFloat(line.style.left) + (parseFloat(line.style.width) / 2);
-        const centerY = parseFloat(line.style.top) + (parseFloat(line.style.height) / 2);
+      const centerX = parseFloat(line.style.left) + (lengthPx / 2);
+      const centerY = parseFloat(line.style.top) + (line.offsetHeight / 2);
 
-        line.style.transform = `rotate(${angle}rad)`;
-        line.style.left = `${centerX - (parseFloat(line.style.width) / 2)}px`; // Adjust left position
-        line.style.top = `${centerY - (parseFloat(line.style.height) / 2)}px`; // Adjust top position
-    }
+      line.style.left += `${(lengthPx / 2) * Math.cos(angleRad)}px`;
+      line.style.top += `${(lengthPx / 2) * Math.sin(angleRad)}px`;
 
-    document.getElementById('remove-last-line').addEventListener('click', () => {
-        if (lines.length > 0) {
-            const lastLine = lines.pop(); // Remove last line from array
-            document.body.removeChild(lastLine); // Remove from DOM
-        } else {
-            alert("No lines to remove.");
-        }
-    });
+      line.style.transformOrigin= "0% 50%";
+      line.style.transform= `rotate(${angleRad}rad)`; 
+      
+      return; 
+   }
 
-    document.getElementById('done').addEventListener('click', () => {
-        isLineFrozen = !isLineFrozen; // Toggle frozen state
-        const buttonText = isLineFrozen ? "Edit Line" : "Done";
-        document.getElementById('done').innerText = buttonText;
-    });
+   function rotateLine(line) {
+       let angle= parseFloat(line.dataset.angle);
+       angle += Math.PI / 18; // Rotate by 10 degrees
+       line.dataset.angle= angle;
 
-    document.body.addEventListener('click', (event) => {
-        if (event.target === document.body && !isLineFrozen && !hidePopup) { 
-          const rect = document.body.getBoundingClientRect();
-          createLine(event.clientX - rect.left, event.clientY - rect.top); 
-          document.getElementById('popup').style.display='none'; 
-      }
+       adjustLinePosition(line); 
+
+       return; 
+   }
+
+   document.getElementById('remove-last-line').addEventListener('click', () => {
+       if (lines.length > 0) {
+           const lastLine= lines.pop(); // Remove last line from array
+           document.body.removeChild(lastLine); // Remove from DOM
+       } else {
+           alert("No lines to remove.");
+       }
+   });
+
+   document.getElementById('done').addEventListener('click', () => {
+       isLineFrozen= !isLineFrozen; // Toggle frozen state
+       const buttonText= isLineFrozen ? "Edit Line" : "Done";
+       document.getElementById('done').innerText= buttonText;
+   });
+
+   document.body.addEventListener('click', (event) => {
+       if (event.target === document.body && !isLineFrozen && !hidePopup) { 
+         const rect= document.body.getBoundingClientRect();
+         createLine(event.clientX - rect.left, event.clientY - rect.top); 
+         document.getElementById('popup').style.display='none'; 
+     }
    });
 </script>
 
