@@ -172,7 +172,8 @@
     let currentThickness = 2;
     let selectedLineIndex = null;
     let isMovingEnabled = true; // Flag to control line movement
-    let controlPoints = []; // Store control points for each line
+    let isAddingLine = false; // Flag to control line addition
+    let startX, startY; // Starting coordinates for new lines
 
     function drawLines() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -183,6 +184,7 @@
             ctx.lineTo(line.endX, line.endY);
             ctx.stroke();
 
+            // Draw control points
             drawControlPoint(line.startX, line.startY, index, 'start');
             drawControlPoint(line.endX, line.endY, index, 'end');
 
@@ -207,8 +209,6 @@
             selectedLineIndex = lineIndex; // Set selected line index
             moveControlPoint(point, x, y, pointType);
         });
-
-        controlPoints.push(point); 
     }
 
     function moveControlPoint(point, startX, startY, pointType) {
@@ -220,11 +220,17 @@
             if (selectedLineIndex !== null) {
                 const line = lines[selectedLineIndex];
                 if (pointType === 'start') {
-                    line.startX = mouseX; 
-                    line.startY = mouseY;
+                    // Fixed start point
+                    const dx = mouseX - line.startX;
+                    const dy = mouseY - line.startY;
+                    line.endX = line.startX + dx; 
+                    line.endY = line.startY + dy; 
                 } else {
-                    line.endX = mouseX; 
-                    line.endY = mouseY;
+                    // Fixed end point
+                    const dx = mouseX - line.endX;
+                    const dy = mouseY - line.endY;
+                    line.startX = line.endX + dx; 
+                    line.startY = line.endY + dy; 
                 }
                 drawLines(); 
                 point.style.left = `${mouseX - 5}px`;
@@ -243,68 +249,72 @@
 
     // Add a new line
     document.getElementById('add-line').addEventListener('click', () => {
-        const startX = Math.random() * canvas.width;
-        const startY = Math.random() * canvas.height;
-        const angle = Math.random() * 2 * Math.PI; 
-        const length = 100; 
-        const endX = startX + length * Math.cos(angle);
-        const endY = startY + length * Math.sin(angle);
-
-        lines.push({ startX, startY, endX, endY });
-        drawLines();
+        isAddingLine = true; // Set flag to true for adding a new line
     });
 
-    // Remove the selected line
-    document.getElementById('remove-line').addEventListener('click', () => {
-        if (selectedLineIndex !== null) {
-            lines.splice(selectedLineIndex, 1); 
-            selectedLineIndex = null; 
-            drawLines(); 
-        } else {
-            alert("No line selected to remove.");
-        }
-    });
-
-    // Increase line thickness
-    document.getElementById('increase-thickness').addEventListener('click', () => {
-        currentThickness++;
-        document.getElementById('thickness-value').innerText = currentThickness;
-        drawLines();
-    });
-
-    // Decrease line thickness
-    document.getElementById('decrease-thickness').addEventListener('click', () => {
-        if (currentThickness > 1) {
-            currentThickness--;
-            document.getElementById('thickness-value').innerText = currentThickness;
-            drawLines();
-        }
-    });
-
-    // Toggle moving capability with "Done" button
-    document.getElementById('done').addEventListener('click', () => {
-        isMovingEnabled = !isMovingEnabled; 
-        const buttonText = isMovingEnabled ? "Done" : "Move";
-        document.getElementById('done').innerText = buttonText; 
-        if (!isMovingEnabled) {
-            selectedLineIndex = null; 
-        }
-    });
-
-   // Select and move lines on mouse click
+   // Click event to set start and end points for the new line
    canvas.addEventListener('click', (event) => {
-       const rect = canvas.getBoundingClientRect();
-       const mouseX = event.clientX - rect.left;
-       const mouseY = event.clientY - rect.top;
+       if (isAddingLine) {
+           const rect = canvas.getBoundingClientRect();
+           if (!startX && !startY) { // First click sets the start point
+               startX = event.clientX - rect.left;
+               startY = event.clientY - rect.top;
+           } else { // Second click sets the end point and creates the line
+               const endX = event.clientX - rect.left;
+               const endY = event.clientY - rect.top;
 
-       if (isMovingEnabled) { 
+               lines.push({ startX, startY, endX, endY });
+               drawLines();
+
+               // Reset for next addition
+               isAddingLine = false; 
+               startX = null; 
+               startY = null; 
+           }
+       } else if (isMovingEnabled) { // Select existing lines for moving
            selectedLineIndex = null; 
            lines.forEach((line, index) => {
-               if (isPointOnLine(mouseX, mouseY, line)) {
+               if (isPointOnLine(event.clientX - rect.left, event.clientY - rect.top, line)) {
                    selectedLineIndex = index; 
                }
            });
            drawLines(); 
+       }
+   });
+
+   // Remove the selected line
+   document.getElementById('remove-line').addEventListener('click', () => {
+       if (selectedLineIndex !== null) {
+           lines.splice(selectedLineIndex, 1); 
+           selectedLineIndex = null; 
+           drawLines(); 
+       } else {
+           alert("No line selected to remove.");
+       }
+   });
+
+   // Increase and decrease thickness logic remains unchanged...
+   document.getElementById('increase-thickness').addEventListener('click', () => {
+       currentThickness++;
+       document.getElementById('thickness-value').innerText = currentThickness;
+       drawLines();
+   });
+
+   document.getElementById('decrease-thickness').addEventListener('click', () => {
+       if (currentThickness > 1) {
+           currentThickness--;
+           document.getElementById('thickness-value').innerText = currentThickness;
+           drawLines();
+       }
+   });
+
+   // Toggle moving capability with "Done" button
+   document.getElementById('done').addEventListener('click', () => {
+       isMovingEnabled = !isMovingEnabled; 
+       const buttonText = isMovingEnabled ? "Done" : "Move";
+       document.getElementById('done').innerText = buttonText; 
+       if (!isMovingEnabled) {
+           selectedLineIndex = null; 
        }
    });
 
