@@ -114,13 +114,12 @@
 
 </body>
 </html>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Line Drawing App</title>
+    <title>Interactive Line Drawing App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -139,7 +138,7 @@
 </head>
 <body>
 
-<h1>Draw Lines on Canvas</h1>
+<h1>Draw and Move Lines on Canvas</h1>
 
 <div class="controls">
     <button id="add-line">Add Line</button>
@@ -155,16 +154,25 @@
     const ctx = canvas.getContext('2d');
     let lines = [];
     let currentThickness = 2;
+    let selectedLineIndex = null;
 
     // Function to draw all lines
     function drawLines() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.lineWidth = currentThickness; // Set line thickness
-        lines.forEach(line => {
+        lines.forEach((line, index) => {
             ctx.beginPath();
             ctx.moveTo(line.startX, line.startY);
             ctx.lineTo(line.endX, line.endY);
             ctx.stroke();
+            
+            // Highlight selected line
+            if (index === selectedLineIndex) {
+                ctx.strokeStyle = 'red'; // Change color for selected line
+                ctx.lineWidth = currentThickness + 2; // Thicker for visibility
+                ctx.stroke();
+                ctx.strokeStyle = 'black'; // Reset color
+            }
         });
     }
 
@@ -172,8 +180,10 @@
     document.getElementById('add-line').addEventListener('click', () => {
         const startX = Math.random() * canvas.width;
         const startY = Math.random() * canvas.height;
-        const endX = Math.random() * canvas.width;
-        const endY = Math.random() * canvas.height;
+        const angle = Math.random() * 2 * Math.PI; // Random angle in radians
+        const length = 100; // Fixed length for simplicity
+        const endX = startX + length * Math.cos(angle);
+        const endY = startY + length * Math.sin(angle);
 
         lines.push({ startX, startY, endX, endY });
         drawLines();
@@ -194,6 +204,59 @@
             drawLines();
         }
     });
+
+    // Select and move lines on mouse click
+    canvas.addEventListener('click', (event) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+
+        // Check if a line is clicked
+        selectedLineIndex = null; // Reset selection
+        lines.forEach((line, index) => {
+            if (isPointOnLine(mouseX, mouseY, line)) {
+                selectedLineIndex = index; // Select the clicked line
+            }
+        });
+        
+        if (selectedLineIndex !== null) {
+            moveLine(selectedLineIndex); // Move the selected line
+        }
+
+        drawLines(); // Redraw all lines after selection/move
+    });
+
+    function isPointOnLine(x, y, line) {
+        const { startX, startY, endX, endY } = line;
+        const distanceToStart = Math.hypot(x - startX, y - startY);
+        const distanceToEnd = Math.hypot(x - endX, y - endY);
+        
+        const lineLength = Math.hypot(endX - startX, endY - startY);
+        
+        return distanceToStart + distanceToEnd >= lineLength - 5 && distanceToStart + distanceToEnd <= lineLength + 5; 
+    }
+
+    function moveLine(index) {
+        const line = lines[index];
+        
+        canvas.addEventListener('mousemove', onMouseMove);
+        
+        function onMouseMove(event) {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            // Update the position of the selected line's endpoint to follow the mouse
+            line.endX = mouseX;
+            line.endY = mouseY;
+
+            drawLines(); // Redraw with updated position
+        }
+
+        canvas.addEventListener('mouseup', () => {
+            canvas.removeEventListener('mousemove', onMouseMove); // Stop moving on mouse up
+        }, { once: true });
+    }
 
 </script>
 
