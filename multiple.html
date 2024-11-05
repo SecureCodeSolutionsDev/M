@@ -114,6 +114,12 @@
 
 </body>
 </html>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,17 +140,26 @@
         .controls {
             margin-bottom: 10px;
         }
+        .control-point {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-<h1>Draw and Move Lines on Canvas</h1>
+<h1>Draw and Adjust Lines on Canvas</h1>
 
 <div class="controls">
     <button id="add-line">Add Line</button>
     <button id="remove-line">Remove Line</button>
     <button id="increase-thickness">Increase Thickness</button>
     <button id="decrease-thickness">Decrease Thickness</button>
+    <button id="done">Done</button>
     <span>Thickness: <span id="thickness-value">2</span></span>
 </div>
 
@@ -156,6 +171,8 @@
     let lines = [];
     let currentThickness = 2;
     let selectedLineIndex = null;
+    let isMovingEnabled = true; // Flag to control line movement
+    let controlPoints = []; // Store control points for each line
 
     // Function to draw all lines
     function drawLines() {
@@ -167,6 +184,10 @@
             ctx.lineTo(line.endX, line.endY);
             ctx.stroke();
             
+            // Draw control points
+            drawControlPoint(line.startX, line.startY);
+            drawControlPoint(line.endX, line.endY);
+
             // Highlight selected line
             if (index === selectedLineIndex) {
                 ctx.strokeStyle = 'red'; // Change color for selected line
@@ -175,6 +196,56 @@
                 ctx.strokeStyle = 'black'; // Reset color
             }
         });
+    }
+
+    function drawControlPoint(x, y) {
+        const point = document.createElement('div');
+        point.className = 'control-point';
+        point.style.left = `${x - 5}px`; // Center the control point
+        point.style.top = `${y - 5}px`;
+        document.body.appendChild(point);
+
+        point.addEventListener('mousedown', (event) => {
+            event.stopPropagation(); // Prevent triggering the canvas click
+            selectedLineIndex = getLineIndexAtPoint(x, y); // Get the index of the line containing this point
+            moveControlPoint(point, x, y);
+        });
+
+        controlPoints.push(point); // Store the control point for cleanup later
+    }
+
+    function moveControlPoint(point, startX, startY) {
+        const onMouseMove = (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+
+            if (selectedLineIndex !== null) {
+                const line = lines[selectedLineIndex];
+                if (point.style.left === `${startX - 5}px` && point.style.top === `${startY - 5}px`) {
+                    line.startX = mouseX; // Move start point
+                    line.startY = mouseY;
+                } else {
+                    line.endX = mouseX; // Move end point
+                    line.endY = mouseY;
+                }
+                drawLines(); // Redraw with updated position
+                point.style.left = `${mouseX - 5}px`;
+                point.style.top = `${mouseY - 5}px`;
+            }
+        };
+
+        const onMouseUp = () => {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+        };
+
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    }
+
+    function getLineIndexAtPoint(x, y) {
+        return lines.findIndex(line => isPointOnLine(x, y, line));
     }
 
     // Add a new line
@@ -217,58 +288,42 @@
         }
     });
 
-    // Select and move lines on mouse click
-    canvas.addEventListener('click', (event) => {
-        const rect = canvas.getBoundingClientRect();
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-
-        // Check if a line is clicked
-        selectedLineIndex = null; // Reset selection
-        lines.forEach((line, index) => {
-            if (isPointOnLine(mouseX, mouseY, line)) {
-                selectedLineIndex = index; // Select the clicked line
-            }
-        });
-        
-        if (selectedLineIndex !== null) {
-            moveLine(selectedLineIndex); // Move the selected line
+    // Toggle moving capability with "Done" button
+    document.getElementById('done').addEventListener('click', () => {
+        isMovingEnabled = !isMovingEnabled; // Toggle the flag
+        const buttonText = isMovingEnabled ? "Done" : "Move";
+        document.getElementById('done').innerText = buttonText; // Update button text
+        if (!isMovingEnabled) {
+            selectedLineIndex = null; // Deselect any currently selected line when done
         }
-
-        drawLines(); // Redraw all lines after selection/move
     });
 
-    function isPointOnLine(x, y, line) {
-        const { startX, startY, endX, endY } = line;
-        const distanceToStart = Math.hypot(x - startX, y - startY);
-        const distanceToEnd = Math.hypot(x - endX, y - endY);
-        
-        const lineLength = Math.hypot(endX - startX, endY - startY);
-        
-        return distanceToStart + distanceToEnd >= lineLength - 5 && distanceToStart + distanceToEnd <= lineLength + 5; 
-    }
+   // Select and move lines on mouse click
+   canvas.addEventListener('click', (event) => {
+       const rect = canvas.getBoundingClientRect();
+       const mouseX = event.clientX - rect.left;
+       const mouseY = event.clientY - rect.top;
 
-    function moveLine(index) {
-        const line = lines[index];
-        
-        canvas.addEventListener('mousemove', onMouseMove);
-        
-        function onMouseMove(event) {
-            const rect = canvas.getBoundingClientRect();
-            const mouseX = event.clientX - rect.left;
-            const mouseY = event.clientY - rect.top;
+       if (isMovingEnabled) { // Only allow selection if moving is enabled
+           selectedLineIndex = null; // Reset selection
+           lines.forEach((line, index) => {
+               if (isPointOnLine(mouseX, mouseY, line)) {
+                   selectedLineIndex = index; // Select the clicked line
+               }
+           });
+           drawLines(); // Redraw all lines after selection/move
+       }
+   });
 
-            // Update the position of the selected line's endpoint to follow the mouse
-            line.endX = mouseX;
-            line.endY = mouseY;
-
-            drawLines(); // Redraw with updated position
-        }
-
-        canvas.addEventListener('mouseup', () => {
-            canvas.removeEventListener('mousemove', onMouseMove); // Stop moving on mouse up
-        }, { once: true });
-    }
+   function isPointOnLine(x, y, line) {
+       const { startX, startY, endX, endY } = line;
+       const distanceToStart = Math.hypot(x - startX, y - startY);
+       const distanceToEnd = Math.hypot(x - endX, y - endY);
+       
+       const lineLength = Math.hypot(endX - startX, endY - startY);
+       
+       return distanceToStart + distanceToEnd >= lineLength - 5 && distanceToStart + distanceToEnd <= lineLength + 5; 
+   }
 
 </script>
 
