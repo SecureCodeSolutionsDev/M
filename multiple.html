@@ -1,64 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Dashboard</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .widget-container {
-            margin-bottom: 20px;
-        }
-        iframe {
-            width: 100%;
-            height: 400px; /* Adjust height as needed */
-            border: none;
-        }
-    </style>
-</head>
-<body>
-
-<h1>Comprehensive Financial Dashboard</h1>
-
 <div class="widget-container">
-    <!-- Ticker Tape Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12345&symbol=NASDAQ:AAPL&interval=D&hidesidetoolbar=1&theme=light" title="Ticker Tape"></iframe>
+    <canvas id="drawingCanvas" width="800" height="400" style="border:1px solid #000;"></canvas>
 </div>
 
-<div class="widget-container">
-    <!-- Symbol Info Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12346&symbol=NASDAQ:AAPL&theme=light" title="Symbol Info"></iframe>
-</div>
+<script>
+const canvas = document.getElementById('drawingCanvas');
+const ctx = canvas.getContext('2d');
+let painting = false;
 
-<div class="widget-container">
-    <!-- Advanced Chart Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12347&symbol=NASDAQ:AAPL&interval=D&theme=light" title="Advanced Chart"></iframe>
-</div>
+canvas.addEventListener('mousedown', (e) => {
+    painting = true;
+    ctx.moveTo(e.offsetX, e.offsetY);
+});
 
-<div class="widget-container">
-    <!-- Company Profile Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12348&symbol=NASDAQ:AAPL&theme=light" title="Company Profile"></iframe>
-</div>
+canvas.addEventListener('mousemove', (e) => {
+    if (painting) {
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+    }
+});
 
-<div class="widget-container">
-    <!-- Fundamental Data Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12349&symbol=NASDAQ:AAPL&theme=light" title="Fundamental Data"></iframe>
-</div>
+canvas.addEventListener('mouseup', () => {
+    painting = false;
+    ctx.beginPath();
+});
 
-<div class="widget-container">
-    <!-- Technical Analysis Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12350&symbol=NASDAQ:AAPL&theme=light" title="Technical Analysis"></iframe>
-</div>
-
-<div class="widget-container">
-    <!-- Top Stories Widget -->
-    <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_12351&symbol=NASDAQ:AAPL&theme=light" title="Top Stories"></iframe>
-</div>
-
-</body>
-</html>
+canvas.addEventListener('mouseout', () => {
+    painting = false;
+    ctx.beginPath();
+});
+</script>
