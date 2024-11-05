@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Dashboard</title>
+    <title>Comprehensive Financial Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,7 +19,7 @@
             height: 400px; /* Adjust height as needed */
             border: none;
         }
-        .input-container {
+        .input-container, .button-container {
             margin-bottom: 20px;
         }
     </style>
@@ -29,9 +29,18 @@
 <h1>Comprehensive Financial Dashboard</h1>
 
 <div class="input-container">
-    <label for="symbol-input">Enter Stock Symbol (e.g., AAPL, TSLA): </label>
+    <label for="symbol-input">Enter Stock or Asset Symbol (e.g., AAPL, EURUSD): </label>
     <input type="text" id="symbol-input" placeholder="Enter symbol here">
     <button id="update-button">Update</button>
+</div>
+
+<div class="button-container">
+    <button onclick="updateWidgets('FOREX')">Forex</button>
+    <button onclick="updateWidgets('CRYPTO')">Crypto</button>
+    <button onclick="updateWidgets('FUTURES')">Futures</button>
+    <button onclick="updateWidgets('COMMODITIES')">Commodities</button>
+    <button onclick="updateWidgets('INDICES')">Indices</button>
+    <button onclick="updateWidgets('OTHERS')">Others</button>
 </div>
 
 <div class="widget-container">
@@ -70,16 +79,26 @@
 </div>
 
 <script>
-    // Function to update all iframe sources based on the entered stock symbol
+    // Function to update all iframe sources based on the entered stock symbol or asset class
     function updateWidgets(symbol) {
         const baseUrl = "https://s.tradingview.com/widgetembed/?frameElementId=tradingview_";
-        document.getElementById("ticker-tape").src = `${baseUrl}12345&symbol=NASDAQ:${symbol}&interval=D&hidesidetoolbar=1&theme=light`;
-        document.getElementById("symbol-info").src = `${baseUrl}12346&symbol=NASDAQ:${symbol}&theme=light`;
-        document.getElementById("advanced-chart").src = `${baseUrl}12347&symbol=NASDAQ:${symbol}&interval=D&theme=light`;
-        document.getElementById("company-profile").src = `${baseUrl}12348&symbol=NASDAQ:${symbol}&theme=light`;
-        document.getElementById("fundamental-data").src = `${baseUrl}12349&symbol=NASDAQ:${symbol}&theme=light`;
-        document.getElementById("technical-analysis").src = `${baseUrl}12350&symbol=NASDAQ:${symbol}&theme=light`;
-        document.getElementById("top-stories").src = `${baseUrl}12351&symbol=NASDAQ:${symbol}&theme=light`;
+        
+        // Check if the input is a specific symbol or an asset class
+        const assetSymbol = (symbol === 'FOREX') ? 'EURUSD' :
+                            (symbol === 'CRYPTO') ? 'BTCUSD' :
+                            (symbol === 'FUTURES') ? 'ES1!' :
+                            (symbol === 'COMMODITIES') ? 'GC1!' :
+                            (symbol === 'INDICES') ? 'NASDAQ:AAPL' : 
+                            (symbol === 'OTHERS') ? 'GOOGL' : 
+                            document.getElementById("symbol-input").value.trim();
+
+        document.getElementById("ticker-tape").src = `${baseUrl}12345&symbol=${assetSymbol}&interval=D&hidesidetoolbar=1&theme=light`;
+        document.getElementById("symbol-info").src = `${baseUrl}12346&symbol=${assetSymbol}&theme=light`;
+        document.getElementById("advanced-chart").src = `${baseUrl}12347&symbol=${assetSymbol}&interval=D&theme=light`;
+        document.getElementById("company-profile").src = `${baseUrl}12348&symbol=${assetSymbol}&theme=light`;
+        document.getElementById("fundamental-data").src = `${baseUrl}12349&symbol=${assetSymbol}&theme=light`;
+        document.getElementById("technical-analysis").src = `${baseUrl}12350&symbol=${assetSymbol}&theme=light`;
+        document.getElementById("top-stories").src = `${baseUrl}12351&symbol=${assetSymbol}&theme=light`;
     }
 
     // Event listener for the button click
