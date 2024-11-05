@@ -142,6 +142,7 @@
 
 <div class="controls">
     <button id="add-line">Add Line</button>
+    <button id="remove-line">Remove Line</button>
     <button id="increase-thickness">Increase Thickness</button>
     <button id="decrease-thickness">Decrease Thickness</button>
     <span>Thickness: <span id="thickness-value">2</span></span>
@@ -187,6 +188,17 @@
 
         lines.push({ startX, startY, endX, endY });
         drawLines();
+    });
+
+    // Remove the selected line
+    document.getElementById('remove-line').addEventListener('click', () => {
+        if (selectedLineIndex !== null) {
+            lines.splice(selectedLineIndex, 1); // Remove the selected line from the array
+            selectedLineIndex = null; // Reset selection
+            drawLines(); // Redraw all lines after removal
+        } else {
+            alert("No line selected to remove.");
+        }
     });
 
     // Increase line thickness
