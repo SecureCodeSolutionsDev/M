@@ -220,17 +220,13 @@
             if (selectedLineIndex !== null) {
                 const line = lines[selectedLineIndex];
                 if (pointType === 'start') {
-                    // Fixed start point
-                    const dx = mouseX - line.startX;
-                    const dy = mouseY - line.startY;
-                    line.endX = line.startX + dx; 
-                    line.endY = line.startY + dy; 
+                    // Move end point based on mouse position
+                    line.endX = mouseX; 
+                    line.endY = mouseY; 
                 } else {
-                    // Fixed end point
-                    const dx = mouseX - line.endX;
-                    const dy = mouseY - line.endY;
-                    line.startX = line.endX + dx; 
-                    line.startY = line.endY + dy; 
+                    // Move start point based on mouse position
+                    line.startX = mouseX; 
+                    line.startY = mouseY; 
                 }
                 drawLines(); 
                 point.style.left = `${mouseX - 5}px`;
@@ -254,9 +250,9 @@
 
    // Click event to set start and end points for the new line
    canvas.addEventListener('click', (event) => {
+       const rect = canvas.getBoundingClientRect();
        if (isAddingLine) {
-           const rect = canvas.getBoundingClientRect();
-           if (!startX && !startY) { // First click sets the start point
+           if (startX === undefined && startY === undefined) { // First click sets the start point
                startX = event.clientX - rect.left;
                startY = event.clientY - rect.top;
            } else { // Second click sets the end point and creates the line
@@ -268,8 +264,8 @@
 
                // Reset for next addition
                isAddingLine = false; 
-               startX = null; 
-               startY = null; 
+               startX = undefined; 
+               startY = undefined; 
            }
        } else if (isMovingEnabled) { // Select existing lines for moving
            selectedLineIndex = null; 
