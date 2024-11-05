@@ -125,205 +125,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Line Drawing App</title>
+    <title>Interactive Line Drawing Tool</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            position: relative;
         }
-        canvas {
-            border: 1px solid #000;
-            cursor: crosshair;
+        .line {
+            position: absolute;
+            background-color: black;
+            cursor: pointer;
         }
         .controls {
-            margin-bottom: 10px;
-        }
-        .control-point {
-            width: 10px;
-            height: 10px;
-            background-color: red;
             position: absolute;
-            border-radius: 50%;
-            cursor: pointer;
+            top: 10px;
+            left: 10px;
+            z-index: 20; /* Controls above lines */
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-<h1>Draw and Adjust Lines on Canvas</h1>
-
 <div class="controls">
     <button id="add-line">Add Line</button>
     <button id="remove-line">Remove Line</button>
-    <button id="increase-thickness">Increase Thickness</button>
-    <button id="decrease-thickness">Decrease Thickness</button>
-    <button id="done">Done</button>
-    <span>Thickness: <span id="thickness-value">2</span></span>
+    <button id="rotate-line">Rotate Line</button>
 </div>
 
-<canvas id="drawingCanvas" width="800" height="600"></canvas>
-
 <script>
-    const canvas = document.getElementById('drawingCanvas');
-    const ctx = canvas.getContext('2d');
     let lines = [];
-    let currentThickness = 2;
     let selectedLineIndex = null;
-    let isMovingEnabled = true; // Flag to control line movement
-    let isAddingLine = false; // Flag to control line addition
-    let startX, startY; // Starting coordinates for new lines
 
-    function drawLines() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.lineWidth = currentThickness; 
-        lines.forEach((line, index) => {
-            ctx.beginPath();
-            ctx.moveTo(line.startX, line.startY);
-            ctx.lineTo(line.endX, line.endY);
-            ctx.stroke();
-
-            // Draw control points
-            drawControlPoint(line.startX, line.startY, index, 'start');
-            drawControlPoint(line.endX, line.endY, index, 'end');
-
-            if (index === selectedLineIndex) {
-                ctx.strokeStyle = 'red'; 
-                ctx.lineWidth = currentThickness + 2; 
-                ctx.stroke();
-                ctx.strokeStyle = 'black'; 
-            }
-        });
-    }
-
-    function drawControlPoint(x, y, lineIndex, pointType) {
-        const point = document.createElement('div');
-        point.className = 'control-point';
-        point.style.left = `${x - 5}px`; 
-        point.style.top = `${y - 5}px`;
-        document.body.appendChild(point);
-
-        point.addEventListener('mousedown', (event) => {
-            event.stopPropagation(); 
-            selectedLineIndex = lineIndex; // Set selected line index
-            moveControlPoint(point, x, y, pointType);
-        });
-    }
-
-    function moveControlPoint(point, startX, startY, pointType) {
-        const onMouseMove = (event) => {
-            const rect = canvas.getBoundingClientRect();
-            const mouseX = event.clientX - rect.left;
-            const mouseY = event.clientY - rect.top;
-
-            if (selectedLineIndex !== null) {
-                const line = lines[selectedLineIndex];
-                if (pointType === 'start') {
-                    // Move end point based on mouse position
-                    line.endX = mouseX; 
-                    line.endY = mouseY; 
-                } else {
-                    // Move start point based on mouse position
-                    line.startX = mouseX; 
-                    line.startY = mouseY; 
-                }
-                drawLines(); 
-                point.style.left = `${mouseX - 5}px`;
-                point.style.top = `${mouseY - 5}px`;
-            }
-        };
-
-        const onMouseUp = () => {
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
-        };
-
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
-    }
-
-    // Add a new line
     document.getElementById('add-line').addEventListener('click', () => {
-        isAddingLine = true; // Set flag to true for adding a new line
+        const line = document.createElement('div');
+        line.className = 'line';
+        line.style.width = '100px'; // Default length
+        line.style.height = '2px'; // Thickness
+        line.style.transformOrigin = '0% 50%'; // Rotate around the start point
+        line.style.left = '100px'; // Starting position
+        line.style.top = '100px'; // Starting position
+        line.dataset.angle = 0; // Initial angle
+
+        // Make the line draggable
+        makeDraggable(line);
+
+        document.body.appendChild(line);
+        lines.push(line);
     });
 
-   // Click event to set start and end points for the new line
-   canvas.addEventListener('click', (event) => {
-       const rect = canvas.getBoundingClientRect();
-       if (isAddingLine) {
-           if (startX === undefined && startY === undefined) { // First click sets the start point
-               startX = event.clientX - rect.left;
-               startY = event.clientY - rect.top;
-           } else { // Second click sets the end point and creates the line
-               const endX = event.clientX - rect.left;
-               const endY = event.clientY - rect.top;
+    function makeDraggable(element) {
+        let isDragging = false;
 
-               lines.push({ startX, startY, endX, endY });
-               drawLines();
+        element.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            selectedLineIndex = lines.indexOf(element);
+            event.preventDefault(); // Prevent text selection
+        });
 
-               // Reset for next addition
-               isAddingLine = false; 
-               startX = undefined; 
-               startY = undefined; 
-           }
-       } else if (isMovingEnabled) { // Select existing lines for moving
-           selectedLineIndex = null; 
-           lines.forEach((line, index) => {
-               if (isPointOnLine(event.clientX - rect.left, event.clientY - rect.top, line)) {
-                   selectedLineIndex = index; 
-               }
-           });
-           drawLines(); 
-       }
-   });
+        document.addEventListener('mousemove', (event) => {
+            if (isDragging) {
+                const rect = element.getBoundingClientRect();
+                const offsetX = event.clientX - rect.width / 2; // Center the line on the cursor
+                const offsetY = event.clientY - rect.height / 2;
 
-   // Remove the selected line
-   document.getElementById('remove-line').addEventListener('click', () => {
-       if (selectedLineIndex !== null) {
-           lines.splice(selectedLineIndex, 1); 
-           selectedLineIndex = null; 
-           drawLines(); 
-       } else {
-           alert("No line selected to remove.");
-       }
-   });
+                element.style.left = `${offsetX}px`;
+                element.style.top = `${offsetY}px`;
+            }
+        });
 
-   // Increase and decrease thickness logic remains unchanged...
-   document.getElementById('increase-thickness').addEventListener('click', () => {
-       currentThickness++;
-       document.getElementById('thickness-value').innerText = currentThickness;
-       drawLines();
-   });
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+        
+        element.addEventListener('click', () => {
+            if (selectedLineIndex === lines.indexOf(element)) {
+                selectedLineIndex = null; // Deselect if clicked again
+                element.style.borderColor = 'black'; // Reset color
+            } else {
+                selectedLineIndex = lines.indexOf(element); // Select this line
+                element.style.borderColor = 'red'; // Highlight selected line
+                resetLineColors(); // Reset others' colors
+            }
+        });
+    }
 
-   document.getElementById('decrease-thickness').addEventListener('click', () => {
-       if (currentThickness > 1) {
-           currentThickness--;
-           document.getElementById('thickness-value').innerText = currentThickness;
-           drawLines();
-       }
-   });
+    function resetLineColors() {
+        lines.forEach((line) => {
+            line.style.borderColor = 'black'; // Reset color for all lines
+        });
+    }
 
-   // Toggle moving capability with "Done" button
-   document.getElementById('done').addEventListener('click', () => {
-       isMovingEnabled = !isMovingEnabled; 
-       const buttonText = isMovingEnabled ? "Done" : "Move";
-       document.getElementById('done').innerText = buttonText; 
-       if (!isMovingEnabled) {
-           selectedLineIndex = null; 
-       }
-   });
+    document.getElementById('remove-line').addEventListener('click', () => {
+        if (selectedLineIndex !== null) {
+            const lineToRemove = lines[selectedLineIndex];
+            document.body.removeChild(lineToRemove);
+            lines.splice(selectedLineIndex, 1);
+            selectedLineIndex = null; // Deselect after removal
+        } else {
+            alert("No line selected to remove.");
+        }
+    });
 
-   function isPointOnLine(x, y, line) {
-       const { startX, startY, endX, endY } = line;
-       const distanceToStart = Math.hypot(x - startX, y - startY);
-       const distanceToEnd = Math.hypot(x - endX, y - endY);
-       
-       const lineLength = Math.hypot(endX - startX, endY - startY);
-       
-       return distanceToStart + distanceToEnd >= lineLength - 5 && distanceToStart + distanceToEnd <= lineLength + 5; 
-   }
+    document.getElementById('rotate-line').addEventListener('click', () => {
+        if (selectedLineIndex !== null) {
+            const line = lines[selectedLineIndex];
+            let angle = parseFloat(line.dataset.angle);
+            angle += Math.PI / 18; // Rotate by 10 degrees
+            line.dataset.angle = angle;
 
+            const centerX = parseFloat(line.style.left) + (parseFloat(line.style.width) / 2);
+            const centerY = parseFloat(line.style.top) + (parseFloat(line.style.height) / 2);
+
+            line.style.transform = `rotate(${angle}rad)`;
+            line.style.left = `${centerX - (parseFloat(line.style.width) / 2)}px`; // Adjust left position
+            line.style.top = `${centerY - (parseFloat(line.style.height) / 2)}px`; // Adjust top position
+        } else {
+            alert("No line selected to rotate.");
+        }
+    });
 </script>
 
 </body>
