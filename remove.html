@@ -1,18 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multitimeframe, Multicharts</title>
-</head>
+    <title>Multitimeframe, Multicharts with Preloader</title>
+    <style>
+        body {
+            overflow: hidden; /* Prevent scrolling during loading */
+            margin: 0; /* Remove default margin */
+            font-family: 'Arial', sans-serif;
+            background-color: #0b0c20; /* Dark navy background */
+        }
 
+        /* Preloader styles */
+        .preload {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 10, 30, 0.9); /* Semi-transparent background */
+            color: #00ffcc; /* Light cyan text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999; /* Ensure it covers everything */
+        }
+
+        .loading {
+            font-size: 24px; /* Size of loading text */
+            margin-bottom: 20px; /* Space between text and progress bar */
+        }
+
+        .progress-container {
+            width: 80%; /* Width of the progress bar container */
+            height: 30px; /* Height of the progress bar container */
+            background-color: #444; /* Background color of the progress bar container */
+            border-radius: 15px; /* Rounded corners for the progress bar container */
+            overflow: hidden;
+            position: relative; /* Position for child elements */
+        }
+
+        .progress-bar {
+            height: 100%; /* Full height of progress bar */
+            width: 0; /* Start with no width (hidden) */
+            background-color: #00ffcc; /* Color of the progress indicator */
+            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; /* Glowing effect */
+            transition: width 0.5s ease-in-out; /* Smooth transition for width change */
+        }
+
+        .percentage {
+            font-size: 18px; /* Size of percentage text */
+            position: absolute; /* Position above the progress bar */
+            left: 50%; /* Center horizontally */
+            top: 50%; /* Center vertically within the container */
+            transform: translate(-50%, -50%); /* Adjust to center correctly */
+        }
+
+        .widget-container {
+            margin-bottom: 20px; /* Space between charts */
+        }
+    </style>
+</head>
 <body>
 
-    <h1>Multitimeframe , Multicharts</h1>
+<!-- Preload Screen -->
+<div class="preload" id="preload">
+    <div class="loading">Fetching live charts from the source...</div>
+    
+    <!-- Progress Bar Container -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div> <!-- Progress bar that fills up -->
+        <div class="percentage" id="percentage">0%</div> <!-- Percentage display -->
+    </div>
+</div>
 
-    <!-- Chart containers -->
-    <div class="widget-container">
+<h1>Multitimeframe , Multicharts</h1>
+
+<!-- Chart containers -->
+<div class="widget-container">
         <div class="tradingview-widget-container">
             <div id="chart1" class="chart-container"></div>
             <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
@@ -252,7 +318,38 @@
             </script>
         </div>
     </div>
+<script>
+// Progress logic
+let progress = document.getElementById('progress-bar');
+let percentageText = document.getElementById('percentage');
+let totalDuration = 20000; // Total duration in milliseconds (20 seconds)
+let startTime = Date.now();
+
+function updateProgress() {
+    let elapsedTime = Date.now() - startTime;
+    let percentComplete = Math.min((elapsedTime / totalDuration) * 100, 100);
+    
+    // Update width and percentage text
+    progress.style.width = percentComplete + '%';
+    percentageText.textContent = Math.floor(percentComplete) + '%';
+
+    // Hide preload when complete
+    if (percentComplete >= 100) {
+        document.getElementById('preload').style.display = 'none'; // Hide preload screen
+        document.body.style.overflow = 'auto'; // Allow scrolling again
+    } else {
+        requestAnimationFrame(updateProgress); // Continue updating
+    }
+}
+
+// Start updating the progress
+requestAnimationFrame(updateProgress);
+</script>
 
 </body>
-
 </html>
+
+
+
+
+
