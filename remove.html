@@ -130,26 +130,47 @@ function updateWidgets(symbol) {
                         document.getElementById("symbol-input").value.trim();
 
     // Update each chart's symbol
-    const charts = [chart1, chart2, chart3];
-    
+    const charts = [
+        { containerId: 'chart1', defaultSymbol: 'FOREXCOM:EURUSD' },
+        { containerId: 'chart2', defaultSymbol: 'NASDAQ:AAPL' },
+        { containerId: 'chart3', defaultSymbol: 'NASDAQ:GOOGL' }
+    ];
+
     charts.forEach((chart, index) => {
         const widget = document.querySelectorAll('.tradingview-widget-container')[index].querySelector('script');
         
-        // Update the symbol in the script
-        const newScriptContent = widget.innerHTML.replace(/"symbol":"[^"]*"/, `"symbol":"${assetSymbol}"`);
-        
-        // Recreate the script to refresh the chart
+        // Create a new script element to replace the old one
         const newScript = document.createElement('script');
+        
+        // Set new attributes and content
         newScript.type = 'text/javascript';
         newScript.src = widget.src;
-        
-        // Clear existing widget content and append new script
-        const container = document.querySelectorAll('.tradingview-widget-container')[index];
-        container.innerHTML = ''; // Clear existing widget
-        container.appendChild(newScript); // Append new script
-        
-        // Update the script content after appending it
-        newScript.innerHTML = newScriptContent;
+
+        // Update the symbol in the script content
+        const newScriptContent = `
+          {
+              width: '100%',
+              height: '400',
+              symbol: '${assetSymbol}',
+              interval: 'D',
+              timezone: 'Etc/UTC',
+              theme: 'light',
+              style: '3',
+              locale: 'en',
+              backgroundColor: '#ffffff',
+              hide_side_toolbar: false,
+              allow_symbol_change: true,
+              save_image: false,
+              calendar: true,
+              hide_volume: false,
+              support_host: 'https://www.tradingview.com'
+          }
+        `;
+
+        // Append the new script to the container and remove old script
+        document.getElementById(chart.containerId).innerHTML = ''; // Clear existing widget
+        newScript.innerHTML = newScriptContent; // Set new content
+        document.getElementById(chart.containerId).appendChild(newScript); // Append new script
     });
 }
 
