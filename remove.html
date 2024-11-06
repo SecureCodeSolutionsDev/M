@@ -1,96 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forex Trading Platform</title>
+    <title>on</title>
     <style>
         body {
-            background-image: url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
+              background-image: url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg');
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Sets the height to fill the viewport */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    text-align: center; /* Center text */
+    font-family: 'Montserrat', sans-serif; /* Consistent font */
+    background-color: #121212; /* Dark background for a modern look */
+}
             margin: 0;
             padding: 0;
-            text-align: center;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #121212;
+            text-align: center; /* Center text */
+            font-family: 'Montserrat', sans-serif; /* Consistent font */
         }
-
-        #welcomeBanner {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
             color: #FFD700; /* Gold text color */
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        .button-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 36px; /* Large font size for visibility */
-            z-index: 10; /* Ensure it appears above other content */
-            transition: opacity 1s ease; /* Smooth transition for fading out */
+            flex-direction: column; /* Arrange in a column for pyramid shape */
+            align-items: center; /* Center items horizontally */
+            margin-top: 20px;
+        }
+        .row {
+            display: flex;
+            justify-content: center; /* Center items in each row */
+            width: fit-content; /* Fit to content width */
+        }
+        .button {
+            background-color: transparent; /* Transparent background */
+            border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
+            color: rgba(0, 255, 255, 0.8); /* Cyan text color */
+            padding: 15px 30px; /* Increased padding for larger buttons */
+            font-size: 18px; /* Increased font size for better readability */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            width: 150px; /* Fixed width for uniform button size */
+            margin: 10px; /* Add margin for spacing between buttons */
+            cursor: pointer;
+            border-radius: 10px; /* Rounded corners for buttons */
+            transition: all .3s ease-in-out; /* Transition for hover effect */
+        }
+        .button:hover {
+            color: white; /* Change text color on hover */
+            border-color: white; /* Change border color on hover */
+        }
+        .glow {
+            box-shadow: 0 0 5px rgba(0, 255, 255, .8), 
+                        0 0 10px rgba(0, 255, 255, .8), 
+                        0 0 15px rgba(0, 255, 255, .8); /* Glowing effect */
+        }
+        .popup {
+            width:auto ; 
+            height:auto ; 
+            max-width: 600px; /* Set a maximum width for popups */
+            max-height: calc(80vh - 40px); /* Set a maximum height for popups */
+            position :fixed ; 
+            top :50%; 
+            left :50%; 
+            transform: translate(-50%, -50%); /* Center the popup */
+            background-color :rgba(30 ,30 ,30 ,.95); 
+            display :flex ; 
+            justify-content :center ; 
+            align-items :center ; 
+            z-index :2 ; 
+            opacity:.9 ; 
+            visibility:hidden ; 
+            transition:.3s ease-in-out ; 
         }
 
-        .tradingview-widget-container {
-            display: block; /* Keep the TradingView widget visible */
+        .popup.active {
+           opacity:.9 ; 
+           visibility :visible ; 
+       }
+
+       .popup-content {
+           width :calc(100% -40px); 
+           height:auto ; 
+           border-radius :10px ; 
+           box-shadow :rgba(255 ,255 ,255 ,.2) -1px -1px ,rgba(255 ,255 ,255 ,.2) -2px -2px ,rgba(255 ,255 ,255 ,.2) -3px -3px ; 
+           padding :20px ; 
+           text-align :justify ; 
+           overflow-y:auto ;
+           background-color: rgba(50, 50, 50, 0.9); /* Darker background for popup content */
+       }
+
+       .close {
+           position:absolute ; 
+           top :20px ; 
+           right :20px ; 
+           font-size :24px ; 
+           color :#FFD700; /* Gold close button color */
+           cursor:pointer ; 
+           transition :all .3s ease-in-out ; 
+       }
+
+       .close:hover { 
+           color:#FF4500; /* Change close button color on hover */
+       }
+       
+@keyframes moveRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(20px); } /* Adjust distance as needed */
+}
+
+       @keyframes flashGlow {
+           from {
+               text-shadow:
+                   none;
+               color: rgba(0,255,255,1);
+           }
+           to {
+               text-shadow:
+                   0 0 5px rgba(135,206,250,1),
+                   0 0 10px rgba(135,206,250,1),
+                   0 0 15px rgba(135,206,250,.7);
+               color:white;
+           }
+       }
+
+       #chartToggleButton {
+           margin-top:20px;
+       }
+
+       .popup-content p {
+           font-size: 20px; /* Making the analysis text larger */
+           color: white; /* Changing analysis text color to white */
+       }
+
+       .popup-content strong {
+           color: rgba(0, 255, 255, .8); /* Match button text color for analysis titles */
+       }
+
+       .artistic-text {
+           font-size: 18px; /* Match font size with other texts */
+           color: #FFD700; /* Gold text color */
+           text-shadow: 0 0 5px rgba(255,215,0,.7), 
+                        0 0 10px rgba(255,215,0,.5), 
+                        0 0 15px rgba(255,215,0,.3); /* Glowing effect for artistic text */
+           animation: flashText 1s infinite alternate; /* Flashing animation for artistic text */
+           cursor: pointer; /* Pointer cursor on hover */
+           background-color: transparent; /* Background color for button style */
+           border: none; /* No border for button style */
+       }
+
+       @keyframes flashText {
+           from {
+               opacity: 1;
+           }
+           to {
+               opacity: 0.5;
+           }
+       }
+
+.bitcoin-button:hover {
+    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+}
+
+.bitcoin-button:hover {
+    animation: moveRight 0.5s forwards;
+}
+.eur-button:hover {
+    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+}
+
+.gbp-button:hover {
+    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+}
+
+.usd-button:hover {
+    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+}
+
+.gold-button:hover {
+    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+}
+
+.aud-button:hover {
+    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+}
+
+.nzd-button:hover {
+    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+}
+
+.silver-button:hover {
+    animation: moveRight 0.7s forwards; /* Adjust duration as needed */
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Button Animation</title>
+    <style>
+        /* Style for the button container */
+        #chartToggleButton {
+            position: relative; /* Needed for absolute positioning */
+            margin: 20px; /* Add some margin for visual spacing */
+        }
+
+        /* Style for the button */
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 5s ease; /* Smooth transition */
+        }
+
+        /* Class to move the button down */
+        .move-down {
+            transform: translateY(120px); /* Move down by 120 pixels */
         }
     </style>
 </head>
 <body>
-
-<div id="welcomeBanner">Welcome to Our Forex Trading Platform!</div>
-
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {
-        "symbols": [
-            {"proName": "FOREXCOM:SPXUSD", "title": "S&P 500 Index"},
-            {"proName": "FOREXCOM:NSXUSD", "title": "US 100 Cash CFD"},
-            {"proName": "FX_IDC:EURUSD", "title": "EUR to USD"},
-            {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"},
-            {"proName": "BITSTAMP:ETHUSD", "title": "Ethereum"},
-            {"description": "Gold", "proName": "OANDA:XAUUSD"},
-            {"description": "Dollar", "proName": "CAPITALCOM:DXY"},
-            {"description": "Tesla", "proName": "NASDAQ:TSLA"},
-            {"description": "NVDA", "proName": "NASDAQ:NVDA"},
-            {"description": "Facebook", "proName": "NASDAQ:META"}
-        ],
-        "showSymbolLogo": true,
-        "isTransparent": true,
-        "displayMode": "adaptive",
-        "colorTheme": "dark",
-        "locale": "en"
-    }
-    </script>
-</div>
-<!-- TradingView Widget END -->
-
-<script>
-    // Function to hide the welcome banner after 5 seconds
-    setTimeout(() => {
-        const welcomeBanner = document.getElementById('welcomeBanner');
-        welcomeBanner.style.opacity = '0'; // Fade out effect
-
-        // Wait for fade out transition to complete before hiding
-        setTimeout(() => {
-            welcomeBanner.style.display = 'none'; // Hide the banner completely
-        }, 1000); // Match this duration with the CSS transition duration
-    }, 5000); // Display for 5 seconds
-</script>
-
 <div id="offline-message" style="display: none; background-color: #f44336; color: white; padding: 20px; text-align: center;">
     SignalSharp / It seems you are offline. Please check your internet connection.
 </div>
-<h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
+    <h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
 
-<div class="button-container">
+    <div class="button-container">
 <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
+<div class="tradingview-widget-container" id="widget" style="display: none;"><script>
+  setTimeout(() => {
+    const widget = document.getElementById('widget');
+    widget.style.display = 'block'; // Show the widget
+    widget.style.position = 'absolute'; // Position it absolutely
+    widget.style.top = '0'; // Move it to the top
+    widget.style.transition = 'top 0.5s ease'; // Smooth transition
+    setTimeout(() => {
+      widget.style.top = '100px'; // Adjust this value as needed
+    }, 0); // Start transition immediately
+  }, 5000); // Delay of 5 seconds
+</script>
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
   {
@@ -120,7 +275,7 @@
         "proName": "OANDA:XAUUSD"
       },
       {
-        "description": "Dollar",
+        "description": "Dollar , DXY",
         "proName": "CAPITALCOM:DXY"
       },
       {
@@ -136,32 +291,31 @@
         "proName": "NASDAQ:META"
       }
     ],
-    ...
-   </script>
+    "showSymbolLogo": true,
+    "isTransparent": true,
+    "displayMode": "adaptive",
+    "colorTheme": "dark",
+    "locale": "en"
+  }
+  </script>
 </div>
 <!-- TradingView Widget END -->
-    
-<!-- The rest of your original code continues here without any changes -->
-    
-<div class="row">
-    <button class="button eur-button" onclick="showPopup('EUR/USD', this)">EUR</button>
-</div>
-<div class="row">
-    <button class="button gbp-button" onclick="showPopup('GBP/USD', this)">GBP</button>
-    <button class="button usd-button" onclick="showPopup('USD/JPY', this)">USD/JPY</button>
-</div>
-<div class="row">
-    <button class="button gold-button" onclick="showPopup('Gold', this)">XAUUSD</button>
-    <button class="button aud-button" onclick="showPopup('AUD/USD', this)">AUD</button>
-    <button class="button nzd-button" onclick="showPopup('NZD/USD', this)">NZD</button>
-</div>
-<div class="row">
-	<button class="button silver-button" onclick="showPopup('Silver', this)">Silver/USD</button>
-	<button class="button bitcoin-button" onclick="showPopup('Bitcoin', this)">BTCUSD</button>
-</div>
-
-<!-- Continue with your original code -->
-...
+      <div class="row">
+        <button class="button eur-button" onclick="showPopup('EUR/USD', this)">EUR</button>
+      </div>
+      <div class="row">
+        <button class="button gbp-button" onclick="showPopup('GBP/USD', this)">GBP</button>
+        <button class="button usd-button" onclick="showPopup('USD/JPY', this)">USD/JPY</button>
+      </div>
+      <div class="row">
+        <button class="button gold-button" onclick="showPopup('Gold', this)">XAUUSD</button>
+        <button class="button aud-button" onclick="showPopup('AUD/USD', this)">AUD</button>
+        <button class="button nzd-button" onclick="showPopup('NZD/USD', this)">NZD</button>
+      </div>
+      <div class="row">
+		<button class="button silver-button" onclick="showPopup('Silver', this)">Silver/USD</button>
+		<button class="button bitcoin-button" onclick="showPopup('Bitcoin', this)">BTCUSD</button>
+      </div>
     </div>
 
     <div style="margin-top:20px;">
