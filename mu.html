@@ -142,7 +142,7 @@
     <input type="text" id="brokerInput" class="input-field" placeholder="Enter BROKER name">
     <input type="text" id="tradingPairInput" class="input-field" placeholder="Enter PAIR (e.g., XAUUSD)">
     <button class="update-button" onclick="updateCharts()">Update Charts</button>
-    <div class="instruction">For advanced multi-timeframe analysis, by SignalSharp . Leverage the power of multi-display setups to view the same pairs simultaneously across multiple charts.This approach allows  comprehensive market assessment. Additionally, you can customize each chart by changing the pairs manually (chart) , enabling you to analyze distinct symbols side by side. Use uppercase letters (e.g., FOREXCOM:XAUUSD). To locate indicators , swipe left on the top toolbar of the chart. </div> <!-- Instruction for users -->
+    <div class="instruction">For advanced multi-timeframe analysis, by SignalSharp . Leverage the power of multi-display setups to view the same pairs simultaneously across multiple charts.This approach allows  comprehensive market assessment. Additionally, you can customize each chart by changing the pairs manually (chart) , enabling you to analyze distinct symbols side by side. Swipe left on the top toolbar of the chart, to locate indicators ... </div> <!-- Instruction for users -->
 </div>
 
 <!-- Chart containers -->
@@ -419,11 +419,8 @@ function updateCharts() {
     const brokerInputValue = document.getElementById('brokerInput').value.trim();
     const tradingPairInputValue = document.getElementById('tradingPairInput').value.trim();
     
-    // Validate input format (e.g., FOREXCOM:XAUUSD)
-    if (!/^[A-Z]+:[A-Z]+$/.test(brokerInputValue + ':' + tradingPairInputValue)) {
-        alert("SignalSharp / Please use uppercase (e.g., EURUSD same for the broker name ) and enter a valid trading pair ,  'brokername:pairs' (e.g., FOREXCOM:XAUUSD).");
-        return;
-    }
+    // (removed )Validate input format (e.g., FOREXCOM:XAUUSD)
+    
 
     const symbol = `${brokerInputValue.toUpperCase()}:${tradingPairInputValue.toUpperCase()}`; // Convert to uppercase
 
@@ -481,4 +478,3 @@ function updateCharts() {
 
 </body>
 </html>
-
