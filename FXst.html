@@ -97,71 +97,80 @@
 <button class="update-button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">Back to SignalSharp's Homepage</button>
 
 <!-- TradingView Widgets -->
+
 <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {
-      "symbols": [
-        {
-          "proName": "FOREXCOM:SPXUSD",
-          "title": "S&P 500 Index"
-        },
-        {
-          "proName": "FOREXCOM:NSXUSD",
-          "title": "US 100 Cash CFD"
-        },
-        {
-          "description": "",
-          "proName": "NASDAQ:TSLA"
-        },
-        {
-          "description": "",
-          "proName": "NASDAQ:NVDA"
-        },
-        {
-          "description": "",
-          "proName": "NASDAQ:AAPL"
-        },
-        {
-          "description": "",
-          "proName": "NASDAQ:AMZN"
-        },
-        {
-          "description": "",
-          "proName": "NASDAQ:MSFT"
-        },
-        {
-          "description": "",
-          "proName": "NASDAQ:META"
-        },
-        {
-          "description": "",
-          "proName": "NASDAQ:NFLX"
-        },
-        {
-          "description": "",
-          "proName": "NASDAQ:GOOGL"
+    <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
+    <input type="text" id="tickerTapeSymbolInput" placeholder="Enter Symbol (e.g., TSLA )" />
+    <button class="update-button"  id="changeTickerTapeSymbolButton">Change Symbol</button>
+    <script type="text/javascript">
+      function createTickerTapeWidget(symbols) {
+        const widgetContainer = document.getElementById('ticker-tape-widget');
+        widgetContainer.innerHTML = ''; // Clear the existing widget
+
+        const script = document.createElement('script');
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+        script.async = true;
+        script.innerHTML = JSON.stringify({
+          symbols: symbols,
+          showSymbolLogo: true,
+          isTransparent: true,
+          displayMode: "adaptive",
+          colorTheme: "dark",
+          locale: "en"
+        });
+
+        widgetContainer.appendChild(script);
+      }
+
+      document.getElementById('changeTickerTapeSymbolButton').addEventListener('click', function() {
+        const newSymbol = document.getElementById('tickerTapeSymbolInput').value;
+        if (newSymbol) {
+          createTickerTapeWidget([{ proName: newSymbol, title: newSymbol }]);
+        } else {
+          alert('Please enter a valid symbol.');
         }
-      ],
-      "showSymbolLogo": true,
-      "isTransparent": true,
-      "displayMode": "adaptive",
-      "colorTheme": "dark",
-      "locale": "en"
-    }
+      });
+
+      // Initialize with default symbols
+      createTickerTapeWidget([
+        { proName: "FOREXCOM:SPXUSD", title: "S&P 500 Index" },
+        { proName: "FOREXCOM:NSXUSD", title: "US 100 Cash CFD" },
+        { proName: "NASDAQ:TSLA" },
+        { proName: "NASDAQ:NVDA" },
+        { proName: "NASDAQ:AAPL" }
+      ]);
     </script>
 </div>
 
+<!-- Symbol Info Widget -->
 <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
-    {
-      "symbol": "NASDAQ:NVDA",
-      "width": 550,
-      "locale": "en",
-      "colorTheme": "dark",
-      "isTransparent": true
-    }
+    <div class="tradingview-widget-container__widget" id="symbol-info-widget"></div>
+    <input type="text" id="symbolInfoInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <button class="update-button" id="changeSymbolInfoButton">Change Symbol</button>
+    <script type="text/javascript">
+        function createSymbolInfoWidget() {
+            const widgetContainer = document.getElementById('symbol-info-widget');
+            widgetContainer.innerHTML = ''; // Clear the existing widget
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "symbol": document.getElementById('symbolInfoInput').value || "NASDAQ:NVDA",
+                "width": 550,
+                "locale": "en",
+                "colorTheme": "dark",
+                "isTransparent": true
+            });
+            widgetContainer.appendChild(script);
+        }
+
+        document.getElementById('changeSymbolInfoButton').onclick = function() {
+            createSymbolInfoWidget();
+        };
+
+        createSymbolInfoWidget(); // Initial load
     </script>
 </div>
 
@@ -201,66 +210,143 @@
   </script>
 </div>
 
+<!-- Symbol Profile Widget -->
 <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js" async>
-    {
-      "width": 400,
-      "height": 550,
-      "isTransparent": true,
-      "colorTheme": "dark",
-      "symbol": "NASDAQ:NVDA",
-      "locale": "en"
-    }
+    <div class="tradingview-widget-container__widget" id="symbol-profile-widget"></div>
+    <input type="text" id="symbolProfileInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <button class="update-button" id="changeSymbolProfileButton">Change Symbol</button>
+    <script type="text/javascript">
+        function createSymbolProfileWidget() {
+            const widgetContainer = document.getElementById('symbol-profile-widget');
+            widgetContainer.innerHTML = ''; // Clear the existing widget
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "width": 400,
+                "height": 550,
+                "isTransparent": true,
+                "colorTheme": "dark",
+                "symbol": document.getElementById('symbolProfileInput').value || "NASDAQ:NVDA",
+                "locale": "en"
+            });
+            widgetContainer.appendChild(script);
+        }
+
+        document.getElementById('changeSymbolProfileButton').onclick = function() {
+            createSymbolProfileWidget();
+        };
+
+        createSymbolProfileWidget(); // Initial load
     </script>
 </div>
 
+<!-- Financials Widget -->
 <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-financials.js" async>
-    {
-      "isTransparent": true,
-      "largeChartUrl": "",
-      "displayMode": "adaptive",
-      "width": 400,
-      "height": 550,
-      "colorTheme": "dark",
-      "symbol": "NASDAQ:NVDA",
-      "locale": "en"
-    }
+    <div class="tradingview-widget-container__widget" id="financials-widget"></div>
+    <input type="text" id="financialsInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <button class="update-button" id="changeFinancialsButton">Change Symbol</button>
+    <script type="text/javascript">
+        function createFinancialsWidget() {
+            const widgetContainer = document.getElementById('financials-widget');
+            widgetContainer.innerHTML = ''; // Clear the existing widget
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-financials.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "isTransparent": true,
+                "largeChartUrl": "",
+                "displayMode": "adaptive",
+                "width": 400,
+                "height": 550,
+                "colorTheme": "dark",
+                "symbol": document.getElementById('financialsInput').value || "NASDAQ:NVDA",
+                "locale": "en"
+            });
+            widgetContainer.appendChild(script);
+        }
+
+        document.getElementById('changeFinancialsButton').onclick = function() {
+            createFinancialsWidget();
+        };
+
+        createFinancialsWidget(); // Initial load
     </script>
 </div>
 
+<!-- Technical Analysis Widget -->
 <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-    {
-      "interval":"1h",
-       "width":"425",
-      "isTransparent":"true",
-      "height":"450",
-      "symbol":"NASDAQ:NVDA",
-      "showIntervalTabs":"true",
-      "displayMode":"multiple",
-      "locale":"en",
-      "colorTheme":"dark"
-    }
+    <div class="tradingview-widget-container__widget" id="technical-analysis-widget"></div>
+    <input type="text" id="technicalAnalysisInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <button class="update-button" id="changeTechnicalAnalysisButton">Change Symbol</button>
+    <script type="text/javascript">
+        function createTechnicalAnalysisWidget() {
+            const widgetContainer = document.getElementById('technical-analysis-widget');
+            widgetContainer.innerHTML = ''; // Clear the existing widget
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "interval": "1h",
+                "width": "425",
+                "isTransparent": "true",
+                "height": "450",
+                "symbol": document.getElementById('technicalAnalysisInput').value || "NASDAQ:NVDA",
+                "showIntervalTabs": "true",
+                "displayMode": "multiple",
+                "locale": "en",
+                "colorTheme": "dark"
+            });
+            widgetContainer.appendChild(script);
+        }
+
+        document.getElementById('changeTechnicalAnalysisButton').onclick = function() {
+            createTechnicalAnalysisWidget();
+        };
+
+        createTechnicalAnalysisWidget(); // Initial load
     </script>
 </div>
 
+<!-- Timeline Widget -->
 <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
-    {
-        "feedMode":"symbol",
-        "isTransparent":"true",
-        "displayMode":"adaptive",
-        "width":"400",
-        "height":"550",
-        "colorTheme":"dark",
-        "locale":"en",
-        "symbol":"NASDAQ:NVDA"
-    }
+    <div class="tradingview-widget-container ```html
+__widget" id="timeline-widget"></div>
+    <input type="text" id="timelineInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <button class="update-button" id="changeTimelineButton">Change Symbol</button>
+    <script type="text/javascript">
+        function createTimelineWidget() {
+            const widgetContainer = document.getElementById('timeline-widget');
+            widgetContainer.innerHTML = ''; // Clear the existing widget
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-timeline.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "feedMode": "symbol",
+                "isTransparent": "true",
+                "displayMode": "adaptive",
+                "width": "400",
+                "height": "550",
+                "colorTheme": "dark",
+                "locale": "en",
+                "symbol": document.getElementById('timelineInput').value || "NASDAQ:NVDA"
+            });
+            widgetContainer.appendChild(script);
+        }
+
+        document.getElementById('changeTimelineButton').onclick = function() {
+            createTimelineWidget();
+        };
+
+        createTimelineWidget(); // Initial load
     </script>
 </div>
 
