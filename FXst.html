@@ -96,6 +96,13 @@
 <!-- Back Button -->
 <button class="update-button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">Back to SignalSharp's Homepage</button>
 
+<!-- Input for broker and trading pair -->
+<div class="input-container">
+    <input type="text" id="brokerInput" placeholder="Enter BROKER name" class="input-field">
+    <input type="text" id="tradingPairInput" placeholder="Enter PAIR (e.g., XAUUSD)" class="input-field">
+    <button class="update-button" onclick="updateCharts(document.getElementById('brokerInput').value, document.getElementById('tradingPairInput').value)">Update Charts</button>
+</div>
+
 <!-- TradingView Widgets -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
@@ -140,7 +147,7 @@
         },
         {
           "description": "",
-          "proName": "NASDAQ:GOOGL"
+          "proName": "NASDAQ:GooGL"
         }
       ],
       "showSymbolLogo": true,
@@ -172,32 +179,32 @@ Chart
   <div class="tradingview-widget-copyright"><span></span></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
   {
-  "width": "980",
-  "height": "710",
-  "symbol": "NASDAQ:NVDA",
-  "timezone": "Etc/UTC",
-  "theme": "dark",
-  "style": "3",
-  "locale": "en",
-  "withdateranges": true,
-  "range": "1D",
-  "hide_side_toolbar": false,
-  "allow_symbol_change": true,
-  "save_image": false,
-  "compareSymbols": [
-    {
-      "symbol": "NASDAQ:META",
-      "position": "SameScale"
-    }
-  ],
-  "details": true,
-  "calendar": false,
-  "studies": [
-    "STD;24h%Volume"
-  ],
-  "support_host": "https://www.tradingview.com"
-}
-  </script>
+      "width": "980",
+      "height": "710",
+      "symbol": "NASDAQ:NVDA",
+      "timezone": "Etc/UTC",
+      "theme": "dark",
+      "style": "3",
+      "locale": "en",
+      "withdateranges": true,
+      "range": "1D",
+      "hide_side_toolbar": false,
+      "allow_symbol_change": true,
+      "save_image": false,
+      "compareSymbols": [
+          {
+              "symbol": "NASDAQ:META",
+              "position": "SameScale"
+          }
+      ],
+      "details": true,
+      "calendar": false,
+      "studies": [
+          "STD;24h%Volume"
+      ],
+      "support_host": "https://www.tradingview.com"
+   }
+   </script>
 </div>
 
 <div class="tradingview-widget-container">
@@ -220,47 +227,47 @@ Chart
     {
       "isTransparent": true,
       "largeChartUrl": "",
-      "displayMode": "adaptive",
-      "width": 400,
-      "height": 550,
-      "colorTheme": "dark",
-      "symbol": "NASDAQ:NVDA",
-      "locale": "en"
-    }
-    </script>
+      "displayMode": adaptive,
+      width :400,
+      height :550,
+       colorTheme : dark,
+       symbol : NASDAQ : NVDA,
+       locale : en
+     }
+     </script>
+ </div>
+
+<div class="tradingview-widget-container">
+   <div class="tradingview-widget-container__widget"></div>
+   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+   {
+       interval:"1h",
+       width:"425",
+       isTransparent:"true",
+       height:"450",
+       symbol:"NASDAQ:NVIDIA",
+       showIntervalTabs:"true",
+       displayMode:"multiple",
+       locale:"en",
+       colorTheme:"dark"
+   }
+   </script>
 </div>
 
 <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
-    {
-      "interval":"1h",
-       "width":"425",
-      "isTransparent":"true",
-      "height":"450",
-      "symbol":"NASDAQ:NVDA",
-      "showIntervalTabs":"true",
-      "displayMode":"multiple",
-      "locale":"en",
-      "colorTheme":"dark"
-    }
-    </script>
-</div>
-
-<div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
-    {
-        "feedMode":"symbol",
-        "isTransparent":"true",
-        "displayMode":"adaptive",
-        "width":"400",
-        "height":"550",
-        "colorTheme":"dark",
-        "locale":"en",
-        "symbol":"NASDAQ:NVDA"
-    }
-    </script>
+   <div class="tradingview-widget-container__widget"></div>
+   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+   {
+       feedMode:"symbol",
+       isTransparent:"true",
+       displayMode:"adaptive",
+       width:"400",
+       height:"550",
+       colorTheme:"dark",
+       locale:"en",
+       symbol:"NASDAQ:NVIDIA"
+   }
+   </script>
 </div>
 
 <script>
@@ -289,6 +296,68 @@ function updateProgress() {
 
 // Start updating the progress
 requestAnimationFrame(updateProgress);
+
+// Function to update all charts based on user input
+function updateCharts(brokerInputValue, tradingPairInputValue) {
+    // Ensure inputs are trimmed and converted to uppercase
+    const broker = brokerInputValue.trim().toUpperCase();
+    const tradingPair = tradingPairInputValue.trim().toUpperCase();
+
+    // Construct the symbol in the format BROKER:PAIR
+    const symbol = `${broker}:${tradingPair}`;
+
+    // Define chart containers with their respective intervals
+    const chartContainers = [
+        {id: 'chart1', interval:'1'},
+        {id:'chart2', interval:'3'},
+        {id:'chart3', interval:'5'},
+        {id:'chart4', interval:'15'},
+        {id:'chart5', interval:'30'},
+        {id:'chart6', interval:'45'},
+        {id:'chart7', interval:'60'},
+        {id:'chart8', interval:'240'},
+        {id:'chart9', interval:'1D'},
+        {id:'chart10', interval:'1W'}
+    ];
+
+   // Update each chart based on the new symbol and its specific interval
+   chartContainers.forEach(chart => {
+       const chartDiv = document.getElementById(chart.id);
+       
+       // Clear existing content
+       while (chartDiv.firstChild) {
+           chartDiv.removeChild(chartDiv.firstChild);
+       }
+
+       // Create a new script element for TradingView widget
+       const newScript = document.createElement('script');
+       newScript.type = 'text/javascript';
+       newScript.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+       newScript.async = true;
+
+       // Set the innerHTML with updated symbol and interval
+       newScript.innerHTML = JSON.stringify({
+           width : '100%',
+           height : '400',
+           symbol : symbol,
+           interval : chart.interval,
+           timezone : 'Etc/UTC',
+           theme : 'light',
+           style : '3',
+           locale : 'en',
+           backgroundColor : '#ffffff',
+           hide_side_toolbar : false,
+           allow_symbol_change : true,
+           save_image : false,
+           calendar : true,
+           hide_volume : false,
+           support_host : 'https://www.tradingview.com'
+       });
+
+       // Append the new script to the chart container
+       chartDiv.appendChild(newScript);
+   });
+}
 </script>
 
 </body>
