@@ -164,13 +164,16 @@
     }
     </script>
 </div>
-Chart
+
+<!-- Chart -->
+
+
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   <div class="tradingview-widget-copyright"><span></span></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
   {
-  "width": "980",
+  "width": "600",
   "height": "710",
   "symbol": "NASDAQ:NVDA",
   "timezone": "Etc/UTC",
@@ -265,7 +268,7 @@ Chart
 // Progress logic
 let progress = document.getElementById('progress-bar');
 let percentageText = document.getElementById('percentage');
-let totalDuration = 35000; // Total duration in milliseconds (35 seconds)
+let totalDuration = 15000; // Total duration in milliseconds (15 seconds)
 let startTime = Date.now();
 
 function updateProgress() {
