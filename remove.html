@@ -312,6 +312,19 @@
     <button class="button" onclick="window.location.href='https://www.google.com'">Forex Overview</button>
     <button class="button" onclick="window.location.href='https://www.google.com'">Crypto Overview</button>
 </div>
+  <!-- Contact Information Button -->
+    <div style="margin-top:30px;" id="contactInfo">
+      <button class='artistic-text' onclick="showContactPopup()">CONTACT </button>
+    </div>
+
+    <!-- Contact Popup -->
+    <div class='popup' id='authorPopup'>
+      <div class='popup-content'>
+          <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
+          <h2 style='color:#FFD700;'>Developer : </h2>
+          <p>Email: <strong>Live@signalsharp.com  Personal: oitache123@gmail.com</strong></p>
+      </div>
+    </div>
     </div>
 
     <div style="margin-top:20px;">
@@ -534,11 +547,7 @@ function stopDrag() {
     <div id="chartToggleButton">
       <button class="button" id="toggleChartBtn" onclick="toggleChart(this)">Show Chart</button>
     </div>
-    <!-- Contact Information Button -->
-    <div style="margin-top:30px;" id="contactInfo">
-      <button class='artistic-text' onclick="showContactPopup()">CONTACT </button>
-    </div>
-
+  
     <script>
         // Function to move the button down automatically
         function moveButton() {
@@ -551,15 +560,8 @@ function stopDrag() {
             setTimeout(moveButton, 5); // Delay of 5 milliseconds 
         };
     </script>
+    
 
-    <!-- Contact Popup -->
-    <div class='popup' id='authorPopup'>
-      <div class='popup-content'>
-          <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
-          <h2 style='color:#FFD700;'>Developer : </h2>
-          <p>Email: <strong>Live@signalsharp.com  Personal: oitache123@gmail.com</strong></p>
-      </div>
-    </div>
 
 <script>
          let chartVisible = false;
