@@ -233,62 +233,56 @@
     <h1 style="display:none;">Forex Signals</h1> <!-- Hidden title -->
 
     <div class="button-container">
+    
+    
 <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-  {
-    "symbols": [
-      {
-        "proName": "FOREXCOM:SPXUSD",
-        "title": "S&P 500 Index"
-      },
-      {
-        "proName": "FOREXCOM:NSXUSD",
-        "title": "US 100 Cash CFD"
-      },
-      {
-        "proName": "FX_IDC:EURUSD",
-        "title": "EUR to USD"
-      },
-      {
-        "proName": "BITSTAMP:BTCUSD",
-        "title": "Bitcoin"
-      },
-      {
-        "proName": "BITSTAMP:ETHUSD",
-        "title": "Ethereum"
-      },
-      {
-        "description": "Gold",
-        "proName": "OANDA:XAUUSD"
-      },
-      {
-        "description": "Dollar",
-        "proName": "CAPITALCOM:DXY"
-      },
-      {
-        "description": "Tesla",
-        "proName": "NASDAQ:TSLA"
-      },
-      {
-        "description": "NVDA",
-        "proName": "NASDAQ:NVDA"
-      },
-      {
-        "description": "Facebook",
-        "proName": "NASDAQ:META"
+
+<div class="tradingview-widget-container" style="height: 100px;"> <!-- Set a fixed height -->
+    <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
+    <input type="text" id="tickerTapeSymbolInput" placeholder="(e.g., XAUUSD or broker:pair)" />
+    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: 10px; padding: 5px 10px; font-size: 16px; display: inline-block; position: relative;">Check</button> <!-- Adjusted size -->
+    <script type="text/javascript">
+      function createTickerTapeWidget(symbols) {
+        const widgetContainer = document.getElementById('ticker-tape-widget');
+        widgetContainer.innerHTML = ''; // Clear the existing widget
+
+        const script = document.createElement('script');
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+        script.async = true;
+        script.innerHTML = JSON.stringify({
+          symbols: symbols,
+          showSymbolLogo: true,
+          isTransparent: true,
+          displayMode: "adaptive",
+          colorTheme: "dark",
+          locale: "en"
+        });
+
+        widgetContainer.appendChild(script);
       }
-    ],
-    "showSymbolLogo": true,
-    "isTransparent": true,
-    "displayMode": "adaptive",
-    "colorTheme": "dark",
-    "locale": "en"
-  }
-  </script>
+
+      document.getElementById('changeTickerTapeSymbolButton').addEventListener('click', function() {
+        const newSymbol = document.getElementById('tickerTapeSymbolInput').value;
+        if (newSymbol) {
+          createTickerTapeWidget([{ proName: newSymbol, title: newSymbol }]);
+        } else {
+          alert('Please enter a valid symbol.');
+        }
+      });
+
+      // Initialize with default symbols
+      createTickerTapeWidget([
+        { proName: "FOREXCOM:SPXUSD", title: "S&P 500 Index" },
+        { proName: "FOREXCOM:NSXUSD", title: "US 100 Cash CFD" },
+        { proName: "NASDAQ:TSLA" },
+        { proName: "NASDAQ:NVDA" },
+        { proName: "NASDAQ:AAPL" }
+      ]);
+    </script>
 </div>
+
 <!-- TradingView Widget END -->
+
       <div class="row">
         <button class="button eur-button" onclick="showPopup('EUR/USD', this)">EUR</button>
       </div>
