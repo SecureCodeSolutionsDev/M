@@ -50,18 +50,22 @@
             color: white; /* Change text color on hover */
             border-color: white; /* Change border color on hover */
         }
+        .glow {
+            box-shadow: 
+                0 0 5px rgba(0,255,255,.8), 
+                0 0 10px rgba(0,255,255,.8), 
+                0 0 15px rgba(0,255,255,.8); /* Glowing effect for buttons with class 'glow' */
+        }
     </style>
 </head>
 <body>
 
-    <h1>SignalSharp</h1>
-
     <!-- Input for broker and trading pair -->
     <div class="input-container">
-        <button class="button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">Back to SignalSharp's Homepage</button>
+        <button class="button glow" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">Back to SignalSharp's Homepage</button>
         <input type="text" id="brokerInput" class="input-field" placeholder="Enter BROKER name">
         <input type="text" id="tradingPairInput" class="input-field" placeholder="Enter PAIR (e.g., XAUUSD)">
-        <button class="button" onclick="updateCharts()">Open Ten Charts</button>
+        <button class="button glow" onclick="updateCharts()">Open Ten Charts below</button> <!-- Reverted to previous glowing button -->
         <div class="instruction"> ...</div> 
     </div>
 
