@@ -224,6 +224,20 @@
         .move-down {
             transform: translateY(-20px); /* Move up by 20 pixels */
         }
+        #tickerTapeSymbolInput {
+    background-color: transparent; /* Match button style */
+    border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
+    color: rgba(0, 255, 255, 0.8); /* Cyan text color */
+    padding: 10px; /* Padding for comfort */
+    font-size: 14px; /* Consistent font size */
+    border-radius: 10px; /* Rounded corners */
+    transition: all .3s ease-in-out; /* Smooth transition */
+}
+
+#tickerTapeSymbolInput:hover {
+    border-color: white; /* Change border color on hover */
+    color: white; /* Change text color on hover */
+}
     </style>
 </head>
 <body>
@@ -240,7 +254,7 @@
 <div class="tradingview-widget-container" style="height: 100px;"> <!-- Set a fixed height -->
     <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
     <input type="text" id="tickerTapeSymbolInput" placeholder="(e.g., XAUUSD or broker:pair)" />
-    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: 10px; padding: 5px 10px; font-size: 16px; display: inline-block; position: relative;">Check</button> <!-- Adjusted size -->
+    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: -15px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Check</button> <!-- Adjusted size -->
     <script type="text/javascript">
       function createTickerTapeWidget(symbols) {
         const widgetContainer = document.getElementById('ticker-tape-widget');
@@ -693,17 +707,18 @@ function closeChartPopup() {
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
 </script>
-   <!-- Contact Information Button -->
-    <div style="margin-top:30px;" id="contactInfo">
-      <button class='artistic-text' onclick="showContactPopup()">CONTACT </button>
-    </div>
+<!-- Contact Information Button -->
+<div style="margin-top:30px;" id="contactInfo">
+  <button class='artistic-text' onclick="showContactPopup()">CONTACT </button>
+</div>
 
-    <!-- Contact Popup -->
-    <div class='popup' id='authorPopup'>
-      <div class='popup-content'>
-          <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
-          <h2 style='color:#FFD700;'>Developer : </h2>
-          <p>Email: <strong>Live@signalsharp.com  Personal: oitache123@gmail.com</strong></p>
-      </div>
+<!-- Contact Popup -->
+<div class='popup' id='authorPopup'>
+  <div class='popup-content'>
+      <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
+      <h2 style='color:#FFD700;'>Developer : </h2>
+      <p>Email: <strong>Live@signalsharp.com  Personal: oitache123@gmail.com</strong></p>
+  </div>
+</div>
 </body>
 </html>
