@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M</title>
+    <style>
+        /* ... (your existing styles) ... */
+    </style>
+</head>
+<body>
+
+    <!-- Preload Screen -->
+    <div class="preload" id="preload">
+        <div class="loading">Fetching live charts from the source Tradingview ...</div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+            <div class="percentage" id="percentage">0%</div>
+        </div>
+    </div>
+
+    <h1>M</h1>
+
+    <!-- Input for broker and trading pair -->
+    <div class="input-container">
+        <button class="update-button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">Back to SignalSharp's Homepage</button>
+        <input type="text" id="brokerInput" class="input-field" placeholder="Enter BROKER name">
+        <input type="text" id="tradingPairInput" class="input-field" placeholder="Enter PAIR (e.g., XAUUSD)">
+        <button class="update-button" onclick="updateCharts()">Update Charts</button>
+        <div class="instruction">For advanced multi-timeframe analysis, by SignalSharp . Leverage the power of multi-display setups to view the same pairs simultaneously across multiple charts.This approach allows  comprehensive market assessment. Additionally, you can customize each chart by changing the pairs manually (chart) , enabling you to analyze distinct symbols side by side. Swipe left on the top toolbar of the chart, to locate indicators ... </div> 
+    </div>
+
+    <!-- Chart containers -->
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart1" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart2" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart3" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart4" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart5" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart6" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart7" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart8" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart9" class="chart-container"></div>
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="tradingview-widget-container">
+            <div id="chart10" class="chart-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // ... (your existing preloader logic) ... 
+
+        function updateCharts() {
+            const brokerInputValue = document.getElementById('brokerInput').value.trim();
+            const tradingPairInputValue = document.getElementById('tradingPairInput').value.trim();
+
+            // (removed )Validate input format (e.g., FOREXCOM:XAUUSD)
+
+            const symbol = `${brokerInputValue. toUpperCase()}:${tradingPairInputValue.toUpperCase()}`; // Convert to uppercase
+
+            const chartContainers = [
+                {id: "chart1", interval: '1'},
+                {id: "chart2", interval: '3'},
+                {id: "chart3", interval: '5'},
+                {id: "chart4", interval: '15'},
+                {id: "chart5", interval: '30'},
+                {id: "chart6", interval: '45'},
+                {id: "chart7", interval: '60'},
+                {id: "chart8", interval: '240'},
+                {id: "chart9", interval: '1D'},
+                {id: "chart10", interval: '1W'}
+            ];
+
+            chartContainers.forEach(chart => {
+                const chartDiv = document.getElementById(chart.id);
+                
+                // Clear existing content
+                while (chartDiv.firstChild) {
+                    chartDiv.removeChild(chartDiv.firstChild);
+                }
+
+                // Create a new script element
+                const newScript = document.createElement('script');
+                newScript.type = 'text/javascript';
+                newScript.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+                newScript.async = true;
+
+                // Set the innerHTML with updated symbol and interval
+                newScript.innerHTML = JSON.stringify({
+                    width: '100%',
+                    height: '400',
+                    symbol: symbol,
+                    interval: chart.interval, // Use specific intervals for each chart
+                    timezone: 'Etc/UTC',
+                    theme: 'light',
+                    style: '3',
+                    locale: 'en',
+                    backgroundColor: '#ffffff',
+                    hide_side_toolbar: false,
+                    allow_symbol_change: true,
+                    save_image: false,
+                    calendar: true,
+                    hide_volume: false,
+                    support_host: 'https://www.tradingview.com'
+                });
+
+                // Append the new script to the chart container
+                chartDiv.appendChild(newScript);
+            });
+        }
+    </script>
+
+</body>
+</html> 
+
+
+
+
+
