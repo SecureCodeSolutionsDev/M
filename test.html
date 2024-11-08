@@ -553,26 +553,11 @@ function stopDrag() {
     </div>
   </div>
 </div>
-
-
-
     <!-- Chart Toggle Button -->
     <div id="chartToggleButton">
       <button class="button" id="toggleChartBtn" onclick="toggleChart(this)">Show Chart</button>
     </div>
-<!-- Contact Information Button -->
-<div style="margin-top:30px;" id="contactInfo">
-  <button class='artistic-text' onclick="showContactPopup()">CONTACT </button>
-</div>
 
-<!-- Contact Popup -->
-<div class='popup' id='authorPopup'>
-  <div class='popup-content'>
-      <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
-      <h2 style='color:#FFD700;'>Developer : </h2>
-      <p>Email: <strong>Live@signalsharp.com  Personal: oitache123@gmail.com</strong></p>
-  </div>
-</div>
   
     <script>
         // Function to move the button down automatically
@@ -750,5 +735,19 @@ function closeChartPopup() {
     const currentYear = new Date().getFullYear(); // Get the current year
     document.getElementById('copyrightText').innerText = `SignalSharp © ${currentYear} all rights reserved`;
 </script>
+
+<!-- Contact Information Button -->
+<div style="margin-top:30px;" id="contactInfo">
+  <button class='artistic-text' onclick="showContactPopup()">CONTACT </button>
+</div>
+
+<!-- Contact Popup -->
+<div class='popup' id='authorPopup'>
+  <div class='popup-content'>
+      <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
+      <h2 style='color:#FFD700;'>Developer : </h2>
+      <p>Email: <strong>Live@signalsharp.com  Personal: oitache123@gmail.com</strong></p>
+  </div>
+</div>
 </body>
 </html>
