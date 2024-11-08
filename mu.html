@@ -61,6 +61,30 @@
     margin-bottom: 20px; /* Space between charts */
 }
 
+/* Flashing Button Styles */
+.button {
+    background-color: transparent; /* Transparent background */
+    border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
+    color: rgba(0, 255, 255, 0.8); /* Cyan text color */
+    padding: 15px 30px; /* Padding for buttons */
+    font-size: 18px; /* Font size */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer;
+    transition: all .3s ease-in-out; /* Transition for hover effect */
+    box-shadow:
+        0 0 5px rgba(0, 255, 255, .8),
+        0 0 10px rgba(0, 255, 255, .8),
+        0 0 15px rgba(0, 255, 255, .8); /* Initial glow effect */
+    
+    animation: flash-animation linear infinite;
+    animation-duration: .5s;
+}
+
+@keyframes flash-animation {
+    from { opacity: .5; }
+    to { opacity: .9; }
+}
+
 .input-container {
     margin-top: 20px;
     text-align: left; /* Aligns items to the left */
@@ -135,6 +159,11 @@
 </div>
 
 <h1>M</h1>
+<!-- New Version Button Section -->
+<div style="text-align:center;margin-top:20px;">
+    <button class="button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/remove.html?instrument=EURUSD'">New Version</button>
+    <div class="instruction" style="margin-top:10px;">Use the final version, above, if you want to switch the symbol .The method below  is currently in BETA, first version.</div>
+</div>
 
 <!-- Input for broker and trading pair -->
 <div class="input-container">
