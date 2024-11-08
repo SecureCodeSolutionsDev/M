@@ -4,20 +4,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M</title>
     <style>
-        /* ... (your existing styles) ... */
+        /* Existing styles */
+        body {
+            background-image: url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg');
+            background-size: cover; /* Ensures the image covers the entire area */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents the image from repeating */
+            height: 100vh; /* Sets the height to fill the viewport */
+            margin: 0; /* Removes default margin */
+            padding: 0; /* Removes default padding */
+            text-align: center; /* Center text */
+            font-family: 'Montserrat', sans-serif; /* Consistent font */
+            background-color: #004764; /* Dark background for a modern look */
+        }
+        h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #FFD700; /* Gold text color */
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(135, 206, 250, 1), 0 0 20px rgba(135, 206, 250, 1); /* Sky blue glow effect */
+        }
+        .input-field {
+            width: 300px; /* Wider input fields for better usability */
+            padding: 15px; /* Increased padding for larger input fields */
+            font-size: 18px; /* Increased font size for better readability */
+            border-radius: 10px; /* Rounded corners */
+            border: 2px solid rgba(135, 206, 250, .8); /* Sky blue border */
+            margin-bottom: 20px; /* Space between inputs */
+        }
+        .button {
+            background-color: transparent; /* Transparent background */
+            border: 2px solid rgba(135, 206, 250, .8); /* Sky blue border */
+            color: rgba(135, 206, 250, .8); /* Sky blue text color */
+            padding: 15px 30px; /* Increased padding for larger buttons */
+            font-size: 18px; /* Increased font size for better readability */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 10px; /* Rounded corners for buttons */
+            transition: all .3s ease-in-out; /* Transition for hover effect */
+        }
+        .button:hover {
+            color: white; /* Change text color on hover */
+            border-color: white; /* Change border color on hover */
+        }
     </style>
 </head>
 <body>
 
-    <h1>M</h1>
+    <h1>SignalSharp</h1>
 
     <!-- Input for broker and trading pair -->
     <div class="input-container">
-        <button class="update-button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">Back to SignalSharp's Homepage</button>
+        <button class="button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">Back to SignalSharp's Homepage</button>
         <input type="text" id="brokerInput" class="input-field" placeholder="Enter BROKER name">
         <input type="text" id="tradingPairInput" class="input-field" placeholder="Enter PAIR (e.g., XAUUSD)">
-        <button class="update-button" onclick="updateCharts()">Update Charts</button>
-        <div class="instruction">For advanced multi-timeframe analysis, by SignalSharp. Leverage the power of multi-display setups to view the same pairs simultaneously across multiple charts. This approach allows comprehensive market assessment. Additionally, you can customize each chart by changing the pairs manually (chart), enabling you to analyze distinct symbols side by side. Swipe left on the top toolbar of the chart to locate indicators ... </div> 
+        <button class="button" onclick="updateCharts()">Open Ten Charts</button>
+        <div class="instruction"> ...</div> 
     </div>
 
     <!-- Chart containers -->
@@ -110,8 +155,8 @@
                 newScript.innerHTML = JSON.stringify({
                     width: '100%',
                     height: '400',
-                    symbol: symbol,
-                    interval: chart.interval, // Use specific intervals for each chart
+                    symbol,
+                    interval: chart.interval,
                     timezone: 'Etc/UTC',
                     theme: 'light',
                     style: '3',
