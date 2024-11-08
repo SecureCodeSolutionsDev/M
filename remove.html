@@ -9,15 +9,6 @@
 </head>
 <body>
 
-    <!-- Preload Screen -->
-    <div class="preload" id="preload">
-        <div class="loading">Fetching live charts from the source Tradingview ...</div>
-        <div class="progress-container">
-            <div class="progress-bar" id="progress-bar"></div>
-            <div class="percentage" id="percentage">0%</div>
-        </div>
-    </div>
-
     <h1>M</h1>
 
     <!-- Input for broker and trading pair -->
@@ -26,7 +17,7 @@
         <input type="text" id="brokerInput" class="input-field" placeholder="Enter BROKER name">
         <input type="text" id="tradingPairInput" class="input-field" placeholder="Enter PAIR (e.g., XAUUSD)">
         <button class="update-button" onclick="updateCharts()">Update Charts</button>
-        <div class="instruction">For advanced multi-timeframe analysis, by SignalSharp . Leverage the power of multi-display setups to view the same pairs simultaneously across multiple charts.This approach allows  comprehensive market assessment. Additionally, you can customize each chart by changing the pairs manually (chart) , enabling you to analyze distinct symbols side by side. Swipe left on the top toolbar of the chart, to locate indicators ... </div> 
+        <div class="instruction">For advanced multi-timeframe analysis, by SignalSharp. Leverage the power of multi-display setups to view the same pairs simultaneously across multiple charts. This approach allows comprehensive market assessment. Additionally, you can customize each chart by changing the pairs manually (chart), enabling you to analyze distinct symbols side by side. Swipe left on the top toolbar of the chart to locate indicators ... </div> 
     </div>
 
     <!-- Chart containers -->
@@ -82,15 +73,11 @@
     </div>
 
     <script>
-        // ... (your existing preloader logic) ... 
-
         function updateCharts() {
             const brokerInputValue = document.getElementById('brokerInput').value.trim();
             const tradingPairInputValue = document.getElementById('tradingPairInput').value.trim();
 
-            // (removed )Validate input format (e.g., FOREXCOM:XAUUSD)
-
-            const symbol = `${brokerInputValue. toUpperCase()}:${tradingPairInputValue.toUpperCase()}`; // Convert to uppercase
+            const symbol = `${brokerInputValue.toUpperCase()}:${tradingPairInputValue.toUpperCase()}`; // Convert to uppercase
 
             const chartContainers = [
                 {id: "chart1", interval: '1'},
@@ -145,9 +132,4 @@
     </script>
 
 </body>
-</html> 
-
-
-
-
-
+</html>
