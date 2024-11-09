@@ -224,6 +224,22 @@
 .silver-button:hover {
     animation: moveRight 0.7s forwards; /* Adjust duration as needed */
 }
+
+.input-style {
+    background-color: transparent; /* Match button style */
+    border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
+    color: rgba(0, 255, 255, 0.8); /* Cyan text color */
+    padding: 10px; /* Padding for comfort */
+    font-size: 14px; /* Consistent font size */
+    border-radius: 10px; /* Rounded corners */
+    transition: all .3s ease-in-out; /* Smooth transition */
+    width: 100%; /* Full width of container */
+}
+
+.input-style:hover {
+    border-color: white; /* Change border color on hover */
+    color: white; /* Change text color on hover */
+}
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -295,7 +311,7 @@
         <h2>Symbol Info</h2>
         <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget" id="symbol-info-widget"></div>
-            <input type="text" id="symbolInfoInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+            <input type="text" class="input-style" id="symbolInfoInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
             <button class="button update-button" id="changeSymbolInfoButton" style="width: 100px; padding: 1px; font-size: 15px;">Change Symbol</button>
         </div>
     </div>
