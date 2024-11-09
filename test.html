@@ -113,6 +113,29 @@
            color:#FF4500; /* Change close button color on hover */
        }
        
+      .popup {
+    width: auto; 
+    height: auto; 
+    max-width: 600px; /* Set a maximum width for popups */
+    max-height: calc(80vh - 40px); /* Set a maximum height for popups */
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Center the popup */
+    background-color: rgba(30, 30, 30, .95); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 2; 
+    opacity: .9; 
+    visibility: hidden; /* Initially hidden */
+}
+
+.popup.active {
+   opacity: .9; 
+   visibility: visible; /* Make visible when active */
+}
+       
 @keyframes moveRight {
     0% { transform: translateX(0); }
     100% { transform: translateX(20px); } /* Adjust distance as needed */
@@ -264,6 +287,19 @@
     <strong>Notice:</strong> It seems JavaScript is disabled in your browser. Please enable JavaScript to enjoy all functionalities of this website.
     <button onclick="hideNotification()">Hide</button>
 </div>
+
+<!-- Added this HTML for the new widget popup just before </body> -->
+<div class="popup" id="widgetPopup">
+    <div class="popup-content">
+        <span class="close" onclick="closeWidgetPopup()">×</span>
+        <h2>Symbol Info</h2>
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget" id="symbol-info-widget"></div>
+            <input type="text" id="symbolInfoInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+            <button class="update-button" id="changeSymbolInfoButton">Change Symbol</button>
+        </div>
+    </div>
+</div>
     
     
 <!-- TradingView Widget BEGIN -->
@@ -293,13 +329,16 @@
       }
 
       document.getElementById('changeTickerTapeSymbolButton').addEventListener('click', function() {
-        const newSymbol = document.getElementById('tickerTapeSymbolInput').value;
-        if (newSymbol) {
-          createTickerTapeWidget([{ proName: newSymbol, title: newSymbol }]);
-        } else {
-          alert('Please enter a valid symbol.');
-        }
-      });
+    const newSymbol = document.getElementById('tickerTapeSymbolInput').value; // Get value from ticker input
+    if (newSymbol) {
+        createTickerTapeWidget([{ proName: newSymbol, title: newSymbol }]); // Update ticker tape widget
+        showWidgetPopup(); // Show the new widget when clicked
+        document.getElementById('symbolInfoInput').value = newSymbol; // Set input for symbol info
+        createSymbolInfoWidget(); // Load symbol info widget with new symbol
+    } else {
+        alert('Please enter a valid symbol.'); // Alert if no valid symbol is entered
+    }
+});
 
       // Initialize with default symbols
       createTickerTapeWidget([
@@ -572,7 +611,45 @@ function stopDrag() {
         };
     </script>
     
+<script>
+function showWidgetPopup() {
+    const widgetPopup = document.getElementById('widgetPopup');
+    widgetPopup.classList.add('active'); // Show the popup
+    createSymbolInfoWidget(); // Load the widget
+}
 
+function closeWidgetPopup() {
+    const widgetPopup = document.getElementById('widgetPopup');
+    widgetPopup.classList.remove('active'); // Hide the popup
+}
+
+document.getElementById('changeSymbolInfoButton').onclick = function() {
+    createSymbolInfoWidget();
+};
+
+function createSymbolInfoWidget() {
+    const widgetContainer = document.getElementById('symbol-info-widget');
+    widgetContainer.innerHTML = ''; // Clear existing content
+
+    const script = document.createElement('script');
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
+    script.async = true;
+    script.innerHTML = JSON.stringify({
+        "symbol": document.getElementById('symbolInfoInput').value || "NASDAQ:NVDA",
+        "width": "100%",
+        "height": "300",
+        "locale": "en",
+        "colorTheme": "dark",
+        "isTransparent": true
+    });
+    widgetContainer.appendChild(script);
+}
+
+// Update your existing button's onclick to show the widget
+document.getElementById('changeTickerTapeSymbolButton').addEventListener('click', function() {
+    showWidgetPopup(); // Show the new widget when clicked
+});
+</script>
 
 <script>
          let chartVisible = false;
