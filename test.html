@@ -372,23 +372,31 @@
 
 <!-- TradingView Widget END -->
 
-      <div class="row">
-        <button class="button eur-button" onclick="showPopup('EUR/USD', this)">EUR</button>
-      </div>
-      <div class="row">
+      <!-- New Button to Show Signals -->
+<div class="row">
+    <button class="button" id="showSignalsButton" onclick="toggleSignalButtons()">Show Signals</button>
+</div>
+
+<!-- Hidden Signal Buttons -->
+<div id="signalButtons" style="display: none;">
+    <div class="row">
+        <button class="button eur-button" onclick="showPopup('EUR/USD', this)">EUR/USD</button>
+    </div>
+    <div class="row">
         <button class="button gbp-button" onclick="showPopup('GBP/USD', this)">GBP</button>
         <button class="button usd-button" onclick="showPopup('USD/JPY', this)">USD/JPY</button>
-      </div>
-      <div class="row">
+    </div>
+    <div class="row">
         <button class="button gold-button" onclick="showPopup('Gold', this)">XAUUSD</button>
         <button class="button aud-button" onclick="showPopup('AUD/USD', this)">AUD</button>
         <button class="button nzd-button" onclick="showPopup('NZD/USD', this)">NZD</button>
-      </div>
-      <div class="row">
-		<button class="button silver-button" onclick="showPopup('Silver', this)">Silver/USD</button>
-		<button class="button bitcoin-button" onclick="showPopup('Bitcoin', this)">BTCUSD</button>
-      </div>
-      </div>
+    </div>
+    <div class="row">
+        <button class="button silver-button" onclick="showPopup('Silver', this)">Silver/USD</button>
+        <button class="button bitcoin-button" onclick="showPopup('Bitcoin', this)">BTCUSD</button>
+    </div>
+</div>
+      
    <!-- New Buttons Section -->
 <div class="row" style="margin-top: 30px; display: flex; justify-content: center; flex-wrap: wrap;">
     <button class="button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/mu.html?instrument=EURUSD'">Ten Charts, Exclusive</button>
@@ -830,6 +838,22 @@ function closeChartPopup() {
 <script>
     const currentYear = new Date().getFullYear(); // Get the current year
     document.getElementById('copyrightText').innerText = `SignalSharp © ${currentYear} all rights reserved`;
+</script>
+<script>
+// Function to toggle visibility of signal buttons
+function toggleSignalButtons() {
+    const signalButtons = document.getElementById('signalButtons');
+    const toggleButton = document.getElementById('showSignalsButton');
+
+    // Toggle visibility of the signal buttons
+    if (signalButtons.style.display === 'none' || signalButtons.style.display === '') {
+        signalButtons.style.display = 'block'; // Show buttons
+        toggleButton.textContent = 'Hide Signals'; // Change button text
+    } else {
+        signalButtons.style.display = 'none'; // Hide buttons
+        toggleButton.textContent = 'Show Signals'; // Change button text
+    }
+}
 </script>
 
 <!-- Contact Information Button -->
