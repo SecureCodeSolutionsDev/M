@@ -100,8 +100,8 @@
 
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
-    <input type="text" id="tickerTapeSymbolInput" placeholder="Enter Symbol (e.g., TSLA )" />
-    <button class="update-button"  id="changeTickerTapeSymbolButton">Change Symbol</button>
+    <input type="text" id="tickerTapeSymbolInput" placeholder="Enter Symbol (e.g., BTC )" />
+    <button class="update-button"  id="changeTickerTapeSymbolButton">Check</button>
     <script type="text/javascript">
       function createTickerTapeWidget(symbols) {
         const widgetContainer = document.getElementById('ticker-tape-widget');
@@ -133,22 +133,46 @@
 
       // Initialize with default symbols
       createTickerTapeWidget([
-        { proName: "FOREXCOM:SPXUSD", title: "S&P 500 Index" },
-        { proName: "FOREXCOM:NSXUSD", title: "US 100 Cash CFD" },
-        { proName: "NASDAQ:TSLA" },
-        { proName: "NASDAQ:NVDA" },
-        { proName: "NASDAQ:AAPL" }
+        { proName: "BINANCE:BTCUSDT", title: "Bitcoin/USDT" },
+        { proName: "BINANCE:ETHUSDT", title: "Ethereum/USDT" },
+        { proName: "BINANCE:XRPUSDT" },
+        { proName: "BINANCE:LTCUSDT" },
+        { proName: "BINANCE:DOGEUSDT" }
       ]);
     </script>
 </div>
+<!-- TradingView Widget END -->
+
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">SignalSharp</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js" async>
+  {
+  "dataSource": "Crypto",
+  "blockSize": "market_cap_calc",
+  "blockColor": "change",
+  "locale": "en",
+  "symbolUrl": "",
+  "colorTheme": "dark",
+  "hasTopBar": true,
+  "isDataSetEnabled": true,
+  "isZoomEnabled": true,
+  "hasSymbolTooltip": true,
+  "isMonoSize": false,
+  "width": "100%",
+  "height": "100%"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
 
 <!-- Symbol Info Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="symbol-info-widget"></div>
     
     <!-- Symbol Info Input -->
-    
-    <input type="text" id="symbolInfoInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <input type="text" id="symbolInfoInput" placeholder="Enter Symbol (e.g., BTCUSD)" /> <!-- Updated placeholder -->
     <button class="update-button" id="changeSymbolInfoButton">Change Symbol</button>
     <script type="text/javascript">
         function createSymbolInfoWidget() {
@@ -160,7 +184,7 @@
             script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
             script.async = true;
             script.innerHTML = JSON.stringify({
-                "symbol": document.getElementById('symbolInfoInput').value || "NASDAQ:NVDA",
+                "symbol": document.getElementById('symbolInfoInput').value || "BTCUSD", // Default to Bitcoin
                 "width":  "100%",
                 "height": "300", 
                 "locale": "en",
@@ -178,18 +202,35 @@
     </script>
 </div>
 
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+  {
+  "width": "100%",
+  "height": 550,
+  "defaultColumn": "overview",
+  "screener_type": "crypto_mkt",
+  "displayCurrency": "USD",
+  "colorTheme": "dark",
+  "locale": "en",
+  "isTransparent": true
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
 
 <!-- Chart -->
 
-
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"><span></span></a></div>
+  <div class="tradingview-widget-copyright"><span></span></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
   {
   "width": "600",
   "height": "710",
-  "symbol": "NASDAQ:NVDA",
+  "symbol": "BTCUSD", // Changed to Bitcoin
   "timezone": "Etc/UTC",
   "theme": "dark",
   "style": "3",
@@ -201,7 +242,7 @@
   "save_image": false,
   "compareSymbols": [
     {
-      "symbol": "NASDAQ:META",
+      "symbol": "ETHUSD", // Changed to Ethereum for comparison
       "position": "SameScale"
     }
   ],
@@ -218,7 +259,7 @@
 <!-- Symbol Profile Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="symbol-profile-widget"></div>
-    <input type="text" id="symbolProfileInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <input type="text" id="symbolProfileInput" placeholder="Enter Symbol (e.g., BTCUSD)" /> <!-- Updated placeholder -->
     <button class="update-button" id="changeSymbolProfileButton">Change Symbol</button>
     <script type="text/javascript">
         function createSymbolProfileWidget() {
@@ -234,7 +275,7 @@
                 "height": 550,
                 "isTransparent": true,
                 "colorTheme": "dark",
-                "symbol": document.getElementById('symbolProfileInput').value || "NASDAQ:NVDA",
+                "symbol": document.getElementById('symbolProfileInput').value || "BTCUSD", // Default to Bitcoin
                 "locale": "en"
             });
             widgetContainer.appendChild(script);
@@ -248,45 +289,10 @@
     </script>
 </div>
 
-<!-- Financials Widget -->
-<div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget" id="financials-widget"></div>
-    <input type="text" id="financialsInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
-    <button class="update-button" id="changeFinancialsButton">Change Symbol</button>
-    <script type="text/javascript">
-        function createFinancialsWidget() {
-            const widgetContainer = document.getElementById('financials-widget');
-            widgetContainer.innerHTML = ''; // Clear the existing widget
-
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-financials.js';
-            script.async = true;
-            script.innerHTML = JSON.stringify({
-                "isTransparent": true,
-                "largeChartUrl": "",
-                "displayMode": "adaptive",
-                "width": 400,
-                "height": 550,
-                "colorTheme": "dark",
-                "symbol": document.getElementById('financialsInput').value || "NASDAQ:NVDA",
-                "locale": "en"
-            });
-            widgetContainer.appendChild(script);
-        }
-
-        document.getElementById('changeFinancialsButton').onclick = function() {
-            createFinancialsWidget();
-        };
-
-        createFinancialsWidget(); // Initial load
-    </script>
-</div>
-
 <!-- Technical Analysis Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="technical-analysis-widget"></div>
-    <input type="text" id="technicalAnalysisInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <input type="text" id="technicalAnalysisInput" placeholder="Enter Symbol (e.g., BTCUSD)" /> <!-- Updated placeholder -->
     <button class="update-button" id="changeTechnicalAnalysisButton">Change Symbol</button>
     <script type="text/javascript">
         function createTechnicalAnalysisWidget() {
@@ -302,7 +308,7 @@
                 "width": "425",
                 "isTransparent": "true",
                 "height": "450",
-                "symbol": document.getElementById('technicalAnalysisInput').value || "NASDAQ:NVDA",
+                "symbol": document.getElementById('technicalAnalysisInput').value || "BTCUSD", // Default to Bitcoin
                 "showIntervalTabs": "true",
                 "displayMode": "multiple",
                 "locale": "en",
@@ -321,9 +327,8 @@
 
 <!-- Timeline Widget -->
 <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container ```html
-__widget" id="timeline-widget"></div>
-    <input type="text" id="timelineInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+    <div class="tradingview-widget-container__widget" id="timeline-widget"></div>
+    <input type="text" id="timelineInput" placeholder="Enter Symbol (e.g., BTCUSD)" /> <!-- Updated placeholder -->
     <button class="update-button" id="changeTimelineButton">Change Symbol</button>
     <script type="text/javascript">
         function createTimelineWidget() {
@@ -342,7 +347,7 @@ __widget" id="timeline-widget"></div>
                 "height": "550",
                 "colorTheme": "dark",
                 "locale": "en",
-                "symbol": document.getElementById('timelineInput').value || "NASDAQ:NVDA"
+                "symbol": document.getElementById('timelineInput').value || "BTCUSD" // Default to Bitcoin
             });
             widgetContainer.appendChild(script);
         }
