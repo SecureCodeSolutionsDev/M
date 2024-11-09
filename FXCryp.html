@@ -96,6 +96,28 @@
 <!-- Back Button -->
 <button class="update-button" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">Back to SignalSharp's Homepage</button>
 
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><span class="blue-text">SignalSharp</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js" async>
+  {
+  "dataSource": "Crypto",
+  "blockSize": "market_cap_calc",
+  "blockColor": "change",
+  "locale": "en",
+  "symbolUrl": "",
+  "colorTheme": "dark",
+  "hasTopBar": true,
+  "isDataSetEnabled": true,
+  "isZoomEnabled": true,
+  "hasSymbolTooltip": true,
+  "isMonoSize": false,
+  "width": 400,
+  "height": 600
+}
+  </script>
+</div>
+
 <!-- TradingView Widgets -->
 
 <div class="tradingview-widget-container">
@@ -143,30 +165,6 @@
 </div>
 <!-- TradingView Widget END -->
 
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-coins-heatmap.js" async>
-  {
-  "dataSource": "Crypto",
-  "blockSize": "24h_vol_cmc",
-  "blockColor": "change|60",
-  "locale": "en",
-  "symbolUrl": "",
-  "colorTheme": "dark",
-  "hasTopBar": true,
-  "isDataSetEnabled": true,
-  "isZoomEnabled": true,
-  "hasSymbolTooltip": true,
-  "isMonoSize": false,
-  "width": "100%",
-  "height": "200%"
-}
-  </script>
-</div>
-<!-- TradingView Widget END -->
-
 <!-- Symbol Info Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="symbol-info-widget"></div>
@@ -202,35 +200,17 @@
     </script>
 </div>
 
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-  {
-  "width": "100%",
-  "height": 550,
-  "defaultColumn": "overview",
-  "screener_type": "crypto_mkt",
-  "displayCurrency": "USD",
-  "colorTheme": "dark",
-  "locale": "en",
-  "isTransparent": true
-}
-  </script>
-</div>
-<!-- TradingView Widget END -->
 
 <!-- Chart -->
 
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"><span></span></div>
+   <div class="tradingview-widget-copyright"><span></span></a></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
   {
   "width": "600",
   "height": "710",
-  "symbol": "BTCUSD", // Changed to Bitcoin
+  "symbol": "BTCUSD", 
   "timezone": "Etc/UTC",
   "theme": "dark",
   "style": "3",
@@ -242,7 +222,7 @@
   "save_image": false,
   "compareSymbols": [
     {
-      "symbol": "ETHUSD", // Changed to Ethereum for comparison
+      "symbol": "ETHUSD", 
       "position": "SameScale"
     }
   ],
@@ -272,7 +252,7 @@
             script.async = true;
             script.innerHTML = JSON.stringify({
                 "width": 400,
-                "height": 550,
+                "height": 400,
                 "isTransparent": true,
                 "colorTheme": "dark",
                 "symbol": document.getElementById('symbolProfileInput').value || "BTCUSD", // Default to Bitcoin
@@ -325,6 +305,7 @@
     </script>
 </div>
 
+
 <!-- Timeline Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="timeline-widget"></div>
@@ -359,6 +340,72 @@
         createTimelineWidget(); // Initial load
     </script>
 </div>
+
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><span class="blue-text">SignalSharp</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+  {
+  "width": "100%",
+  "height": 550,
+  "defaultColumn": "moving_averages",
+  "screener_type": "crypto_mkt",
+  "displayCurrency": "USD",
+  "colorTheme": "dark",
+  "locale": "en",
+  "isTransparent": true
+}
+  </script>
+</div>
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><span class="blue-text">SignalSharp</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+  {
+  "width": "100%",
+  "height": 550,
+  "defaultColumn": "oscillators",
+  "screener_type": "crypto_mkt",
+  "displayCurrency": "USD",
+  "colorTheme": "dark",
+  "locale": "en",
+  "isTransparent": true
+}
+  </script>
+</div>
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><span class="blue-text">SignalSharp</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+  {
+  "width": "100%",
+  "height": 550,
+  "defaultColumn": "performance",
+  "screener_type": "crypto_mkt",
+  "displayCurrency": "USD",
+  "colorTheme": "dark",
+  "locale": "en",
+  "isTransparent": true
+}
+  </script>
+</div>
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><span class="blue-text">SignalSharp</span></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+  {
+  "width": "100%",
+  "height": 550,
+  "defaultColumn": "overview",
+  "screener_type": "crypto_mkt",
+  "displayCurrency": "USD",
+  "colorTheme": "dark",
+  "locale": "en",
+  "isTransparent": true
+}
+  </script>
+</div>
+
 
 <script>
 // Progress logic
