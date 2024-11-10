@@ -254,10 +254,14 @@
 
 @media (min-width: 768px) {
     body {
+        width: 100%; /* Ensure body takes full width */
         overflow-x: hidden; /* Prevent horizontal scrolling */
-        /* Add more styles to fit mobile layout */
     }
-    /* Adjust other elements as needed */
+    .button-container {
+        display: flex; /* Change to flex for better alignment */
+        flex-wrap: wrap; /* Allow wrapping of buttons */
+    }
+    /* Add more styles as needed for desktop layout */
 }
     </style>
     <meta charset="UTF-8">
