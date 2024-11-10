@@ -315,7 +315,7 @@
     <button onclick="hideNotification()">Hide</button>
 </div>
 <div style="position: fixed; top: 20px; right: 20px;">
-    <button id="settingsButton" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 15px; font-size: 18px; border-radius: 10px; cursor: pointer;">Settings</button>
+    <button id="settingsButton" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 15px; font-size: 11px; border-radius: 10px; cursor: pointer;">Settings</button>
 </div>
 
 <div class="settings-menu" id="settingsPopup" style="display: none; position: fixed; top: 60px; right: 20px; background-color: rgba(30, 30, 30, 0.9); padding: 15px; border-radius: 10px; color: #FFD700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); z-index: 1000;">
@@ -353,7 +353,7 @@
 <div class="tradingview-widget-container" style="height: 100px;"> <!-- Set a fixed height -->
     <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
     <input type="text" id="tickerTapeSymbolInput" placeholder="(e.g., XAUUSD or broker:pair)" />
-    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: -15px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Check</button> <!-- Adjusted size -->
+    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: -15px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Check info</button> <!-- Adjusted size -->
     <script type="text/javascript">
       function createTickerTapeWidget(symbols) {
         const widgetContainer = document.getElementById('ticker-tape-widget');
