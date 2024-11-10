@@ -922,6 +922,12 @@ function closeChartPopup() {
             }
         });
     </script>
+    
+<script>
+    if (window.innerWidth > 768) { // Check if the screen width is greater than 768px
+        document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=375, initial-scale=1.0');
+    }
+</script>
 <script>
 // Function to toggle visibility of signal buttons
 function toggleSignalButtons() {
