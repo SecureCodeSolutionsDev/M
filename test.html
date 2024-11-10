@@ -240,6 +240,17 @@
     border-color: white; /* Change border color on hover */
     color: white; /* Change text color on hover */
 }
+.settings-menu {
+    position: fixed; /* Keep it in a fixed position */
+    top: 60px; /* Below the settings button */
+    right: 20px;
+    background-color: rgba(30, 30, 30, 0.9); /* Semi-transparent background */
+    padding: 15px;
+    border-radius: 10px;
+    color: #FFD700; /* Gold text color */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Glow effect */
+    z-index: 1000; /* Ensure it appears above other content */
+}
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -302,6 +313,23 @@
 <div id="notification" style="display: none; background-color: #f8d7da; color: #721c24; padding: 20px; text-align: center;">
     <strong>Notice:</strong> It seems JavaScript is disabled in your browser. Please enable JavaScript to enjoy all functionalities of this website.
     <button onclick="hideNotification()">Hide</button>
+</div>
+<div style="position: fixed; top: 20px; right: 20px;">
+    <button id="settingsButton">Settings</button>
+</div>
+
+<div class="settings-menu" id="settingsPopup" style="display: none;">
+    <label>
+        <input type="checkbox" id="darkModeToggle"> Dark Mode
+    </label>
+    <label>
+        <input type="checkbox" id="backgroundToggle"> Dark Teal
+    </label>
+    <p style="margin-top: 10px; font-size: 14px; color: #FFD700;">
+        We plan to expand the settings menu  with additional options, including support for a wide range of languages.
+        
+    </p>
+    <button onclick="closeSettings()">Close</button>
 </div>
 
 <!-- Added this HTML for the new widget popup just before </body> -->
@@ -840,6 +868,47 @@ function closeChartPopup() {
     const currentYear = new Date().getFullYear(); // Get the current year
     document.getElementById('copyrightText').innerText = `SignalSharp © ${currentYear} all rights reserved`;
 </script>
+    <script>
+        document.getElementById('settingsButton').addEventListener('click', function() {
+            const settingsPopup = document.getElementById('settingsPopup');
+            if (settingsPopup.style.display === 'none') {
+                settingsPopup.style.display = 'block'; // Show the popup
+            } else {
+                settingsPopup.style.display = 'none'; // Hide the popup
+            }
+        });
+
+        function closeSettings() {
+            document.getElementById('settingsPopup').style.display = 'none'; // Hide the popup
+        }
+
+        // Dark Mode and Dark Teal functionality
+        document.getElementById('darkModeToggle').addEventListener('change', function() {
+            if (this.checked) {
+                document.body.style.backgroundColor = 'black'; // Set background to black
+                document.body.style.backgroundImage = 'none'; // Remove background image
+                document.body.style.color = 'white'; // Change text color for better visibility
+                document.getElementById('backgroundToggle').checked = false; // Uncheck Dark Teal if Dark Mode is activated
+            } else {
+                // Reset to original settings if unchecked
+                document.body.style.backgroundColor = '#004764'; // Original Teal Background color
+                document.body.style.backgroundImage = "url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg')";
+                document.body.style.color = ''; // Reset text color
+            }
+        });
+
+        document.getElementById('backgroundToggle').addEventListener('change', function() {
+            if (this.checked) {
+                document.body.style.backgroundImage = 'none'; // Remove background image
+                document.body.style.backgroundColor = '#004764'; // Set background color to Teal
+                document.getElementById('darkModeToggle').checked = false; // Uncheck Dark Mode if Dark Teal is activated
+            } else {
+                // Reset to original background image if unchecked
+                document.body.style.backgroundImage = "url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg')";
+                document.body.style.backgroundColor = '#004764'; // Ensure Teal Background color is set
+            }
+        });
+    </script>
 <script>
 // Function to toggle visibility of signal buttons
 function toggleSignalButtons() {
