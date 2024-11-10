@@ -40,20 +40,32 @@
             justify-content: center; /* Center items in each row */
             width: fit-content; /* Fit to content width */
         }
-        .button {
-    padding: 10px 20px; /* Adjusted padding */
-    font-size: 2vw; /* Responsive font size */
-    width: auto; /* Auto width for flexibility */
-    max-width: 150px; /* Limit max width */
+/* General styles for buttons and text */
+.button {
+    padding: 20px 40px; /* Increase padding for larger buttons */
+    font-size: 24px; /* Set a larger font size */
+    width: auto; /* Allow width to adjust based on content */
+    max-width: 300px; /* Optional: set a max width for uniformity */
 }
 
+/* Styles for headings */
 h1 {
-    font-size: 4vw; /* Responsive heading size */
+    font-size: 48px; /* Large heading size */
 }
 
-@media (max-width: 600px) {
+/* Media query for desktop screens */
+@media (min-width: 1024px) {
     .button {
-        font-size: 4vw; /* Larger buttons on smaller screens */
+        padding: 30px 60px; /* Further increase padding on larger screens */
+        font-size: 32px; /* Even larger font size for buttons */
+    }
+    
+    h1 {
+        font-size: 64px; /* Increase heading size on large screens */
+    }
+
+    .popup-content p {
+        font-size: 20px; /* Larger text in popups */
     }
 }
         .button {
