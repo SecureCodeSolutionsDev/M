@@ -252,16 +252,24 @@
     z-index: 1000; /* Ensure it appears above other content */
 }
 
-@media (min-width: 768px) {
-    body {
-        width: 100%; /* Ensure body takes full width */
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-    }
-    .button-container {
-        display: flex; /* Change to flex for better alignment */
-        flex-wrap: wrap; /* Allow wrapping of buttons */
-    }
-    /* Add more styles as needed for desktop layout */
+body {
+    width: 375px; /* Fixed width for mobile view */
+    margin: auto; /* Center the page */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center buttons */
+}
+
+button {
+    padding: 15px 30px; /* Adjust padding for larger buttons */
+    font-size: 18px; /* Increase font size for better readability */
+    width: 100%; /* Full width for buttons */
+    max-width: 150px; /* Limit button width */
+    margin: 10px 0; /* Spacing between buttons */
 }
     </style>
     <meta charset="UTF-8">
@@ -343,8 +351,7 @@
     <button onclick="closeSettings()" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 10px; font-size: 16px; border-radius: 10px; cursor: pointer;">Close</button>
 </div>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=375, initial-scale=1.0">
 <!-- Added this HTML for the new widget popup just before </body> -->
 <div class="popup" id="widgetPopup">
     <div class="popup-content">
@@ -926,6 +933,9 @@ function closeChartPopup() {
 <script>
     if (window.innerWidth > 768) { // Check if the screen width is greater than 768px
         document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=375, initial-scale=1.0');
+        document.body.style.width = '375px'; // Force body width
+        document.body.style.margin = 'auto'; // Center the body
+        document.body.style.overflowX = 'hidden'; // Prevent horizontal scroll
     }
 </script>
 <script>
