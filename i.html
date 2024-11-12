@@ -273,7 +273,7 @@
 
         /* Class to move the button up */
         .move-down {
-            transform: translateY(-10px); /* Move up by 10 pixels */
+            transform: translateY(10px); /* Move down by 10 pixels */
         }
         #tickerTapeSymbolInput {
     background-color: transparent; /* Match button style */
@@ -327,8 +327,27 @@
         <input type="checkbox" id="backgroundToggle" style="margin-right: 5px;"> Teal Foncé
     </label>
     <p style="margin-top: 10px; font-size: 14px; color: #FFD700;">
-        Nous prévoyons d'élargir le menu des paramètres avec des options supplémentaires, y compris le support pour une large gamme de langues.
+        Nous prévoyons d'élargir le menu des paramètres avec des options supplémentaires, y compris le support pour une large gamme de langues. <style>.pp-XWX53Y7NSDSB6{text-align:center;border:none;border-radius:1.5rem;min-width:11.625rem;padding:0 2rem;height:2rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.875rem;line-height:1.125rem;cursor:pointer;}</style>
+<form action="https://www.paypal.com/ncp/payment/XWX53Y7NSDSB6" method="post" target="_top" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+  <input class="pp-XWX53Y7NSDSB6" type="submit" value="Financer" />
+  <img src=https://www.paypalobjects.com/images/Debit_Credit.svg alt="cards" />
+  <section><img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+</form>
     </p>
+   <!-- Contact Information Button -->
+<div style="margin-top:30px; text-align: center;" id="contactInfo">
+  <button class='artistic-text' onclick="showContactPopup()">CONTACTER</button>
+</div><img src="https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/Aidez%20%C3%A0%20financ-qrcode.png" alt="QR Code" />
+
+<!-- Contact Popup -->
+<div class='popup' id='authorPopup'>
+  <div class='popup-content'>
+      <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
+      <h2 style='color:#FFD700;'>Développeur : </h2>
+      <p>Email: <strong>Live@signalsharp.com , courriel: oitache123@gmail.com</strong></p>
+  </div>
+</div>
+
     <button onclick="closeSettings()" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 10px; font-size: 16px; border-radius: 10px; cursor: pointer;">Fermer</button>
 </div>
 
@@ -338,11 +357,11 @@
         <span class="close" onclick="closeWidgetPopup()">×</span>
         <h2>Symbol Info</h2>
           <p style="color: #FFD700; font-size: 16px; margin-bottom: 10px;">
-            Swipe below, (upcoming earnings etc ) to explore more details about the selected symbol!
+            "Faites défiler vers le bas (sur, bénéfice par action etc.) pour explorer plus de détails sur le symbole sélectionné !"
         </p>
         <div class="tradingview-widget-container">
             <div class="tradingview-widget-container__widget" id="symbol-info-widget"></div>
-            <input type="text" class="input-style" id="symbolInfoInput" placeholder="Enter Symbol (e.g., NASDAQ:NVDA)" />
+            <input type="text" class="input-style" id="symbolInfoInput" placeholder="Enter Symbol (e.g., CSEMA:IAM)" />
             <button class="button update-button" id="changeSymbolInfoButton" style="width: 100px; padding: 1px; font-size: 15px;">Changer le symbole</button>
         </div>
     </div>
@@ -353,7 +372,7 @@
 
 <div class="tradingview-widget-container" style="height: 100px;"> <!-- Set a fixed height -->
     <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
-    <input type="text" id="tickerTapeSymbolInput" placeholder="(Saisissez un symbole)" />
+    <input type="text" id="tickerTapeSymbolInput" placeholder="CSEMA:symbole , pour Maroc" />
     <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: -15px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Explorer l'action</button> <!-- Adjusted size -->
     <script type="text/javascript">
       function createTickerTapeWidget(symbols) {
@@ -408,7 +427,10 @@ createTickerTapeWidget([
 </div>
 
 <!-- TradingView Widget END -->
-
+<!-- Chart Toggle Button -->
+<div id="chartToggleButton" style="text-align: left;">
+    <button class="button" id="toggleChartBtn" onclick="toggleChart(this)">Afficher le graphique</button>
+</div>
 
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
@@ -440,6 +462,45 @@ createTickerTapeWidget([
   </script>
 </div>
 <!-- TradingView Widget END -->
+<span class='artistic-text' style="color: white; display: block; text-align: left;">
+    Ce service est fourni uniquement en anglais.
+</span>
+<!-- Symbol Profile Widget -->
+<div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget" id="symbol-profile-widget"></div>
+    <input type="text" class="input-style"" id="symbolProfileInput" placeholder="Saisissez un symbole" />
+    <button class="button update-button" id="changeSymbolProfileButton">Changer</button>
+    <script type="text/javascript">
+        function createSymbolProfileWidget() {
+            const widgetContainer = document.getElementById('symbol-profile-widget');
+            widgetContainer.innerHTML = ''; // Clear the existing widget
+
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "width": 400,
+                "height": 300,
+                "isTransparent": true,
+                "colorTheme": "dark",
+                "symbol": document.getElementById('symbolProfileInput').value || "CSEMA:IAM",
+                "locale": "en"
+            });
+            widgetContainer.appendChild(script);
+        }
+
+        document.getElementById('changeSymbolProfileButton').onclick = function() {
+            createSymbolProfileWidget();
+        };
+
+        createSymbolProfileWidget(); // Initial load
+    </script>
+</div>
+<span class='artistic-text' style="color: white; display: block; text-align: left;">
+    La Carte Thermique des Actions.
+</span>
+ 
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
@@ -465,7 +526,10 @@ createTickerTapeWidget([
   </script>
 </div>
 <!-- TradingView Widget END -->
- <span class="blue-text">Indice MASI.</span>
+<span class='artistic-text' style="color: white; display: block; text-align: left;">
+    Faites glisser la barre supérieure du tableau (Carte Thermique des Actions) vers la gauche pour plus d'informations.
+</span>
+
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
@@ -491,60 +555,12 @@ createTickerTapeWidget([
   </script>
 </div>
 <!-- TradingView Widget END -->
-<!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright"><a href="https://fr.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Suivre tous les marchés sur TradingView</span></a></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
-  {
-  "colorTheme": "dark",
-  "isTransparent": false,
-  "width": "500",
-  "height": "500",
-  "locale": "fr",
-  "importanceFilter": "-1,0,1",
-  "countryFilter": "ma"
-}
-  </script>
-</div>
-<!-- TradingView Widget END -->
-<!-- Symbol Profile Widget -->
-<div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget" id="symbol-profile-widget"></div>
-    <input type="text" id="symbolProfileInput" placeholder="Saisissez un symbole" />
-    <button class="update-button" id="changeSymbolProfileButton">Changer</button>
-    <script type="text/javascript">
-        function createSymbolProfileWidget() {
-            const widgetContainer = document.getElementById('symbol-profile-widget');
-            widgetContainer.innerHTML = ''; // Clear the existing widget
 
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js';
-            script.async = true;
-            script.innerHTML = JSON.stringify({
-                "width": 400,
-                "height": 550,
-                "isTransparent": true,
-                "colorTheme": "dark",
-                "symbol": document.getElementById('symbolProfileInput').value || "CSEMA:IAM",
-                "locale": "en"
-            });
-            widgetContainer.appendChild(script);
-        }
-
-        document.getElementById('changeSymbolProfileButton').onclick = function() {
-            createSymbolProfileWidget();
-        };
-
-        createSymbolProfileWidget(); // Initial load
-    </script>
-</div>
 <!-- Financials Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="financials-widget"></div>
-    <input type="text" id="financialsInput" placeholder="Saisissez un symbole" />
-    <button class="update-button" id="changeFinancialsButton">Changer</button>
+    <input type="text" class="input-style" id="financialsInput" placeholder="Saisissez un symbole" />
+    <button class="button update-button" id="changeFinancialsButton">Changer</button>
     <script type="text/javascript">
         function createFinancialsWidget() {
             const widgetContainer = document.getElementById('financials-widget');
@@ -562,7 +578,7 @@ createTickerTapeWidget([
                 "height": 500,
                 "colorTheme": "dark",
                 "symbol": document.getElementById('financialsInput').value || "CSEMA:IAM",
-                "locale": "en"
+                "locale": "fr"
             });
             widgetContainer.appendChild(script);
         }
@@ -592,46 +608,12 @@ createTickerTapeWidget([
   </script>
 </div>
 <!-- TradingView Widget END -->
-<!-- Timeline Widget -->
-<div class="tradingview-widget-container">
-    <div class="tradingview-widget-container ```html
-__widget" id="timeline-widget"></div>
-    <input type="text" id="timelineInput" placeholder="Saisissez un symbole" />
-    <button class="update-button" id="changeTimelineButton">Changer</button>
-    <script type="text/javascript">
-        function createTimelineWidget() {
-            const widgetContainer = document.getElementById('timeline-widget');
-            widgetContainer.innerHTML = ''; // Clear the existing widget
 
-            const script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-timeline.js';
-            script.async = true;
-            script.innerHTML = JSON.stringify({
-                "feedMode": "symbol",
-                "isTransparent": "true",
-                "displayMode": "adaptive",
-                "width": "400",
-                "height": "550",
-                "colorTheme": "dark",
-                "locale": "en",
-                "symbol": document.getElementById('timelineInput').value || "NASDAQ:NVDA"
-            });
-            widgetContainer.appendChild(script);
-        }
-
-        document.getElementById('changeTimelineButton').onclick = function() {
-            createTimelineWidget();
-        };
-
-        createTimelineWidget(); // Initial load
-    </script>
-</div>
 <!-- Technical Analysis Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="technical-analysis-widget"></div>
-    <input type="text" id="technicalAnalysisInput" placeholder="Saisissez un symbole" />
-    <button class="update-button" id="changeTechnicalAnalysisButton">Changer</button>
+    <input type="text" class="input-style" id="technicalAnalysisInput" placeholder="Saisissez un symbole" />
+    <button class="button update-button" id="changeTechnicalAnalysisButton">Changer</button>
     <script type="text/javascript">
         function createTechnicalAnalysisWidget() {
             const widgetContainer = document.getElementById('technical-analysis-widget');
@@ -649,7 +631,7 @@ __widget" id="timeline-widget"></div>
                 "symbol": document.getElementById('technicalAnalysisInput').value || "CSEMA:IAM",
                 "showIntervalTabs": "true",
                 "displayMode": "multiple",
-                "locale": "en",
+                "locale": "fr",
                 "colorTheme": "dark"
             });
             widgetContainer.appendChild(script);
@@ -662,8 +644,63 @@ __widget" id="timeline-widget"></div>
         createTechnicalAnalysisWidget(); // Initial load
     </script>
 </div>
+<span class='artistic-text' style="color: white; display: block; text-align: left;">
+    Le calendrier économique est un outil essentiel pour les traders, fournissant des informations sur les événements économiques  qui peuvent influencer les marchés.
+</span>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+  {
+  "colorTheme": "dark",
+  "isTransparent": false,
+  "width": "500",
+  "height": "500",
+  "locale": "fr",
+  "importanceFilter": "-1,0,1",
+  "countryFilter": "ma"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+<span class='artistic-text' style="color: white; display: block; text-align: left;">
+    Ce service est fourni uniquement en anglais.
+<!-- Timeline Widget -->
+<div class="tradingview-widget-container">
+    <div class="tradingview-widget-container ```html
+__widget" id="timeline-widget"></div>
+    <input type="text" class="input-style" id="timelineInput" placeholder="Saisissez un symbole" />
+    <button class="button update-button" id="changeTimelineButton">Changer</button>
+    <script type="text/javascript">
+        function createTimelineWidget() {
+            const widgetContainer = document.getElementById('timeline-widget');
+            widgetContainer.innerHTML = ''; // Clear the existing widget
 
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-timeline.js';
+            script.async = true;
+            script.innerHTML = JSON.stringify({
+                "feedMode": "market",
+                "isTransparent": "true",
+                "displayMode": "adaptive",
+                "width": "500",
+                "height": "500",
+                "colorTheme": "dark",
+                "locale": "en",
+                "symbol": document.getElementById('timelineInput').value || "FX:EURUSD"
+            });
+            widgetContainer.appendChild(script);
+        }
 
+        document.getElementById('changeTimelineButton').onclick = function() {
+            createTimelineWidget();
+        };
+
+        createTimelineWidget(); // Initial load
+    </script>
+</div>
       <!-- New Button to Show Signals -->
 <div class="row">
 <span class="blue-text" style="visibility: hidden;">الله ، بارك،  ، بارك الله بارك</span>
@@ -710,11 +747,12 @@ __widget" id="timeline-widget"></div>
 </div><div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   <div class="tradingview-widget-copyright">
-    <span class="blue-text">SignalSharp</span>
+    <span class="blue-text">Fermez le graphique avant de faire défiler vers le bas pour éviter que certains boutons ne deviennent cachés. Cette fonctionnalité sera essentielle dans les prochaines mises à jour, permettant un fond clair pour les signaux de trading (dans des pop-ups transparents)
+</span>
   </div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
   {
-    "width": "500",
+    "width": "400",
     "height": "500",
     "symbol": "CSEMA:IAM",
     "timezone": "Etc/UTC",
@@ -770,7 +808,7 @@ __widget" id="timeline-widget"></div>
       color: rgba(0, 255, 255, 0.8); /* Cyan text color */
       padding: 15px; /* Adjust padding for consistent button height */
       font-size: 18px; /* Increased font size for better readability */
-      text-align: center;
+      text-align: left;
       text-decoration: none;
       width: auto; /* Allow width to be determined by content */
       max-width: 150px; /* Limit button width */
@@ -883,10 +921,7 @@ function stopDrag() {
     </div>
   </div>
 </div>
-    <!-- Chart Toggle Button -->
-    <div id="chartToggleButton">
-      <button class="button" id="toggleChartBtn" onclick="toggleChart(this)">Afficher le graphique</button>
-    </div>
+   
 
   
     <script>
@@ -898,7 +933,7 @@ function stopDrag() {
 
         // Call the moveButton function with a delay when the window loads
         window.onload = function() {
-            setTimeout(moveButton, 5); // Delay of 5 milliseconds 
+            setTimeout(moveButton, 1); // Delay of 1 milliseconds 
         };
     </script>
     
@@ -926,10 +961,10 @@ function createSymbolInfoWidget() {
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
     script.async = true;
     script.innerHTML = JSON.stringify({
-        "symbol": document.getElementById('symbolInfoInput').value || "NASDAQ:NVDA",
+        "symbol": document.getElementById('symbolInfoInput').value || "CSEMA:IAM",
         "width": "100%",
         "height": "300",
-        "locale": "en",
+        "locale": "fr",
         "colorTheme": "dark",
         "isTransparent": true
     });
@@ -1032,7 +1067,7 @@ document.getElementById('changeTickerTapeSymbolButton').addEventListener('click'
     } else { // If chart is already visible
         chartVisible = false; // Set to not visible
         chartPopup.classList.remove('active'); // Hide chart popup
-        button.textContent = 'Show Chart'; // Change back to Show Chart
+        button.textContent = 'Afficher le graphique'; // Change back to Show Chart
         button.classList.remove('glow'); // Remove glow effect when hiding chart
     }
 }
@@ -1044,7 +1079,7 @@ function closeChartPopup() {
     chartPopup.classList.remove('active');
 
     const toggleButton = document.getElementById('toggleChartBtn');
-    toggleButton.textContent = 'Show Chart'; // Reset toggle button text
+    toggleButton.textContent = 'Afficher le graphique'; // Reset toggle button text
 
     chartVisible = false; // Reset visibility state of the chart
 
@@ -1161,18 +1196,6 @@ function toggleSignalButtons() {
 }
 </script>
 
-<!-- Contact Information Button -->
-<div style="margin-top:30px;" id="contactInfo">
-  <button class='artistic-text' onclick="showContactPopup()">CONTACTER </button>
-</div>
-
-<!-- Contact Popup -->
-<div class='popup' id='authorPopup'>
-  <div class='popup-content'>
-      <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
-      <h2 style='color:#FFD700;'>Développeur : </h2>
-      <p>Email: <strong>Live@signalsharp.com ,courriel: oitache123@gmail.com</strong></p>
-  </div>
 </div>
 </body>
 </html>
