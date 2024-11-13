@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2, h3 { color: #333; }
+        p { line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+<h1>Privacy Policy for Shopping Assistant</h1>
+<p><strong>Effective Date:</strong> [Insert Date]</p>
+
+<h2>1. Introduction</h2>
+<p>This Privacy Policy explains how we collect, use, and protect your personal information when you use the Shopping Assistant skill (the "Skill"). Your privacy is important to us, and we are committed to safeguarding your personal information.</p>
+
+<h2>2. Information We Collect</h2>
+<p>The Shopping Assistant skill does not collect any personal information from users. We do not store or share any data that could identify you personally.</p>
+
+<h2>3. Use of Information</h2>
+<p>Any information processed by the Skill is used solely to enhance user experience and provide relevant responses based on your queries.</p>
+
+<h2>4. Data Security</h2>
+<p>We take reasonable measures to protect the information processed by the Skill from unauthorized access or disclosure.</p>
+
+<h2>5. Changes to This Privacy Policy</h2>
+<p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on our GitHub page.</p>
+
+<h2>6. Contact Us</h2>
+<p>If you have any questions about this Privacy Policy, please contact us at [insert contact email].</p>
+
+<p>For more details, please visit our full privacy policy at <a href="[insert your GitHub URL]">this link</a>.</p>
+
+</body>
+</html>
