@@ -5,6 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>on</title>
     <style>
+    body {
+    overflow: hidden;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #0b0c20;
+}
+body {
+    overflow: hidden;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a; /* Dark background for a modern look */
+}
+
+.preload {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    color: #00ffcc; /* Bright cyan text */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loading {
+    font-size: 28px; /* Larger font for emphasis */
+    margin-bottom: 20px;
+}
+
+.progress-container {
+    width: 80%; /* Set width of the container */
+    height: 10px; /* Height of the container */
+    position: relative; /* Position relative for absolute children */
+}
+
+.progress-line {
+    height: 5px; /* Height of the progress line */
+    width: 0; /* Start at zero width */
+    background-color: #00ffcc; /* Bright cyan for the progress line */
+    transition: width 1s ease-in-out; /* Smooth transition for progress */
+}
+
+.percentage {
+    font-size: 20px; /* Slightly smaller than loading text */
+    color: #00ffcc; /* Match color with progress line */
+    text-shadow:
+        0 0 5px rgba(0, 255, 255, 1),   /* Small glow */
+        0 0 10px rgba(0, 255, 255, .8), /* Medium glow */
+        0 0 15px rgba(135,206,250, .5); /* Larger glow */
+    animation: flashGlow 1s infinite alternate; /* Flashing animation */
+}
+
+/* Flashing Animation Keyframes */
+@keyframes flashGlow {
+    from {
+        opacity: 1; /* Fully visible */
+        transform: scale(1); /* Original size */
+    }
+    to {
+        opacity: 0.5; /* Faded effect */
+        transform: scale(1.05); /* Slightly larger size for effect */
+    }
+}
         body {
               background-image: url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg');
     background-size: cover; /* Ensures the image covers the entire area */
@@ -15,7 +82,7 @@
     padding: 0; /* Removes default padding */
     text-align: center; /* Center text */
     font-family: 'Montserrat', sans-serif; /* Consistent font */
-    background-color: #004764; /* Dark background for a modern look */
+    background-color: #1a1a1a; /* Dark background for a modern look */
 }
             margin: 0;
             padding: 0;
@@ -168,6 +235,17 @@
        .popup-content strong {
            color: rgba(0, 255, 255, .8); /* Match button text color for analysis titles */
        }
+       .qartistic-text {
+           font-size: 18px; /* Match font size with other texts */
+           color: #FFD700; /* Gold text color */
+           text-shadow: 0 0 5px rgba(255,215,0,.7), 
+                        0 0 10px rgba(255,215,0,.5), 
+                        0 0 15px rgba(255,215,0,.3); /* Glowing effect for artistic text */
+           animation: flashText 0s infinite alternate; /* Flashing animation for artistic text */
+           cursor: pointer; /* Pointer cursor on hover */
+           background-color: transparent; /* Background color for button style */
+           border: none; /* No border for button style */
+       }
 
        .artistic-text {
            font-size: 18px; /* Match font size with other texts */
@@ -225,6 +303,11 @@
     animation: moveRight 0.7s forwards; /* Adjust duration as needed */
 }
 
+input, textarea {
+    max-width: 100%;
+    word-wrap: break-word; /* Allows long words to break */
+}
+
 .input-style {
     background-color: transparent; /* Match button style */
     border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
@@ -252,10 +335,15 @@
     z-index: 1000; /* Ensure it appears above other content */
     text-align: left; /* Aligns text to the left */
 }
+
+.tradingview-widget-container {
+    background-color: black; /* Set container background to black */
+    padding: 10px; /* Optional: add padding */
+}
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automatic Button Animation</title>
+    
     <style>
         /* Style for the button container */
         #chartToggleButton {
@@ -275,6 +363,11 @@
         .move-down {
             transform: translateY(10px); /* Move down by 10 pixels */
         }
+        .input-style, #tickerTapeSymbolInput {
+    width: 100%; /* Full width of the parent container */
+    max-width: 100%; /* Prevents exceeding the container */
+    box-sizing: border-box; /* Include padding and border in element's total width */
+}
         #tickerTapeSymbolInput {
     background-color: transparent; /* Match button style */
     border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
@@ -304,8 +397,17 @@
     </style>
 </head>
 <body>
+<div class="preload" id="preload">
+    <div class="loading">Initialisation du CasaBourse ...</div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="percentage" id="percentage">0%</div>
+    </div>
+</div>
+
+
 <div id="offline-message" style="display: none; background-color: #f44336; color: white; padding: 20px; text-align: center;">
-    SignalSharp / It seems you are offline. Please check your internet connection.
+    CasaBourse par SignalSharp nécessite une connexion Internet. Il semble que vous soyez hors ligne. Veuillez vérifier votre connexion Internet.
 </div>
     
 
@@ -316,41 +418,40 @@
     <button onclick="hideNotification()">Hide</button>
 </div>
 <div style="position: fixed; top: 20px; right: 20px;">
-    <button id="settingsButton" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 15px; font-size: 11px; border-radius: 10px; cursor: pointer;">Paramètres</button>
+    <button id="settingsButton" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 10px; font-size: 16px; border-radius: 10px; cursor: pointer;">Paramètres</button>
 </div>
 
-<div class="settings-menu" id="settingsPopup" style="display: none; position: fixed; top: 60px; right: 20px; background-color: rgba(30, 30, 30, 0.9); padding: 15px; border-radius: 10px; color: #FFD700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); z-index: 1000;">
-    <label style="display:block;">
+<div class="settings-menu" id="settingsPopup" style="display: none; position: fixed; top: 60px; right: 20px; background-color: rgba(30, 30, 30, 0.9); padding: 10px; border-radius: 8px; color: #FFD700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); z-index: 1000; width: 200px;">
+    <label style="display:block; font-size: 12px;">
         <input type="checkbox" id="darkModeToggle" style="margin-right: 5px;"> Mode Sombre
     </label>
-    <label style="display:block;">
+    <label style="display:block; font-size: 12px;">
         <input type="checkbox" id="backgroundToggle" style="margin-right: 5px;"> Teal Foncé
     </label>
-    <p style="margin-top: 10px; font-size: 14px; color: #FFD700;">
-        Nous prévoyons d'élargir le menu des paramètres avec des options supplémentaires, y compris le support pour une large gamme de langues. <style>.pp-XWX53Y7NSDSB6{text-align:center;border:none;border-radius:1.5rem;min-width:11.625rem;padding:0 2rem;height:2rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.875rem;line-height:1.125rem;cursor:pointer;}</style>
-<form action="https://www.paypal.com/ncp/payment/XWX53Y7NSDSB6" method="post" target="_top" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-  <input class="pp-XWX53Y7NSDSB6" type="submit" value="Financer" />
-  <img src=https://www.paypalobjects.com/images/Debit_Credit.svg alt="cards" />
-  <section><img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-</form>
-    </p>
-   <!-- Contact Information Button -->
-<div style="margin-top:30px; text-align: center;" id="contactInfo">
-  <button class='artistic-text' onclick="showContactPopup()">CONTACTER</button>
-</div><img src="https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/Aidez%20%C3%A0%20financ-qrcode.png" alt="QR Code" />
 
-<!-- Contact Popup -->
-<div class='popup' id='authorPopup'>
-  <div class='popup-content'>
-      <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
-      <h2 style='color:#FFD700;'>Développeur : </h2>
-      <p>Email: <strong>Live@signalsharp.com , courriel: oitache123@gmail.com</strong></p>
-  </div>
+    <form action="https://www.paypal.com/ncp/payment/XWX53Y7NSDSB6" method="post" target="_top" style="display:inline-grid; justify-items:center; align-content:start; gap:0.5rem;">
+        <input class="pp-XWX53Y7NSDSB6" type="submit" value="Financer" style="border:none; border-radius:1.5rem; min-width:11rem; padding:0.5rem; background-color:#FFD140; color:#000000; font-family:'Helvetica Neue',Arial,sans-serif; font-size:0.75rem; cursor:pointer;" />
+        <img src="https://www.paypalobjects.com/images/Debit_Credit.svg" alt="cards" />
+        <section><img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.75rem; vertical-align:middle;" /></section>
+    </form>
+    
+    <!-- Contact Information Button -->
+    <div style="margin-top:10px; text-align:center;" id="contactInfo">
+        <button class='artistic-text' onclick="showContactPopup()" style="font-size: 12px;">CONTACTER</button>
+    </div>
+    <img src="https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/Aidez%20%C3%A0%20financ-qrcode.png" alt="QR Code" style="width:50%; margin-top:5px;" />
+
+    <!-- Contact Popup -->
+    <div class='popup' id='authorPopup'>
+        <div class='popup-content'>
+            <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
+            <h2 style='color:#FFD700;'>Développeur : </h2>
+            <p>Email: <strong>Live@signalsharp.com , courriel: oitache123@gmail.com</strong></p>
+        </div>
+    </div>
+
+    <button onclick="closeSettings()" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 8px; font-size: 12px; border-radius: 10px; cursor: pointer;">Fermer</button>
 </div>
-
-    <button onclick="closeSettings()" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 10px; font-size: 16px; border-radius: 10px; cursor: pointer;">Fermer</button>
-</div>
-
 <!-- Added this HTML for the new widget popup just before </body> -->
 <div class="popup" id="widgetPopup">
     <div class="popup-content">
@@ -370,9 +471,9 @@
     
 <!-- TradingView Widget BEGIN -->
 
-<div class="tradingview-widget-container" style="height: 100px;"> <!-- Set a fixed height -->
+<div class="tradingview-widget-containerw" style="height: 200px;">
     <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
-    <input type="text" id="tickerTapeSymbolInput" placeholder="CSEMA:symbole , pour Maroc" />
+    <input type="text" id="tickerTapeSymbolInput" placeholder="Saisissez CSEMA:symbole . Pour éviter toute confusion. " />
     <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: -15px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Explorer l'action</button> <!-- Adjusted size -->
     <script type="text/javascript">
       function createTickerTapeWidget(symbols) {
@@ -431,7 +532,9 @@ createTickerTapeWidget([
 <div id="chartToggleButton" style="text-align: left;">
     <button class="button" id="toggleChartBtn" onclick="toggleChart(this)">Afficher le graphique</button>
 </div>
-
+<span class='qartistic-text' style="color: white; display: block; text-align: left;">
+    La liste chaude est un répertoire de symboles ayant subi des variations significatives en termes de volume ou de prix sur une période donnée. Cet outil peut vous aider à identifier des opportunités de trading potentielles.
+</span>
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
@@ -444,20 +547,20 @@ createTickerTapeWidget([
   "showChart": true,
   "locale": "fr",
   "largeChartUrl": "",
-  "isTransparent": false,
+  "isTransparent": true,
   "showSymbolLogo": true,
   "showFloatingTooltip": true,
-  "width": "500",
+  "width": "100%",
   "height": "500",
-  "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
-  "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+  "plotLineColorGrowing": "rgba(0, 255, 0, 1)",
+  "plotLineColorFalling": "rgba(255, 0, 0, 1)",
   "gridLineColor": "rgba(42, 46, 57, 0)",
   "scaleFontColor": "rgba(209, 212, 220, 1)",
-  "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
-  "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
-  "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
-  "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
-  "symbolActiveColor": "rgba(0, 255, 255, 0.57)"
+  "belowLineFillColorGrowing": "rgba(70, 255, 22, 0.41)",
+  "belowLineFillColorFalling": "rgba(255, 0, 0, 0.3)",
+  "belowLineFillColorGrowingBottom": "rgba(0, 255, 0, 0.33)",
+  "belowLineFillColorFallingBottom": "rgba(255, 0, 0, 0.65)",
+  "symbolActiveColor": "rgba(255, 255, 0, 0.72)"
 }
   </script>
 </div>
@@ -480,7 +583,7 @@ createTickerTapeWidget([
             script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-profile.js';
             script.async = true;
             script.innerHTML = JSON.stringify({
-                "width": 400,
+                "width": "100%",
                 "height": 300,
                 "isTransparent": true,
                 "colorTheme": "dark",
@@ -520,7 +623,7 @@ createTickerTapeWidget([
   "isZoomEnabled": true,
   "hasSymbolTooltip": true,
   "isMonoSize": false,
-  "width": 500,
+  "width": "100%",
   "height": 500
 }
   </script>
@@ -549,7 +652,7 @@ createTickerTapeWidget([
   "isZoomEnabled": true,
   "hasSymbolTooltip": true,
   "isMonoSize": false,
-  "width": 500,
+  "width": "100%",
   "height": 500
 }
   </script>
@@ -559,7 +662,7 @@ createTickerTapeWidget([
 <!-- Financials Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="financials-widget"></div>
-    <input type="text" class="input-style" id="financialsInput" placeholder="Saisissez un symbole" />
+    <input type="text" class="input-style" id="financialsInput" placeholder="Connexion faible? Forcez l'affichage 'Changer' " />
     <button class="button update-button" id="changeFinancialsButton">Changer</button>
     <script type="text/javascript">
         function createFinancialsWidget() {
@@ -571,10 +674,10 @@ createTickerTapeWidget([
             script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-financials.js';
             script.async = true;
             script.innerHTML = JSON.stringify({
-                "isTransparent": false,
+                "isTransparent": true,
                 "largeChartUrl": "",
                 "displayMode": "adaptive",
-                "width": 500,
+                "width": "100%",
                 "height": 500,
                 "colorTheme": "dark",
                 "symbol": document.getElementById('financialsInput').value || "CSEMA:IAM",
@@ -596,13 +699,14 @@ createTickerTapeWidget([
   
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
   {
-  "width": "500",
+  "width": "100%",
   "height": "500",
   "defaultColumn": "moving_averages",
   "defaultScreen": "top_gainers",
   "market": "morocco",
   "showToolbar": true,
   "colorTheme": "dark",
+  "isTransparent": true,
   "locale": "fr"
 }
   </script>
@@ -625,7 +729,7 @@ createTickerTapeWidget([
             script.async = true;
             script.innerHTML = JSON.stringify({
                 "interval": "4h",
-                "width": "500",
+                "width": "100%",
                 "isTransparent": "true",
                 "height": "500",
                 "symbol": document.getElementById('technicalAnalysisInput').value || "CSEMA:IAM",
@@ -645,7 +749,7 @@ createTickerTapeWidget([
     </script>
 </div>
 <span class='artistic-text' style="color: white; display: block; text-align: left;">
-    Le calendrier économique est un outil essentiel pour les traders, fournissant des informations sur les événements économiques  qui peuvent influencer les marchés.
+    Le calendrier économique est un outil essentiel pour les traders/investisseurs, fournissant des informations sur les événements économiques  qui peuvent influencer les marchés.
 </span>
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
@@ -654,8 +758,8 @@ createTickerTapeWidget([
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
   {
   "colorTheme": "dark",
-  "isTransparent": false,
-  "width": "500",
+  "isTransparent": true,
+  "width": "100%",
   "height": "500",
   "locale": "fr",
   "importanceFilter": "-1,0,1",
@@ -685,7 +789,7 @@ __widget" id="timeline-widget"></div>
                 "feedMode": "market",
                 "isTransparent": "true",
                 "displayMode": "adaptive",
-                "width": "500",
+                "width": "100%",
                 "height": "500",
                 "colorTheme": "dark",
                 "locale": "en",
@@ -701,6 +805,7 @@ __widget" id="timeline-widget"></div>
         createTimelineWidget(); // Initial load
     </script>
 </div>
+<button class="button" id="toggleChartBtn" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">ÉCHELLE GLOBALE (Le marché international)</button>
       <!-- New Button to Show Signals -->
 <div class="row">
 <span class="blue-text" style="visibility: hidden;">الله ، بارك،  ، بارك الله بارك</span>
@@ -747,12 +852,11 @@ __widget" id="timeline-widget"></div>
 </div><div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   <div class="tradingview-widget-copyright">
-    <span class="blue-text">Fermez le graphique avant de faire défiler vers le bas pour éviter que certains boutons ne deviennent cachés. Cette fonctionnalité sera essentielle dans les prochaines mises à jour, permettant un fond clair pour les signaux de trading (dans des pop-ups transparents)
-</span>
+    <span class="blue-text" style="font-size: 20px;">Fermez le graphique avant de faire défiler vers le bas pour éviter que certains boutons ne deviennent cachés. Cette fonctionnalité sera essentielle dans les prochaines mises à jour, permettant un fond clair pour les signaux de trading (dans des pop-ups transparents)</span>
   </div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
   {
-    "width": "400",
+    "width": "100%",
     "height": "500",
     "symbol": "CSEMA:IAM",
     "timezone": "Etc/UTC",
@@ -789,12 +893,14 @@ __widget" id="timeline-widget"></div>
       gap: 10px; /* Space between buttons */
       margin-top: 20px;
   }
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+        align-items: center; /* Center buttons */
+    }
+}
 
-  @media (max-width: 600px) {
-      .button-container {
-          grid-template-columns: repeat(2, 1fr); /* Two buttons per row on smaller screens */
-      }
-  }
+
 
   @media (max-width: 400px) {
       .button-container {
@@ -1194,6 +1300,28 @@ function toggleSignalButtons() {
         toggleButton.textContent = 'Show Signals'; // Change button text
     }
 }
+
+let progress = document.getElementById('progress-bar');
+let percentageText = document.getElementById('percentage');
+let totalDuration = 15000; // Total duration in milliseconds (15 seconds)
+let startTime = Date.now();
+
+function updateProgress() {
+    let elapsedTime = Date.now() - startTime;
+    let percentComplete = Math.min((elapsedTime / totalDuration) * 100, 100);
+    
+    progress.style.width = percentComplete + '%';
+    percentageText.textContent = Math.floor(percentComplete) + '%';
+
+    if (percentComplete >= 100) {
+        document.getElementById('preload').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    } else {
+        requestAnimationFrame(updateProgress);
+    }
+}
+
+requestAnimationFrame(updateProgress);
 </script>
 
 </div>
