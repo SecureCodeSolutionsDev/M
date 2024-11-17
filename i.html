@@ -15,7 +15,7 @@ body {
     overflow: hidden;
     margin: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #1a1a1a; /* Dark background for a modern look */
+    background-color: #1a1a1a; 
 }
 
 .preload {
@@ -24,8 +24,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
-    color: #00ffcc; /* Bright cyan text */
+    background-color: rgba(0, 0, 0, 0.8); 
+    color: #00ffcc; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,112 +34,111 @@ body {
 }
 
 .loading {
-    font-size: 28px; /* Larger font for emphasis */
+    font-size: 28px; 
     margin-bottom: 20px;
 }
 
 .progress-container {
-    width: 80%; /* Set width of the container */
-    height: 10px; /* Height of the container */
-    position: relative; /* Position relative for absolute children */
+    width: 80%; 
+    height: 10px; 
+    position: relative; 
 }
 
 .progress-line {
-    height: 5px; /* Height of the progress line */
-    width: 0; /* Start at zero width */
-    background-color: #00ffcc; /* Bright cyan for the progress line */
-    transition: width 1s ease-in-out; /* Smooth transition for progress */
+    height: 5px; 
+    width: 0; 
+    background-color: #00ffcc; 
+    transition: width 1s ease-in-out; 
 }
 
 .percentage {
-    font-size: 20px; /* Slightly smaller than loading text */
-    color: #00ffcc; /* Match color with progress line */
+    font-size: 20px; 
+    color: #00ffcc; 
     text-shadow:
-        0 0 5px rgba(0, 255, 255, 1),   /* Small glow */
-        0 0 10px rgba(0, 255, 255, .8), /* Medium glow */
-        0 0 15px rgba(135,206,250, .5); /* Larger glow */
-    animation: flashGlow 1s infinite alternate; /* Flashing animation */
+        0 0 5px rgba(0, 255, 255, 1),   
+        0 0 10px rgba(0, 255, 255, .8), 
+        0 0 15px rgba(135,206,250, .5); 
+    animation: flashGlow 1s infinite alternate; 
 }
 
-/* Flashing Animation Keyframes */
 @keyframes flashGlow {
     from {
-        opacity: 1; /* Fully visible */
-        transform: scale(1); /* Original size */
+        opacity: 1; 
+        transform: scale(1); 
     }
     to {
-        opacity: 0.5; /* Faded effect */
-        transform: scale(1.05); /* Slightly larger size for effect */
+        opacity: 0.5; 
+        transform: scale(1.05); 
     }
 }
         body {
               background-image: url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg');
-    background-size: cover; /* Ensures the image covers the entire area */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    height: 100vh; /* Sets the height to fill the viewport */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
-    text-align: center; /* Center text */
-    font-family: 'Montserrat', sans-serif; /* Consistent font */
-    background-color: #1a1a1a; /* Dark background for a modern look */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    height: 100vh; 
+    margin: 0; 
+    padding: 0; 
+    text-align: center; 
+    font-family: 'Montserrat', sans-serif; 
+    background-color: #1a1a1a; 
 }
             margin: 0;
             padding: 0;
-            text-align: center; /* Center text */
-            font-family: 'Montserrat', sans-serif; /* Consistent font */
+            text-align: center; 
+            font-family: 'Montserrat', sans-serif; 
         }
         h1 {
             font-size: 48px;
             font-weight: bold;
-            color: #FFD700; /* Gold text color */
+            color: #FFD700; 
             margin-top: 20px;
             margin-bottom: 30px;
         }
         .button-container {
             display: flex;
-            flex-direction: column; /* Arrange in a column for pyramid shape */
-            align-items: center; /* Center items horizontally */
+            flex-direction: column; 
+            align-items: center; 
             margin-top: 20px;
         }
         .row {
             display: flex;
-            justify-content: center; /* Center items in each row */
-            width: fit-content; /* Fit to content width */
+            justify-content: center; 
+            width: fit-content; 
         }
         .button {
-            background-color: transparent; /* Transparent background */
-            border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
-            color: rgba(0, 255, 255, 0.8); /* Cyan text color */
-            padding: 15px 30px; /* Increased padding for larger buttons */
-            font-size: 18px; /* Increased font size for better readability */
+            background-color: transparent; 
+            border: 2px solid rgba(0, 255, 255, 0.8); 
+            color: rgba(0, 255, 255, 0.8); 
+            padding: 15px 30px; 
+            font-size: 18px; 
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            width: 150px; /* Fixed width for uniform button size */
-            margin: 10px; /* Add margin for spacing between buttons */
+            width: 150px; 
+            margin: 10px; 
             cursor: pointer;
-            border-radius: 10px; /* Rounded corners for buttons */
-            transition: all .3s ease-in-out; /* Transition for hover effect */
+            border-radius: 10px; 
+            transition: all .3s ease-in-out; 
         }
         .button:hover {
-            color: white; /* Change text color on hover */
-            border-color: white; /* Change border color on hover */
+            color: white; 
+            border-color: white; 
         }
         .glow {
             box-shadow: 0 0 5px rgba(0, 255, 255, .8), 
                         0 0 10px rgba(0, 255, 255, .8), 
-                        0 0 15px rgba(0, 255, 255, .8); /* Glowing effect */
+                        0 0 15px rgba(0, 255, 255, .8); 
         }
         .popup {
             width:auto ; 
             height:auto ; 
-            max-width: 600px; /* Set a maximum width for popups */
-            max-height: calc(80vh - 40px); /* Set a maximum height for popups */
+            max-width: 600px; 
+            max-height: calc(80vh - 40px); 
             position :fixed ; 
             top :50%; 
             left :50%; 
-            transform: translate(-50%, -50%); /* Center the popup */
+            transform: translate(-50%, -50%); 
             background-color :rgba(30 ,30 ,30 ,.95); 
             display :flex ; 
             justify-content :center ; 
@@ -163,7 +162,7 @@ body {
            padding :20px ; 
            text-align :justify ; 
            overflow-y:auto ;
-           background-color: rgba(50, 50, 50, 0.9); /* Darker background for popup content */
+           background-color: rgba(50, 50, 50, 0.9); 
        }
 
        .close {
@@ -171,41 +170,41 @@ body {
            top :20px ; 
            right :20px ; 
            font-size :24px ; 
-           color :#FFD700; /* Gold close button color */
+           color :#FFD700; 
            cursor:pointer ; 
            transition :all .3s ease-in-out ; 
        }
 
        .close:hover { 
-           color:#FF4500; /* Change close button color on hover */
+           color:#FF4500; 
        }
        
       .popup {
     width: 100%; 
     height: auto; 
-    max-width: 600px; /* Set a maximum width for popups */
-    max-height: calc(80vh - 40px); /* Set a maximum height for popups */
+    max-width: 600px; 
+    max-height: calc(80vh - 40px); 
     position: fixed; 
     top: 50%; 
     left: 50%; 
-    transform: translate(-50%, -50%); /* Center the popup */
+    transform: translate(-50%, -50%); 
     background-color: rgba(30, 30, 30, .95); 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     z-index: 2; 
     opacity: .9; 
-    visibility: hidden; /* Initially hidden */
+    visibility: hidden; 
 }
 
 .popup.active {
    opacity: .9; 
-   visibility: visible; /* Make visible when active */
+   visibility: visible; 
 }
        
 @keyframes moveRight {
     0% { transform: translateX(0); }
-    100% { transform: translateX(20px); } /* Adjust distance as needed */
+    100% { transform: translateX(20px); } 
 }
 
        @keyframes flashGlow {
@@ -228,40 +227,66 @@ body {
        }
 
        .popup-content p {
-           font-size: 20px; /* Making the analysis text larger */
-           color: white; /* Changing analysis text color to white */
+           font-size: 20px; 
+           color: white; 
        }
 
        .popup-content strong {
-           color: rgba(0, 255, 255, .8); /* Match button text color for analysis titles */
+           color: rgba(0, 255, 255, .8); 
        }
+       
        .qartistic-text {
-           font-size: 18px; /* Match font size with other texts */
-           color: #FFD700; /* Gold text color */
+           font-size: 18px; 
+           color: #FFD700; 
            text-shadow: 0 0 5px rgba(255,215,0,.7), 
                         0 0 10px rgba(255,215,0,.5), 
-                        0 0 15px rgba(255,215,0,.3); /* Glowing effect for artistic text */
-           animation: flashText 0s infinite alternate; /* Flashing animation for artistic text */
-           cursor: pointer; /* Pointer cursor on hover */
-           background-color: transparent; /* Background color for button style */
-           border: none; /* No border for button style */
+                        0 0 15px rgba(255,215,0,.3); 
+           animation: flashText 0s infinite alternate; 
+           cursor: pointer; 
+           background-color: transparent; 
+           border: none; 
        }
 
        .artistic-text {
-           font-size: 18px; /* Match font size with other texts */
-           color: #FFD700; /* Gold text color */
+           font-size: 18px; 
+           color: #FFD700; 
            text-shadow: 0 0 5px rgba(255,215,0,.7), 
                         0 0 10px rgba(255,215,0,.5), 
-                        0 0 15px rgba(255,215,0,.3); /* Glowing effect for artistic text */
-           animation: flashText 1s infinite alternate; /* Flashing animation for artistic text */
-           cursor: pointer; /* Pointer cursor on hover */
-           background-color: transparent; /* Background color for button style */
-           border: none; /* No border for button style */
+                        0 0 15px rgba(255,215,0,.3); 
+           animation: flashText 5s infinite alternate; 
+           cursor: pointer; 
+           background-color: transparent; 
+           border: none; 
        }
+.glowing-border {
+    border: 2px solid #87CEEB;  
+    border-radius: 5px; 
+    display: block; 
+    box-shadow: 
+        0 0 5px rgba(255, 215, 0, 0.7), 
+        0 0 10px rgba(255, 215, 0, 0.5), 
+        0 0 15px rgba(255, 215, 0, 0.3); 
+    animation: pulseGlowBorder 1.5s infinite alternate; 
+}
+
+@keyframes pulseGlowBorder {
+    from {
+        box-shadow: 
+            0 0 5px rgba(255, 215, 0, 0.7), 
+            0 0 10px rgba(255, 215, 0, 0.5), 
+            0 0 15px rgba(255, 215, 0, 0.3);
+    }
+    to {
+        box-shadow: 
+            0 0 10px rgba(255, 215, 0, 1), 
+            0 0 20px rgba(255, 215, 0, .8), 
+            0 0 30px rgba(255, 215, 0, .6);
+    }
+}
        
        .text-3d {
             font-size: 50px;
-            color: #00ffcc; /* Futuristic color */
+            color: #00ffcc; 
             text-shadow: 
                 0 1px 0 rgba(255, 255, 255, 0.2),
                 0 2px 0 rgba(255, 255, 255, 0.2),
@@ -275,11 +300,11 @@ body {
             transform: perspective(800px) rotateX(15deg) rotateY(-15deg) scale(1.05);
             text-shadow: 0 0 5px rgba(255,215,0,.7), 
                         0 0 10px rgba(255,215,0,.5), 
-                        0 0 15px rgba(255,215,0,.3); /* Glowing effect for artistic text */
-           animation: flashText 1s infinite alternate; /* Flashing animation for artistic text */
-           cursor: pointer; /* Pointer cursor on hover */
-           background-color: transparent; /* Background color for button style */
-           border: none; /* No border for button style */
+                        0 0 15px rgba(255,215,0,.3); 
+           animation: flashText 1s infinite alternate; 
+           cursor: pointer; 
+           background-color: transparent; 
+           border: none; 
         }
 
        @keyframes flashText {
@@ -292,130 +317,128 @@ body {
        }
 
 .bitcoin-button:hover {
-    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+    animation: moveRight 0.5s forwards; 
 }
 
 .bitcoin-button:hover {
     animation: moveRight 0.5s forwards;
 }
 .eur-button:hover {
-    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+    animation: moveRight 0.5s forwards; 
 }
 
 .gbp-button:hover {
-    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+    animation: moveRight 0.5s forwards; 
 }
 
 .usd-button:hover {
-    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+    animation: moveRight 0.5s forwards; 
 }
 
 .gold-button:hover {
-    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+    animation: moveRight 0.5s forwards; 
 }
 
 .aud-button:hover {
-    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+    animation: moveRight 0.5s forwards; 
 }
 
 .nzd-button:hover {
-    animation: moveRight 0.5s forwards; /* Adjust duration as needed */
+    animation: moveRight 0.5s forwards; 
 }
 
 .silver-button:hover {
-    animation: moveRight 0.7s forwards; /* Adjust duration as needed */
+    animation: moveRight 0.7s forwards; 
 }
 
 input, textarea {
     max-width: 100%;
-    word-wrap: break-word; /* Allows long words to break */
+    word-wrap: break-word; 
 }
 
 .input-style {
-    background-color: transparent; /* Match button style */
-    border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
-    color: rgba(0, 255, 255, 0.8); /* Cyan text color */
-    padding: 10px; /* Padding for comfort */
-    font-size: 14px; /* Consistent font size */
-    border-radius: 10px; /* Rounded corners */
-    transition: all .3s ease-in-out; /* Smooth transition */
-    width: 100%; /* Full width of container */
+    background-color: transparent; 
+    border: 2px solid rgba(0, 255, 255, 0.8); 
+    color: rgba(0, 255, 255, 0.8); 
+    padding: 10px; 
+    font-size: 14px; 
+    border-radius: 10px; 
+    transition: all .3s ease-in-out; 
+    width: 100%; 
 }
 
 .input-style:hover {
-    border-color: white; /* Change border color on hover */
-    color: white; /* Change text color on hover */
+    border-color: white; 
+    color: white; 
 }
 .settings-menu {
-    position: fixed; /* Keep it in a fixed position */
-    top: 60px; /* Below the settings button */
+    position: fixed; 
+    top: 60px; 
     right: 20px;
-    background-color: rgba(30, 30, 30, 0.9); /* Semi-transparent background */
+    background-color: rgba(30, 30, 30, 0.9); 
     padding: 15px;
     border-radius: 10px;
-    color: #FFD700; /* Gold text color */
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Glow effect */
-    z-index: 1000; /* Ensure it appears above other content */
-    text-align: left; /* Aligns text to the left */
+    color: #FFD700; 
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); 
+    z-index: 1000; 
+    text-align: left; 
 }
 
 .tradingview-widget-container {
-    background-color: black; /* Set container background to black */
-    padding: 10px; /* Optional: add padding */
+    background-color: black; 
+    padding: 10px; 
 }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <style>
-        /* Style for the button container */
+        
         #chartToggleButton {
-            position: relative; /* Needed for absolute positioning */
-            margin: 20px; /* Add some margin for visual spacing */
+            position: relative; 
+            margin: 20px; 
         }
 
-        /* Style for the button */
         .button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            transition: transform 5s ease; /* Smooth transition */
+            transition: transform 5s ease; 
         }
 
-        /* Class to move the button up */
         .move-down {
-            transform: translateY(10px); /* Move down by 10 pixels */
+            transform: translateY(10px); 
         }
         .input-style, #tickerTapeSymbolInput {
-    width: 100%; /* Full width of the parent container */
-    max-width: 100%; /* Prevents exceeding the container */
-    box-sizing: border-box; /* Include padding and border in element's total width */
+    width: 100%; 
+    max-width: 100%; 
+    box-sizing: border-box; 
 }
         #tickerTapeSymbolInput {
-    background-color: transparent; /* Match button style */
-    border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
-    color: rgba(0, 255, 255, 0.8); /* Cyan text color */
-    padding: 10px; /* Padding for comfort */
-    font-size: 14px; /* Consistent font size */
-    border-radius: 10px; /* Rounded corners */
-    transition: all .3s ease-in-out; /* Smooth transition */
+    background-color: transparent; 
+    border: 2px solid rgba(0, 255, 255, 0.8); 
+    color: rgba(0, 255, 255, 0.8); 
+    padding: 10px; 
+    font-size: 14px; 
+    border-radius: 10px; 
+    transition: all .3s ease-in-out; 
 }
 
 #tickerTapeSymbolInput:hover {
-    border-color: white; /* Change border color on hover */
-    color: white; /* Change text color on hover */
+    border-color: white; 
+    color: white; 
 }
 #notification {
-    display: none; /* Hide by default */
+    display: none; 
     background-color: #f8d7da;
     color: #721c24;
     padding: 20px;
     text-align: center;
-    position: fixed; /* Fixed position to stay at the top */
-    top: 0; /* Align to the top of the viewport */
-    left: 0; /* Align to the left */
-    right: 0; /* Align to the right */
-    z-index: 1000; /* Ensure it appears above other content */
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 1000; 
 }
     </style>
 </head>
@@ -428,12 +451,10 @@ input, textarea {
     </div>
 </div>
 
-
 <div id="offline-message" style="display: none; background-color: #f44336; color: white; padding: 20px; text-align: center;">
     CasaBourse par SignalSharp nécessite une connexion Internet. Il semble que vous soyez hors ligne. Veuillez vérifier votre connexion Internet.
 </div>
     
-
     <div class="button-container">
     
 <div id="notification" style="display: none; background-color: #f8d7da; color: #721c24; padding: 20px; text-align: center;">
@@ -458,16 +479,14 @@ input, textarea {
         <section><img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.75rem; vertical-align:middle;" /></section>
     </form>
     
-    <!-- Contact Information Button -->
     <div style="margin-top:10px; text-align:center;" id="contactInfo">
         <button class='artistic-text' onclick="showContactPopup()" style="font-size: 12px;">CONTACTER</button>
     </div>
     <img src="https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/Aidez%20%C3%A0%20financ-qrcode.png" alt="QR Code" style="width:50%; margin-top:5px;" />
 
-    <!-- Contact Popup -->
     <div class='popup' id='authorPopup'>
         <div class='popup-content'>
-            <span class='close' onclick="closeContactPopup()">×</span> <!-- Close button -->
+            <span class='close' onclick="closeContactPopup()">×</span> 
             <h2 style='color:#FFD700;'>Développeur : </h2>
             <p>Email: <strong>Live@signalsharp.com , courriel: oitache123@gmail.com</strong></p>
         </div>
@@ -491,17 +510,14 @@ input, textarea {
     </div>
 </div>
     
-    
-<!-- TradingView Widget BEGIN -->
-
 <div class="tradingview-widget-containerw" style="height: 200px;">
     <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
     <input type="text" id="tickerTapeSymbolInput" placeholder="Saisissez CSEMA:symbole . Pour éviter toute confusion. " />
-    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: 2px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Explorer l'action</button> <!-- Adjusted size -->
-    <script type="text/javascript">
+    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: 2px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Explorer l'action</button> 
+    <script defer type="text/javascript">
       function createTickerTapeWidget(symbols) {
         const widgetContainer = document.getElementById('ticker-tape-widget');
-        widgetContainer.innerHTML = ''; // Clear the existing widget
+        widgetContainer.innerHTML = ''; 
 
         const script = document.createElement('script');
         script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
@@ -519,18 +535,17 @@ input, textarea {
       }
 
       document.getElementById('changeTickerTapeSymbolButton').addEventListener('click', function() {
-    const newSymbol = document.getElementById('tickerTapeSymbolInput').value; // Get value from ticker input
+    const newSymbol = document.getElementById('tickerTapeSymbolInput').value; 
     if (newSymbol) {
-        createTickerTapeWidget([{ proName: newSymbol, title: newSymbol }]); // Update ticker tape widget
-        showWidgetPopup(); // Show the new widget when clicked
-        document.getElementById('symbolInfoInput').value = newSymbol; // Set input for symbol info
-        createSymbolInfoWidget(); // Load symbol info widget with new symbol
+        createTickerTapeWidget([{ proName: newSymbol, title: newSymbol }]); 
+        showWidgetPopup(); 
+        document.getElementById('symbolInfoInput').value = newSymbol; 
+        createSymbolInfoWidget(); 
     } else {
-        alert('Please enter a valid symbol.'); // Alert if no valid symbol is entered
+        alert('Please enter a valid symbol.'); 
     }
 });
 
- // Initialize with default symbols
 createTickerTapeWidget([
     { proName: "CSEMA:ADH", title: "Douja Prom Addoha" },
     { proName: "CSEMA:GAZ", title: "Afriquia Gaz" },
@@ -550,358 +565,30 @@ createTickerTapeWidget([
     </script>
 </div>
 
-<!-- TradingView Widget END -->
-<!-- Chart Toggle Button -->
 <div id="chartToggleButton" style="text-align: left;">
     <button class="button" id="toggleChartBtn" onclick="toggleChart(this)">Afficher le graphique</button>
 </div>
 
-   
-<div class="tradingview-widget-containerr">
-  <div class="tradingview-widget-containerr__widget"></div>
- 
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
-  {
-  "width": "100%",
-  "height": 350,
-  "symbolsGroups": [
-    {
-      "name": "Marché actions Maroc par SignalSharp (CasaBourse )",
-      "symbols": [
-        {
-          "name": "CSEMA:TGC",
-          "displayName": "TRAVAUX GENERAUX DE CONSTRUCTIONS DE CASABLANCA"
-        },
-        {
-          "name": "CSEMA:ADH",
-          "displayName": "DOUJA PROM ADDOHA"
-        },
-        {
-          "name": "CSEMA:MSA",
-          "displayName": "SODEP-MARSA MAROC"
-        },
-        {
-          "name": "CSEMA:AKT",
-          "displayName": "AKDITAL S.A"
-        },
-        {
-          "name": "CSEMA:JET",
-          "displayName": "JET CONTRACTORS"
-        },
-        {
-          "name": "CSEMA:RDS",
-          "displayName": "RES DAR SAADA"
-        },
-        {
-          "name": "CSEMA:ADI",
-          "displayName": "ALLIANCES"
-        },
-        {
-          "name": "CSEMA:SRM",
-          "displayName": "REALISATIONS MECANIQUES"
-        },
-        {
-          "name": "CSEMA:CDM",
-          "displayName": "CDM"
-        },
-        {
-          "name": "CSEMA:ARD",
-          "displayName": "ARADEI CAPITAL"
-        },
-        {
-          "name": "CSEMA:CFG",
-          "displayName": "CFG BANK"
-        },
-        {
-          "name": "CSEMA:IAM",
-          "displayName": "ITISSALAT AL-MAGHRIB"
-        },
-        {
-          "name": "CSEMA:NKL",
-          "displayName": "ENNAKL"
-        },
-        {
-          "name": "CSEMA:TQM",
-          "displayName": "TAQA MOROCCO"
-        },
-        {
-          "name": "CSEMA:SNP",
-          "displayName": "SNEP"
-        },
-        {
-          "name": "CSEMA:HPS",
-          "displayName": "HPS"
-        },
-        {
-          "name": "CSEMA:BCP",
-          "displayName": "BCP"
-        },
-        {
-          "name": "CSEMA:CMA",
-          "displayName": "CIMENTS DU MAROC"
-        },
-        {
-          "name": "CSEMA:ATL",
-          "displayName": "ATLANTASANAD"
-        },
-        {
-          "name": "CSEMA:CSR",
-          "displayName": "COSUMAR"
-        },
-        {
-          "name": "CSEMA:ATW",
-          "displayName": "ATTIJARIWAFA BANK"
-        },
-        {
-          "name": "CSEMA:MUT",
-          "displayName": "MUTANDIS SCA"
-        },
-        {
-          "name": "CSEMA:BOA",
-          "displayName": "BANK OF AFRICA"
-        },
-        {
-          "name": "CSEMA:CMT",
-          "displayName": "MINIERE TOUISSIT"
-        },
-        {
-          "name": "CSEMA:RIS",
-          "displayName": "RISMA"
-        },
-        {
-          "name": "CSEMA:SID",
-          "displayName": "SONASID"
-        },
-        {
-          "name": "CSEMA:DHO",
-          "displayName": "DELTA HOLDING"
-        },
-        {
-          "name": "CSEMA:MNG",
-          "displayName": "MANAGEM"
-        },
-        {
-          "name": "CSEMA:COL",
-          "displayName": "COLORADO"
-        },
-        {
-          "name": "CSEMA:ATH",
-          "displayName": "AUTO HALL"
-        },
-        {
-          "name": "CSEMA:SBM",
-          "displayName": "SOCIETE DES BOISSONS DU MAROC"
-        },
-        {
-          "name": "CSEMA:DYT",
-          "displayName": "DISTY TECHNOLOGIES"
-        },
-        {
-          "name": "CSEMA:IMO",
-          "displayName": "IMMORENTE INVEST"
-        },
-        {
-          "name": "CSEMA:CIH",
-          "displayName": "CIH"
-        },
-        {
-          "name": "CSEMA:DWY",
-          "displayName": "DISWAY"
-        },
-        {
-          "name": "CSEMA:TMA",
-          "displayName": "TOTALENERGIES MARKETING MAROC"
-        },
-        {
-          "name": "CSEMA:LHM",
-          "displayName": "LAFARGEHOLCIM MAR"
-        },
-        {
-          "name": "CSEMA:STR",
-          "displayName": "STROC INDUSTRIE"
-        },
-        {
-          "name": "CSEMA:S2M",
-          "displayName": "S.M MONETIQUE"
-        },
-        {
-          "name": "CSEMA:SMI",
-          "displayName": "SMI"
-        },
-        {
-          "name": "CSEMA:AFI",
-          "displayName": "AFRIC INDUSTRIES"
-        },
-        {
-          "name": "CSEMA:ALM",
-          "displayName": "ALUMINIUM DU MAROC"
-        },
-        {
-          "name": "CSEMA:MIC",
-          "displayName": "MICRODATA"
-        },
-        {
-          "name": "CSEMA:MOX",
-          "displayName": "MAGHREB OXYGENE"
-        },
-        {
-          "name": "CSEMA:CRS",
-          "displayName": "CARTIER SAADA"
-        },
-        {
-          "name": "CSEMA:FBR",
-          "displayName": "FENIE BROSSETTE"
-        },
-        {
-          "name": "CSEMA:LBV",
-          "displayName": "LABEL VIE"
-        },
-        {
-          "name": "CSEMA:MDP",
-          "displayName": "MED PAPER"
-        },
-        {
-          "name": "CSEMA:AFM",
-          "displayName": "AFMA"
-        },
-        {
-          "name": "CSEMA:GAZ",
-          "displayName": "AFRIQUIA GAZ"
-        },
-        {
-          "name": "CSEMA:OUL",
-          "displayName": "OULMES"
-        },
-        {
-          "name": "CSEMA:WAA",
-          "displayName": "WAFA ASSURANCE"
-        },
-        {
-          "name": "CSEMA:SNA",
-          "displayName": "STOKVIS NORD AFRIQUE"
-        },
-        {
-          "name": "CSEMA:SOT",
-          "displayName": "SOTHEMA"
-        },
-        {
-          "name": "CSEMA:BCI",
-          "displayName": "BMCI"
-        },
-        {
-          "name": "CSEMA:CTM",
-          "displayName": "CTM"
-        },
-        {
-          "name": "CSEMA:MLE",
-          "displayName": "MAROC LEASING"
-        },
-        {
-          "name": "CSEMA:IBC",
-          "displayName": "IB MAROC.COM"
-        },
-        {
-          "name": "CSEMA:LES",
-          "displayName": "LESIEUR CRISTAL"
-        },
-        {
-          "name": "CSEMA:PRO",
-          "displayName": "PROMOPHARM S.A"
-        },
-        {
-          "name": "CSEMA:SAH",
-          "displayName": "SANLAM MAROC"
-        },
-        {
-          "name": "CSEMA:ZDJ",
-          "displayName": "ZELLIDJA S.A"
-        },
-        {
-          "name": "CSEMA:M2M",
-          "displayName": "M2M GROUP"
-        },
-        {
-          "name": "CSEMA:MAB",
-          "displayName": "MAGHREBAIL"
-        },
-        {
-          "name": "CSEMA:SAM",
-          "displayName": "SAMIR"
-        },
-        {
-          "name": "CSEMA:AGM",
-          "displayName": "AGMA"
-        },
-        {
-          "name": "CSEMA:BAL",
-          "displayName": "BALIMA"
-        },
-        {
-          "name": "CSEMA:DIS",
-          "displayName": "DIAC SALAF"
-        },
-        {
-          "name": "CSEMA:DLM",
-          "displayName": "DELATTRE LEVIVIER MAROC"
-        },
-        {
-          "name": "CSEMA:EQD",
-          "displayName": "EQDOM"
-        },
-        {
-          "name": "CSEMA:INV",
-          "displayName": "INVOLYS"
-        },
-        {
-          "name": "CSEMA:SLF",
-          "displayName": "SALAFIN"
-        },
-        {
-          "name": "CSEMA:UMR",
-          "displayName": "UNIMER"
-        },
-        {
-          "name": "CSEMA:DRI",
-          "displayName": "DARI COUSPATE"
-        },
-        {
-          "name": "CSEMA:NEJ",
-          "displayName": "AUTO NEJMA"
-        },
-        {
-          "name": "CSEMA:REB",
-          "displayName": "REBAB COMPANY"
-        }
-      ]
-    },
-    {
-      "name": "SignalSharp (CasaBourse )",
-      "symbols": []
-    }
-  ],
-  "showSymbolLogo": true,
-  "showSymbolDisplayName": true,
-  "isTransparent": true,
-  "colorTheme": "dark",
-  "locale": "fr"
-}
-  </script>
-</div>
 
-<span class='artistic-text' style="color: white; display: block; text-align: center;">
+
+<span class='artistic-text' style="color: white; display: block; text-align: left;">
     Aperçu :
-</span>
-<span class='qartistic-text' style="color: white; display: block; text-align: left;">
-    Faites glisser la barre supérieure du graphique 'pour plus'. (Et pour le tableau au-dessus, glissez vers la gauche et aussi vers le bas) :
-</span>
+    
+    <span class='qartistic-text' style="color: bleu; display: block; text-align: center;">
+  Glissez vers la gauche ,aussi vers le bas  :
+    
+<iframe src="https://securecodesolutionsdev.github.io/M/cb.html?instrument=EURUSD" 
+        width="100%" 
+        height="400px" 
+        class="glowing-border"></iframe>
 
-<!-- TradingView Widget BEGIN -->
+
 <span class='qartistic-text' style="color: bleu; display: block; text-align: center;">
-    La ligne bleue représente la moyenne mobile exponentielle sur 200 périodes :
+    La ligne bleue représente la moyenne mobile exponentielle sur 200 périodes .Encore ,faites glisser la barre supérieure du graphique 'pour plus':
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+  <script defer type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
   {
   "symbols": [
     [
@@ -1172,17 +859,15 @@ createTickerTapeWidget([
 }
   </script>
 </div>
-<!-- TradingView Widget END -->
-
 
 <span class='artistic-text' style="color: white; display: block; text-align: left;">
     La liste chaude est un répertoire de symboles ayant subi des variations significatives en termes de volume ou de prix sur une période donnée. Cet outil peut vous aider à identifier des opportunités de trading potentielles. Pour visualiser le graphique de chaque symbole, cliquez sur les chiffres associés
 </span>
-<!-- TradingView Widget BEGIN -->
+
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
+  <script defer type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-hotlists.js" async>
   {
   "colorTheme": "dark",
   "dateRange": "1D",
@@ -1207,19 +892,19 @@ createTickerTapeWidget([
 }
   </script>
 </div>
-<!-- TradingView Widget END -->
+
 <span class='artistic-text' style="color: white; display: block; text-align: left;">
     Ce service est fourni uniquement en anglais.
 </span>
-<!-- Symbol Profile Widget -->
+
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="symbol-profile-widget"></div>
     <input type="text" class="input-style"" id="symbolProfileInput" placeholder="Saisissez un symbole" />
     <button class="button update-button" id="changeSymbolProfileButton">Changer</button>
-    <script type="text/javascript">
+    <script defer type="text/javascript">
         function createSymbolProfileWidget() {
             const widgetContainer = document.getElementById('symbol-profile-widget');
-            widgetContainer.innerHTML = ''; // Clear the existing widget
+            widgetContainer.innerHTML = ''; 
 
             const script = document.createElement('script');
             script.type = 'text/javascript';
@@ -1240,18 +925,17 @@ createTickerTapeWidget([
             createSymbolProfileWidget();
         };
 
-        createSymbolProfileWidget(); // Initial load
+        createSymbolProfileWidget(); 
     </script>
 </div>
 <span class='artistic-text' style="color: white; display: block; text-align: left;">
     La Carte Thermique des Actions.
 </span>
  
-<!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+  <script defer type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
   {
   "exchanges": [],
   "dataSource": "AllMA",
@@ -1271,16 +955,20 @@ createTickerTapeWidget([
 }
   </script>
 </div>
-<!-- TradingView Widget END -->
+
 <span class='artistic-text' style="color: white; display: block; text-align: left;">
     Faites glisser la barre supérieure du tableau (Carte Thermique des Actions) vers la gauche pour plus d'informations.
 </span>
 
-<!-- TradingView Widget BEGIN -->
+<iframe src="https://securecodesolutionsdev.github.io/M/dex.html" 
+        width="100%" 
+        height="400px" 
+        class="glowing-border"></iframe>
+
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
+  <script defer type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-stock-heatmap.js" async>
   {
   "exchanges": [],
   "dataSource": "CSEMAMASI",
@@ -1300,17 +988,15 @@ createTickerTapeWidget([
 }
   </script>
 </div>
-<!-- TradingView Widget END -->
 
-<!-- Financials Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="financials-widget"></div>
     <input type="text" class="input-style" id="financialsInput" placeholder="Connexion faible? Forcez l'affichage 'Changer' " />
     <button class="button update-button" id="changeFinancialsButton">Changer</button>
-    <script type="text/javascript">
+    <script defer type="text/javascript">
         function createFinancialsWidget() {
             const widgetContainer = document.getElementById('financials-widget');
-            widgetContainer.innerHTML = ''; // Clear the existing widget
+            widgetContainer.innerHTML = ''; 
 
             const script = document.createElement('script');
             script.type = 'text/javascript';
@@ -1333,14 +1019,14 @@ createTickerTapeWidget([
             createFinancialsWidget();
         };
 
-        createFinancialsWidget(); // Initial load
+        createFinancialsWidget(); 
     </script>
 </div>
-<!-- TradingView Widget BEGIN -->
+
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+  <script defer type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
   {
   "width": "100%",
   "height": "500",
@@ -1354,17 +1040,15 @@ createTickerTapeWidget([
 }
   </script>
 </div>
-<!-- TradingView Widget END -->
 
-<!-- Technical Analysis Widget -->
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget" id="technical-analysis-widget"></div>
     <input type="text" class="input-style" id="technicalAnalysisInput" placeholder="Saisissez un symbole" />
     <button class="button update-button" id="changeTechnicalAnalysisButton">Changer</button>
-    <script type="text/javascript">
+    <script defer type="text/javascript">
         function createTechnicalAnalysisWidget() {
             const widgetContainer = document.getElementById('technical-analysis-widget');
-            widgetContainer.innerHTML = ''; // Clear the existing widget
+            widgetContainer.innerHTML = ''; 
 
             const script = document.createElement('script');
             script.type = 'text/javascript';
@@ -1388,17 +1072,17 @@ createTickerTapeWidget([
             createTechnicalAnalysisWidget();
         };
 
-        createTechnicalAnalysisWidget(); // Initial load
+        createTechnicalAnalysisWidget(); 
     </script>
 </div>
 <span class='artistic-text' style="color: white; display: block; text-align: left;">
     Le calendrier économique est un outil essentiel pour les traders/investisseurs, fournissant des informations sur les événements économiques  qui peuvent influencer les marchés.
 </span>
-<!-- TradingView Widget BEGIN -->
+
 <div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+  <script defer type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
   {
   "colorTheme": "dark",
   "isTransparent": true,
@@ -1410,19 +1094,19 @@ createTickerTapeWidget([
 }
   </script>
 </div>
-<!-- TradingView Widget END -->
+
 <span class='artistic-text' style="color: white; display: block; text-align: left;">
     Ce service est fourni uniquement en anglais.
-<!-- Timeline Widget -->
+
 <div class="tradingview-widget-container">
     <div class="tradingview-widget-container ```html
 __widget" id="timeline-widget"></div>
     <input type="text" class="input-style" id="timelineInput" placeholder="Saisissez un symbole" />
     <button class="button update-button" id="changeTimelineButton">Changer</button>
-    <script type="text/javascript">
+    <script defer type="text/javascript">
         function createTimelineWidget() {
             const widgetContainer = document.getElementById('timeline-widget');
-            widgetContainer.innerHTML = ''; // Clear the existing widget
+            widgetContainer.innerHTML = ''; 
 
             const script = document.createElement('script');
             script.type = 'text/javascript';
@@ -1445,59 +1129,45 @@ __widget" id="timeline-widget"></div>
             createTimelineWidget();
         };
 
-        createTimelineWidget(); // Initial load
+        createTimelineWidget(); 
     </script>
 </div>
 <button class="button" id="toggleChartBtn" onclick="window.location.href='https://securecodesolutionsdev.github.io/M/test.html?instrument=EURUSD'">ÉCHELLE GLOBALE (Le marché international)</button>
-      <!-- New Button to Show Signals -->
+      
 <div class="row">
 <span class="blue-text" style="visibility: hidden;">الله ، بارك،  ، بارك الله بارك</span>
     
 </div>
 
-
-
-      
-   <!-- New Buttons Section -->
 <div class="row" style="margin-top: 30px; display: flex; justify-content: center; flex-wrap: wrap;">
     
-   
-
 </div>
     </div>
 
     <div style="margin-top:20px;">
-      <!-- Removed analysis title -->
+      
     </div>
 
-   
-
-<!-- Chart Popup -->
 <div class="popup" id="chartPopup" onmousedown="startDrag(event)">
   <div class="popup-content">
-    <span class="close" onclick="closeChartPopup()">×</span> <!-- Close button -->
-    <h2 style="color:#FFD700;">Chart Analysis</h2> <!-- Chart title -->
+    <span class="close" onclick="closeChartPopup()">×</span> 
+    <h2 style="color:#FFD700;">Chart Analysis</h2> 
     
-
-    <!-- Button to enable keyboard -->
     <button class="button glow" id="enableKeyboardButton" onclick="enableKeyboard()">on</button>
     
-    <!-- Button to disable keyboard -->
     <button class="button glow" id="disableKeyboardButton" onclick="disableKeyboard()">off</button>
 
     <div id="chartContent" onclick="preventKeyboard(event)">
-        <!-- Text Input Area -->
+        
    <textarea id="userNotes" placeholder="  'On': Lance le clavier cliquez 'retour', dans la barre de navigation si le graphique obscurcit le texte d'entrée, ( ou continuez simplement à taper vos notes de trading) ; Icône 'X' : Quitter le graphique. Faites glisser la barre supérieure du graphique vers la gauche pour ajouter des indicateurs ." rows="4" style="height: 60px; width: 100%; border: none; border-radius: 10px; padding: 10px; font-size: 16px; color: #FFD700; background-color: rgba(50, 50, 50, 0.9); box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); resize: none;" readonly></textarea>
     
-      <!-- Insert your chart images or HTML here -->
-      <!-- TradingView Widget BEGIN -->
    </script>
 </div><div class="tradingview-widget-container">
   <div class="tradingview-widget-container__widget"></div>
   <div class="tradingview-widget-copyright">
     <span class="blue-text" style="font-size: 20px;">Fermez le graphique avant de faire défiler vers le bas pour éviter que certains boutons ne deviennent cachés. Cette fonctionnalité sera essentielle dans les prochaines mises à jour, permettant un fond clair pour les signaux de trading (dans des pop-ups transparents)</span>
   </div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+  <script defer type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
   {
     "width": "100%",
     "height": "500",
@@ -1522,61 +1192,58 @@ __widget" id="timeline-widget"></div>
     "support_host": "#"
   }
   </script></div>
-      <!-- TradingView Widget END -->
+      
     </div>
   </div>
 </div>
 
 <style>
-  /* Additional styles for glowing buttons and textarea */
   
   .button-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* Three buttons per row */
-      gap: 10px; /* Space between buttons */
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 10px; 
       margin-top: 20px;
   }
 @media (max-width: 600px) {
     .button-container {
-        flex-direction: column; /* Stack buttons vertically on small screens */
-        align-items: center; /* Center buttons */
+        flex-direction: column; 
+        align-items: center; 
     }
 }
 
-
-
   @media (max-width: 400px) {
       .button-container {
-          grid-template-columns: 1fr; /* One button per row on very small screens */
+          grid-template-columns: 1fr; 
       }
   }
 
   .button {
-      background-color: transparent; /* Transparent background */
-      border: 2px solid rgba(0, 255, 255, 0.8); /* Cyan border */
-      color: rgba(0, 255, 255, 0.8); /* Cyan text color */
-      padding: 15px; /* Adjust padding for consistent button height */
-      font-size: 18px; /* Increased font size for better readability */
+      background-color: transparent; 
+      border: 2px solid rgba(0, 255, 255, 0.8); 
+      color: rgba(0, 255, 255, 0.8); 
+      padding: 15px; 
+      font-size: 18px; 
       text-align: left;
       text-decoration: none;
-      width: auto; /* Allow width to be determined by content */
-      max-width: 150px; /* Limit button width */
-      margin: auto; /* Center buttons in their grid cell */
+      width: auto; 
+      max-width: 150px; 
+      margin: auto; 
       cursor: pointer;
-      border-radius: 10px; /* Rounded corners for buttons */
-      transition: all .3s ease-in-out; /* Transition for hover effect */
+      border-radius: 10px; 
+      transition: all .3s ease-in-out; 
       box-shadow: 0 0 5px rgba(0,255,255,.8), 
                   0 0 10px rgba(0,255,255,.8), 
-                  inset 0 0 5px rgba(135,206,250,.7); /* Inner glow effect */
-      animation: flashGlow .5s infinite alternate; /* Flashing animation */
+                  inset 0 0 5px rgba(135,206,250,.7); 
+      animation: flashGlow .5s infinite alternate; 
   }
 
   .button:hover {
-      color: white; /* Change text color on hover */
-      border-color: white; /* Change border color on hover */
+      color: white; 
+      border-color: white; 
       box-shadow: 
           0 0 20px rgba(135,206,250,.8), 
-          inset 0 0 20px rgba(135,206,250,.5); /* Enhanced glow on hover */
+          inset 0 0 20px rgba(135,206,250,.5); 
   }
 
   @keyframes flashGlow {
@@ -1595,35 +1262,34 @@ __widget" id="timeline-widget"></div>
    }
 
    textarea {
-       transition: all .3s ease-in-out; /* Smooth transition for textarea focus */
+       transition: all .3s ease-in-out; 
    }
 
    textarea:focus {
-       outline: none; /* Remove default outline */
+       outline: none; 
        box-shadow: 
            inset 0 0 5px rgba(135,206,250,.8), 
-           inset 0 0 10px rgba(135,206,250,.5); /* Inner glow effect on focus */
+           inset 0 0 10px rgba(135,206,250,.5); 
    }
 </style>
 
-<script>
+<script defer>
     function enableKeyboard() {
         const textArea = document.getElementById('userNotes');
-        textArea.removeAttribute('readonly'); // Allow input
-        textArea.focus(); // Focus on the text area
+        textArea.removeAttribute('readonly'); 
+        textArea.focus(); 
     }
 
     function disableKeyboard() {
         const textArea = document.getElementById('userNotes');
-        textArea.setAttribute('readonly', 'readonly'); // Disable input
-        textArea.blur(); // Remove focus from the textarea
+        textArea.setAttribute('readonly', 'readonly'); 
+        textArea.blur(); 
     }
 
     function preventKeyboard(event) {
-        event.stopPropagation(); // Prevent click events from bubbling up
+        event.stopPropagation(); 
     }
 
-    // Optional: Reapply readonly after focus is lost to prevent keyboard
     document.getElementById('userNotes').addEventListener('blur', function() {
         if (!this.hasAttribute('readonly')) {
             this.setAttribute('readonly', 'readonly');
@@ -1634,8 +1300,8 @@ __widget" id="timeline-widget"></div>
   </div>
 </div>
 
-<script>
-// Dragging functionality
+<script defer>
+
 let isDragging = true;
 let offsetX, offsetY;
 
@@ -1663,39 +1329,36 @@ function stopDrag() {
 
 <style>
 .popup {
-  position: absolute; /* Make sure the popup can be positioned anywhere */
-  cursor: move; /* Change cursor to indicate draggable */
+  position: absolute; 
+  cursor: move; 
 }
 </style>
     </div>
   </div>
 </div>
    
-
-  
-    <script>
-        // Function to move the button down automatically
+    <script defer>
+        
         function moveButton() {
             const button = document.getElementById('toggleChartBtn');
-            button.classList.add('move-down'); // Add the class to move the button
+            button.classList.add('move-down'); 
         }
 
-        // Call the moveButton function with a delay when the window loads
         window.onload = function() {
-            setTimeout(moveButton, 1); // Delay of 1 milliseconds 
+            setTimeout(moveButton, 1); 
         };
     </script>
     
-<script>
+<script defer>
 function showWidgetPopup() {
     const widgetPopup = document.getElementById('widgetPopup');
-    widgetPopup.classList.add('active'); // Show the popup
-    createSymbolInfoWidget(); // Load the widget
+    widgetPopup.classList.add('active'); 
+    createSymbolInfoWidget(); 
 }
 
 function closeWidgetPopup() {
     const widgetPopup = document.getElementById('widgetPopup');
-    widgetPopup.classList.remove('active'); // Hide the popup
+    widgetPopup.classList.remove('active'); 
 }
 
 document.getElementById('changeSymbolInfoButton').onclick = function() {
@@ -1704,7 +1367,7 @@ document.getElementById('changeSymbolInfoButton').onclick = function() {
 
 function createSymbolInfoWidget() {
     const widgetContainer = document.getElementById('symbol-info-widget');
-    widgetContainer.innerHTML = ''; // Clear existing content
+    widgetContainer.innerHTML = ''; 
 
     const script = document.createElement('script');
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js';
@@ -1720,157 +1383,161 @@ function createSymbolInfoWidget() {
     widgetContainer.appendChild(script);
 }
 
-// Update your existing button's onclick to show the widget
 document.getElementById('changeTickerTapeSymbolButton').addEventListener('click', function() {
-    showWidgetPopup(); // Show the new widget when clicked
+    showWidgetPopup(); 
 });
 </script>
 
-<script>
-         let chartVisible = false;
+<script defer>
+    let chartVisible = false;
 
-         function showPopup(instrument, button) {
-             const popupTitle = document.getElementById('popup-title');
-             popupTitle.textContent = `Trading Signals for ${instrument}`;
-             
-             const signalPopup = document.getElementById('signalPopup');
-             const buttons = document.querySelectorAll('.button');
+    function showPopup(instrument, button) {
+        const popupTitle = document.getElementById('popup-title');
+        popupTitle.textContent = `Trading Signals for ${instrument}`;
+        
+        const signalPopup = document.getElementById('signalPopup');
+        const buttons = document.querySelectorAll('.button');
 
-             // Hide contact information
-             document.getElementById('contactInfo').style.display = 'none';
+        document.getElementById('contactInfo').style.display = 'none';
 
-             // Remove glow from all buttons
-             buttons.forEach(btn => btn.classList.remove('glow'));
+        buttons.forEach(btn => btn.classList.remove('glow'));
 
-             // Hide all buttons and show only the clicked button
-             buttons.forEach(button => {
-                 button.style.display = 'none';
-                 button.style.opacity = '0'; // Fade out buttons
-                 button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
-              });
-              
-              // Show only the clicked button
-              button.style.display = 'inline-block';
-              button.style.opacity = '1'; // Fade in clicked button
-              button.classList.add('glow'); // Add glow effect
+        buttons.forEach(button => {
+            button.style.display = 'none';
+            button.style.opacity = '0'; 
+            button.style.transition = 'opacity .3s ease-in-out'; 
+        });
+        
+        button.style.display = 'inline-block';
+        button.style.opacity = '1'; 
+        button.classList.add('glow'); 
 
-              signalPopup.classList.add('active');
+        signalPopup.classList.add('active');
 
-              // Flashing glow effect on title
-              popupTitle.style.animation = 'flashGlow .5s forwards';
-              setTimeout(() => {
-                  popupTitle.style.animation = ''; // Reset the animation
-              },500);
+        popupTitle.style.animation = 'flashGlow .5s forwards';
+        setTimeout(() => {
+            popupTitle.style.animation = ''; 
+        }, 500);
 
-              // Hide chart toggle button when signal popup is active
-              document.getElementById('toggleChartBtn').style.display = 'none';
-         }
+        document.getElementById('toggleChartBtn').style.display = 'none';
+    }
 
-         function closePopup() {
-             const signalPopup = document.getElementById('signalPopup');
-             
-             // Hide the signal popup
-             signalPopup.classList.remove('active');
-             
-             const buttons = document.querySelectorAll('.button');
+    function closePopup() {
+        const signalPopup = document.getElementById('signalPopup');
+        
+        signalPopup.classList.remove('active');
+        
+        const buttons = document.querySelectorAll('.button');
 
-             // Show all buttons again and remove glow effect
-             buttons.forEach(button => {
-                 button.style.display = 'inline-block';
-                 button.style.opacity = '1'; // Ensure opacity is reset
-                 button.classList.remove('glow'); // Remove glow effect
-                 button.style.transition = 'opacity .3s ease-in-out'; // Add transition for smooth appearance
-                 setTimeout(() => { button.style.opacity = '1'; },100); // Reset opacity after a short delay
-              });
+        buttons.forEach(button => {
+            button.style.display = 'inline-block';
+            button.style.opacity = '1'; 
+            button.classList.remove('glow'); 
+            button.style.transition = 'opacity .3s ease-in-out'; 
+            setTimeout(() => { button.style.opacity = '1'; }, 100); 
+        });
 
-              // Flashing glow effect on title after closing
-              const popupTitle = document.getElementById('popup-title');
-              popupTitle.style.animation = 'flashGlow .5s forwards';
-              setTimeout(() => {
-                  popupTitle.style.animation = ''; // Reset the animation
-              },500);
+        const popupTitle = document.getElementById('popup-title');
+        popupTitle.style.animation = 'flashGlow .5s forwards';
+        setTimeout(() => {
+            popupTitle.style.animation = ''; 
+        }, 500);
 
-              // Show chart toggle button when signal popup is closed
-              document.getElementById('toggleChartBtn').style.display = 'inline-block';
+        document.getElementById('toggleChartBtn').style.display = 'inline-block';
+        document.getElementById('contactInfo').style.display = 'block';
+    }
 
-              // Show contact information again
-              document.getElementById('contactInfo').style.display = 'block';
-         }
+    function toggleChart(button) {
+        const chartPopup = document.getElementById('chartPopup');
+        
+        if (!chartVisible) { 
+            chartVisible = true; 
+            chartPopup.classList.add('active'); 
+            button.textContent = 'Hide Chart'; 
+            button.classList.add('glow'); 
+        } else {
+            chartVisible = false; 
+            chartPopup.classList.remove('active'); 
+            button.textContent = 'Show Chart'; 
+            button.classList.remove('glow'); 
+        }
+    }
 
-       function toggleChart(button) {
-    const chartPopup = document.getElementById('chartPopup');
-    const buttons = document.querySelectorAll('.button'); // Select all buttons except keyboard buttons
+    function toggleChartPopup() {
+        const chartPopup = document.getElementById('chartPopup');
+        const button = document.getElementById('toggleChartBtn');
+        
+        if (!chartVisible) {
+            chartVisible = true;
+            chartPopup.classList.add('active');
+            button.textContent = 'Masquer le graphique';
+            button.classList.add('glow');
+            
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(btn => {
+                if (!btn.id.includes('enableKeyboard') && !btn.id.includes('disableKeyboard')) {
+                    btn.style.display = 'none';
+                }
+            });
+        } else {
+            chartVisible = false;
+            chartPopup.classList.remove('active');
+            button.textContent = 'Afficher le graphique';
+            button.classList.remove('glow');
 
-    if (!chartVisible) { // If chart is not visible yet
-        chartVisible = true; // Set to visible
-        chartPopup.classList.add('active'); // Show chart popup
-        button.textContent = 'Hide Chart'; // Change button text to Hide Chart
-        button.classList.add('glow'); // Add glow effect on click
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(btn => {
+                if (!btn.id.includes('enableKeyboard') && !btn.id.includes('disableKeyboard')) {
+                    btn.style.display = 'inline-block';
+                }
+            });
 
-        // Hide all buttons except keyboard buttons
+            document.getElementById('contactInfo').style.display = 'block';
+        }
+    }
+
+    function closeChartPopup() {
+        const chartPopup = document.getElementById('chartPopup');
+        chartPopup.classList.remove('active');
+        
+        const toggleButton = document.getElementById('toggleChartBtn');
+        toggleButton.textContent = 'Afficher le graphique';
+        
+        chartVisible = false;
+        
+        const buttons = document.querySelectorAll('.button');
         buttons.forEach(btn => {
             if (!btn.id.includes('enableKeyboard') && !btn.id.includes('disableKeyboard')) {
-                btn.style.display = 'none'; // Hide each button
+                btn.style.display = 'inline-block';
             }
         });
-    } else { // If chart is already visible
-        chartVisible = false; // Set to not visible
-        chartPopup.classList.remove('active'); // Hide chart popup
-        button.textContent = 'Afficher le graphique'; // Change back to Show Chart
-        button.classList.remove('glow'); // Remove glow effect when hiding chart
+        
+        document.getElementById('contactInfo').style.display = 'block';
     }
-}
 
-function closeChartPopup() {
-    const chartPopup = document.getElementById('chartPopup');
+    function showContactPopup() {
+        const contactPopup = document.getElementById('authorPopup');
+        contactPopup.classList.add('active');
+    }
 
-    // Hide the chart popup
-    chartPopup.classList.remove('active');
-
-    const toggleButton = document.getElementById('toggleChartBtn');
-    toggleButton.textContent = 'Afficher le graphique'; // Reset toggle button text
-
-    chartVisible = false; // Reset visibility state of the chart
-
-    const buttons = document.querySelectorAll('.button'); // Select all buttons
-
-    // Show all buttons again except keyboard buttons
-    buttons.forEach(btn => {
-        if (!btn.id.includes('enableKeyboard') && !btn.id.includes('disableKeyboard')) {
-            btn.style.display = 'inline-block'; // Show each button
-        }
-    });
-
-    // Show contact information again after closing chart popup
-    document.getElementById('contactInfo').style.display = 'block';
-}
-         function showContactPopup() {
-             const contactPopup = document.getElementById('authorPopup');
-             contactPopup.classList.add('active');
-         }
-
-         function closeContactPopup() {
-             const contactPopup = document.getElementById('authorPopup');
-             contactPopup.classList.remove('active');
-
-             // Show contact information again after closing contact popup
-             document.getElementById('contactInfo').style.display = 'block';
-         }
+    function closeContactPopup() {
+        const contactPopup = document.getElementById('authorPopup');
+        contactPopup.classList.remove('active');
+        
+        document.getElementById('contactInfo').style.display = 'block';
+    }
 </script>
-<script>
+<script defer>
     function updateOnlineStatus() {
         const offlineMessage = document.getElementById('offline-message');
         if (navigator.onLine) {
-            offlineMessage.style.display = 'none'; // Hide message when online
+            offlineMessage.style.display = 'none';
         } else {
-            offlineMessage.style.display = 'block'; // Show message when offline
+            offlineMessage.style.display = 'block';
         }
     }
 
-    // Check initial status
     updateOnlineStatus();
-
-    // Listen for online and offline events
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
 </script>
@@ -1883,88 +1550,83 @@ function closeChartPopup() {
 <div style="text-align: center; color: #FFD700; margin-top: 20px;">
     <p id="copyrightText"></p>
 </div>
-<script>
-    const currentYear = new Date().getFullYear(); // Get the current year
+<script defer>
+    const currentYear = new Date().getFullYear();
     document.getElementById('copyrightText').innerText = `SignalSharp © ${currentYear} Tous droits réservés`;
 </script>
-    <script>
+    <script defer>
         document.getElementById('settingsButton').addEventListener('click', function() {
             const settingsPopup = document.getElementById('settingsPopup');
             if (settingsPopup.style.display === 'none') {
-                settingsPopup.style.display = 'block'; // Show the popup
+                settingsPopup.style.display = 'block';
             } else {
-                settingsPopup.style.display = 'none'; // Hide the popup
+                settingsPopup.style.display = 'none';
             }
         });
 
         function closeSettings() {
-            document.getElementById('settingsPopup').style.display = 'none'; // Hide the popup
+            document.getElementById('settingsPopup').style.display = 'none';
         }
 
-        // Dark Mode and Dark Teal functionality
         document.getElementById('darkModeToggle').addEventListener('change', function() {
             if (this.checked) {
-                document.body.style.backgroundColor = 'black'; // Set background to black
-                document.body.style.backgroundImage = 'none'; // Remove background image
-                document.body.style.color = 'white'; // Change text color for better visibility
-                document.getElementById('backgroundToggle').checked = false; // Uncheck Dark Teal if Dark Mode is activated
+                document.body.style.backgroundColor = 'black';
+                document.body.style.backgroundImage = 'none';
+                document.body.style.color = 'white';
+                document.getElementById('backgroundToggle').checked = false;
             } else {
-                // Reset to original settings if unchecked
-                document.body.style.backgroundColor = '#004764'; // Original Teal Background color
+                document.body.style.backgroundColor = '#004764';
                 document.body.style.backgroundImage = "url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg')";
-                document.body.style.color = ''; // Reset text color
+                document.body.style.color = '';
             }
         });
 
         document.getElementById('backgroundToggle').addEventListener('change', function() {
             if (this.checked) {
-                document.body.style.backgroundImage = 'none'; // Remove background image
-                document.body.style.backgroundColor = '#004764'; // Set background color to Teal
-                document.getElementById('darkModeToggle').checked = false; // Uncheck Dark Mode if Dark Teal is activated
+                document.body.style.backgroundImage = 'none';
+                document.body.style.backgroundColor = '#004764';
+                document.getElementById('darkModeToggle').checked = false;
             } else {
-                // Reset to original background image if unchecked
                 document.body.style.backgroundImage = "url('https://raw.githubusercontent.com/SecureCodeSolutionsDev/M/refs/heads/main/p.jpg')";
-                document.body.style.backgroundColor = '#004764'; // Ensure Teal Background color is set
+                document.body.style.backgroundColor = '#004764';
             }
         });
     </script>
-<script>
-// Function to toggle visibility of signal buttons
-function toggleSignalButtons() {
-    const signalButtons = document.getElementById('signalButtons');
-    const toggleButton = document.getElementById('showSignalsButton');
+<script defer>
+    function toggleSignalButtons() {
+        const signalButtons = document.getElementById('signalButtons');
+        const toggleButton = document.getElementById('showSignalsButton');
 
-    // Toggle visibility of the signal buttons
-    if (signalButtons.style.display === 'none' || signalButtons.style.display === '') {
-        signalButtons.style.display = 'block'; // Show buttons
-        toggleButton.textContent = 'Hide Signals'; // Change button text
-    } else {
-        signalButtons.style.display = 'none'; // Hide buttons
-        toggleButton.textContent = 'Show Signals'; // Change button text
+        if (signalButtons.style.display === 'none' || signalButtons.style.display === '') {
+            signalButtons.style.display = 'block';
+            toggleButton.textContent = 'Hide Signals';
+        } else {
+            signalButtons.style.display = 'none';
+            toggleButton.textContent = 'Show Signals';
+        }
     }
-}
 
-let progress = document.getElementById('progress-bar');
-let percentageText = document.getElementById('percentage');
-let totalDuration = 15000; // Total duration in milliseconds (15 seconds)
-let startTime = Date.now();
+    let progress = document.getElementById('progress-bar');
+    let percentageText = document.getElementById('percentage');
+    let totalDuration = 15000;
+    let startTime = Date.now();
 
-function updateProgress() {
-    let elapsedTime = Date.now() - startTime;
-    let percentComplete = Math.min((elapsedTime / totalDuration) * 100, 100);
-    
-    progress.style.width = percentComplete + '%';
-    percentageText.textContent = Math.floor(percentComplete) + '%';
+    function updateProgress() {
+        let elapsedTime = Date.now() - startTime;
+        let percentComplete = Math.min((elapsedTime / totalDuration) * 100, 100);
 
-    if (percentComplete >= 100) {
-        document.getElementById('preload').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    } else {
-        requestAnimationFrame(updateProgress);
+        progress.style.width = percentComplete + '%';
+        percentageText.textContent = Math.floor(percentComplete) + '%';
+
+        if (percentComplete >= 100) {
+            document.getElementById('preload').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        } else {
+            requestAnimationFrame(updateProgress);
+        }
     }
-}
 
-requestAnimationFrame(updateProgress);
+    requestAnimationFrame(updateProgress);
 </script>
 <span class="blue-text" style="visibility: hidden;">الله ، بارك،  ، بارك الله بارك</span>
 <span class="blue-text" style="visibility: hidden;">الله ، بارك،  ، بارك الله بارك</span>
