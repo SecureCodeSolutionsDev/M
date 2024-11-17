@@ -258,6 +258,29 @@ body {
            background-color: transparent; /* Background color for button style */
            border: none; /* No border for button style */
        }
+       
+       .text-3d {
+            font-size: 50px;
+            color: #00ffcc; /* Futuristic color */
+            text-shadow: 
+                0 1px 0 rgba(255, 255, 255, 0.2),
+                0 2px 0 rgba(255, 255, 255, 0.2),
+                0 3px 0 rgba(255, 255, 255, 0.2),
+                0 4px 0 rgba(255, 255, 255, 0.2),
+                0 5px 10px rgba(0, 0, 0, 0.5);
+            transform: perspective(800px) rotateX(10deg) rotateY(-10deg);
+            transition: transform 0.3s ease-in-out;
+        }
+        .text-3d:hover {
+            transform: perspective(800px) rotateX(15deg) rotateY(-15deg) scale(1.05);
+            text-shadow: 0 0 5px rgba(255,215,0,.7), 
+                        0 0 10px rgba(255,215,0,.5), 
+                        0 0 15px rgba(255,215,0,.3); /* Glowing effect for artistic text */
+           animation: flashText 1s infinite alternate; /* Flashing animation for artistic text */
+           cursor: pointer; /* Pointer cursor on hover */
+           background-color: transparent; /* Background color for button style */
+           border: none; /* No border for button style */
+        }
 
        @keyframes flashText {
            from {
@@ -421,7 +444,7 @@ input, textarea {
     <button id="settingsButton" style="background-color: transparent; border: 2px solid rgba(0, 255, 255, 0.8); color: rgba(0, 255, 255, 0.8); padding: 10px; font-size: 16px; border-radius: 10px; cursor: pointer;">Paramètres</button>
 </div>
 
-<div class="settings-menu" id="settingsPopup" style="display: none; position: fixed; top: 60px; right: 20px; background-color: rgba(30, 30, 30, 0.9); padding: 10px; border-radius: 8px; color: #FFD700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); z-index: 1000; width: 200px;">
+<div class="settings-menu" id="settingsPopup" style="display: none; position: fixed; top: 60px; right: 20px; background-color: rgba(30, 30, 30, 0.9); padding: 10px; border-radius: 8px; color: #FFD700; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); z-index: 1000; width: 80%;">
     <label style="display:block; font-size: 12px;">
         <input type="checkbox" id="darkModeToggle" style="margin-right: 5px;"> Mode Sombre
     </label>
@@ -474,7 +497,7 @@ input, textarea {
 <div class="tradingview-widget-containerw" style="height: 200px;">
     <div class="tradingview-widget-container__widget" id="ticker-tape-widget"></div>
     <input type="text" id="tickerTapeSymbolInput" placeholder="Saisissez CSEMA:symbole . Pour éviter toute confusion. " />
-    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: -15px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Explorer l'action</button> <!-- Adjusted size -->
+    <button class="button update-button" id="changeTickerTapeSymbolButton" style="margin-top: 2px; padding: 10px 1px; font-size: 14px; display: inline-block; position: relative;">Explorer l'action</button> <!-- Adjusted size -->
     <script type="text/javascript">
       function createTickerTapeWidget(symbols) {
         const widgetContainer = document.getElementById('ticker-tape-widget');
@@ -532,8 +555,628 @@ createTickerTapeWidget([
 <div id="chartToggleButton" style="text-align: left;">
     <button class="button" id="toggleChartBtn" onclick="toggleChart(this)">Afficher le graphique</button>
 </div>
+
+   
+<div class="tradingview-widget-containerr">
+  <div class="tradingview-widget-containerr__widget"></div>
+ 
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-quotes.js" async>
+  {
+  "width": "100%",
+  "height": 350,
+  "symbolsGroups": [
+    {
+      "name": "Marché actions Maroc par SignalSharp (CasaBourse )",
+      "symbols": [
+        {
+          "name": "CSEMA:TGC",
+          "displayName": "TRAVAUX GENERAUX DE CONSTRUCTIONS DE CASABLANCA"
+        },
+        {
+          "name": "CSEMA:ADH",
+          "displayName": "DOUJA PROM ADDOHA"
+        },
+        {
+          "name": "CSEMA:MSA",
+          "displayName": "SODEP-MARSA MAROC"
+        },
+        {
+          "name": "CSEMA:AKT",
+          "displayName": "AKDITAL S.A"
+        },
+        {
+          "name": "CSEMA:JET",
+          "displayName": "JET CONTRACTORS"
+        },
+        {
+          "name": "CSEMA:RDS",
+          "displayName": "RES DAR SAADA"
+        },
+        {
+          "name": "CSEMA:ADI",
+          "displayName": "ALLIANCES"
+        },
+        {
+          "name": "CSEMA:SRM",
+          "displayName": "REALISATIONS MECANIQUES"
+        },
+        {
+          "name": "CSEMA:CDM",
+          "displayName": "CDM"
+        },
+        {
+          "name": "CSEMA:ARD",
+          "displayName": "ARADEI CAPITAL"
+        },
+        {
+          "name": "CSEMA:CFG",
+          "displayName": "CFG BANK"
+        },
+        {
+          "name": "CSEMA:IAM",
+          "displayName": "ITISSALAT AL-MAGHRIB"
+        },
+        {
+          "name": "CSEMA:NKL",
+          "displayName": "ENNAKL"
+        },
+        {
+          "name": "CSEMA:TQM",
+          "displayName": "TAQA MOROCCO"
+        },
+        {
+          "name": "CSEMA:SNP",
+          "displayName": "SNEP"
+        },
+        {
+          "name": "CSEMA:HPS",
+          "displayName": "HPS"
+        },
+        {
+          "name": "CSEMA:BCP",
+          "displayName": "BCP"
+        },
+        {
+          "name": "CSEMA:CMA",
+          "displayName": "CIMENTS DU MAROC"
+        },
+        {
+          "name": "CSEMA:ATL",
+          "displayName": "ATLANTASANAD"
+        },
+        {
+          "name": "CSEMA:CSR",
+          "displayName": "COSUMAR"
+        },
+        {
+          "name": "CSEMA:ATW",
+          "displayName": "ATTIJARIWAFA BANK"
+        },
+        {
+          "name": "CSEMA:MUT",
+          "displayName": "MUTANDIS SCA"
+        },
+        {
+          "name": "CSEMA:BOA",
+          "displayName": "BANK OF AFRICA"
+        },
+        {
+          "name": "CSEMA:CMT",
+          "displayName": "MINIERE TOUISSIT"
+        },
+        {
+          "name": "CSEMA:RIS",
+          "displayName": "RISMA"
+        },
+        {
+          "name": "CSEMA:SID",
+          "displayName": "SONASID"
+        },
+        {
+          "name": "CSEMA:DHO",
+          "displayName": "DELTA HOLDING"
+        },
+        {
+          "name": "CSEMA:MNG",
+          "displayName": "MANAGEM"
+        },
+        {
+          "name": "CSEMA:COL",
+          "displayName": "COLORADO"
+        },
+        {
+          "name": "CSEMA:ATH",
+          "displayName": "AUTO HALL"
+        },
+        {
+          "name": "CSEMA:SBM",
+          "displayName": "SOCIETE DES BOISSONS DU MAROC"
+        },
+        {
+          "name": "CSEMA:DYT",
+          "displayName": "DISTY TECHNOLOGIES"
+        },
+        {
+          "name": "CSEMA:IMO",
+          "displayName": "IMMORENTE INVEST"
+        },
+        {
+          "name": "CSEMA:CIH",
+          "displayName": "CIH"
+        },
+        {
+          "name": "CSEMA:DWY",
+          "displayName": "DISWAY"
+        },
+        {
+          "name": "CSEMA:TMA",
+          "displayName": "TOTALENERGIES MARKETING MAROC"
+        },
+        {
+          "name": "CSEMA:LHM",
+          "displayName": "LAFARGEHOLCIM MAR"
+        },
+        {
+          "name": "CSEMA:STR",
+          "displayName": "STROC INDUSTRIE"
+        },
+        {
+          "name": "CSEMA:S2M",
+          "displayName": "S.M MONETIQUE"
+        },
+        {
+          "name": "CSEMA:SMI",
+          "displayName": "SMI"
+        },
+        {
+          "name": "CSEMA:AFI",
+          "displayName": "AFRIC INDUSTRIES"
+        },
+        {
+          "name": "CSEMA:ALM",
+          "displayName": "ALUMINIUM DU MAROC"
+        },
+        {
+          "name": "CSEMA:MIC",
+          "displayName": "MICRODATA"
+        },
+        {
+          "name": "CSEMA:MOX",
+          "displayName": "MAGHREB OXYGENE"
+        },
+        {
+          "name": "CSEMA:CRS",
+          "displayName": "CARTIER SAADA"
+        },
+        {
+          "name": "CSEMA:FBR",
+          "displayName": "FENIE BROSSETTE"
+        },
+        {
+          "name": "CSEMA:LBV",
+          "displayName": "LABEL VIE"
+        },
+        {
+          "name": "CSEMA:MDP",
+          "displayName": "MED PAPER"
+        },
+        {
+          "name": "CSEMA:AFM",
+          "displayName": "AFMA"
+        },
+        {
+          "name": "CSEMA:GAZ",
+          "displayName": "AFRIQUIA GAZ"
+        },
+        {
+          "name": "CSEMA:OUL",
+          "displayName": "OULMES"
+        },
+        {
+          "name": "CSEMA:WAA",
+          "displayName": "WAFA ASSURANCE"
+        },
+        {
+          "name": "CSEMA:SNA",
+          "displayName": "STOKVIS NORD AFRIQUE"
+        },
+        {
+          "name": "CSEMA:SOT",
+          "displayName": "SOTHEMA"
+        },
+        {
+          "name": "CSEMA:BCI",
+          "displayName": "BMCI"
+        },
+        {
+          "name": "CSEMA:CTM",
+          "displayName": "CTM"
+        },
+        {
+          "name": "CSEMA:MLE",
+          "displayName": "MAROC LEASING"
+        },
+        {
+          "name": "CSEMA:IBC",
+          "displayName": "IB MAROC.COM"
+        },
+        {
+          "name": "CSEMA:LES",
+          "displayName": "LESIEUR CRISTAL"
+        },
+        {
+          "name": "CSEMA:PRO",
+          "displayName": "PROMOPHARM S.A"
+        },
+        {
+          "name": "CSEMA:SAH",
+          "displayName": "SANLAM MAROC"
+        },
+        {
+          "name": "CSEMA:ZDJ",
+          "displayName": "ZELLIDJA S.A"
+        },
+        {
+          "name": "CSEMA:M2M",
+          "displayName": "M2M GROUP"
+        },
+        {
+          "name": "CSEMA:MAB",
+          "displayName": "MAGHREBAIL"
+        },
+        {
+          "name": "CSEMA:SAM",
+          "displayName": "SAMIR"
+        },
+        {
+          "name": "CSEMA:AGM",
+          "displayName": "AGMA"
+        },
+        {
+          "name": "CSEMA:BAL",
+          "displayName": "BALIMA"
+        },
+        {
+          "name": "CSEMA:DIS",
+          "displayName": "DIAC SALAF"
+        },
+        {
+          "name": "CSEMA:DLM",
+          "displayName": "DELATTRE LEVIVIER MAROC"
+        },
+        {
+          "name": "CSEMA:EQD",
+          "displayName": "EQDOM"
+        },
+        {
+          "name": "CSEMA:INV",
+          "displayName": "INVOLYS"
+        },
+        {
+          "name": "CSEMA:SLF",
+          "displayName": "SALAFIN"
+        },
+        {
+          "name": "CSEMA:UMR",
+          "displayName": "UNIMER"
+        },
+        {
+          "name": "CSEMA:DRI",
+          "displayName": "DARI COUSPATE"
+        },
+        {
+          "name": "CSEMA:NEJ",
+          "displayName": "AUTO NEJMA"
+        },
+        {
+          "name": "CSEMA:REB",
+          "displayName": "REBAB COMPANY"
+        }
+      ]
+    },
+    {
+      "name": "SignalSharp (CasaBourse )",
+      "symbols": []
+    }
+  ],
+  "showSymbolLogo": true,
+  "showSymbolDisplayName": true,
+  "isTransparent": true,
+  "colorTheme": "dark",
+  "locale": "fr"
+}
+  </script>
+</div>
+
+<span class='artistic-text' style="color: white; display: block; text-align: center;">
+    Aperçu :
+</span>
 <span class='qartistic-text' style="color: white; display: block; text-align: left;">
-    La liste chaude est un répertoire de symboles ayant subi des variations significatives en termes de volume ou de prix sur une période donnée. Cet outil peut vous aider à identifier des opportunités de trading potentielles.
+    Faites glisser la barre supérieure du graphique 'pour plus'. (Et pour le tableau au-dessus, glissez vers la gauche et aussi vers le bas) :
+</span>
+
+<!-- TradingView Widget BEGIN -->
+<span class='qartistic-text' style="color: bleu; display: block; text-align: center;">
+    La ligne bleue représente la moyenne mobile exponentielle sur 200 périodes :
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+  {
+  "symbols": [
+    [
+      "CSEMA:ADH|1D"
+    ],
+    [
+      "CSEMA:ADI|1D"
+    ],
+    [
+      "CSEMA:AFI|1D"
+    ],
+    [
+      "CSEMA:AFM|1D"
+    ],
+    [
+      "CSEMA:AGM|1D"
+    ],
+    [
+      "CSEMA:AKT|1D"
+    ],
+    [
+      "CSEMA:AKT|1D"
+    ],
+    [
+      "CSEMA:ALM|1D"
+    ],
+    [
+      "CSEMA:ARD|1D"
+    ],
+    [
+      "CSEMA:ATH|1D"
+    ],
+    [
+      "CSEMA:ATL|1D"
+    ],
+    [
+      "CSEMA:ATW|1D"
+    ],
+    [
+      "CSEMA:BAL|1D"
+    ],
+    [
+      "CSEMA:BCI|1D"
+    ],
+    [
+      "CSEMA:BCP|1D"
+    ],
+    [
+      "CSEMA:BOA|1D"
+    ],
+    [
+      "CSEMA:CDM|1D"
+    ],
+    [
+      "CSEMA:CFG|1D"
+    ],
+    [
+      "CSEMA:CIH|1D"
+    ],
+    [
+      "CSEMA:CMA|1D"
+    ],
+    [
+      "CSEMA:CMT|1D"
+    ],
+    [
+      "CSEMA:COL|1D"
+    ],
+    [
+      "CSEMA:CRS|1D"
+    ],
+    [
+      "CSEMA:CSR|1D"
+    ],
+    [
+      "CSEMA:CTM|1D"
+    ],
+    [
+      "CSEMA:DHO|1D"
+    ],
+    [
+      "CSEMA:DIS|1D"
+    ],
+    [
+      "CSEMA:DLM|1D"
+    ],
+    [
+      "CSEMA:DRI|1D"
+    ],
+    [
+      "CSEMA:DWY|1D"
+    ],
+    [
+      "CSEMA:DYT|1D"
+    ],
+    [
+      "CSEMA:FBR|1D"
+    ],
+    [
+      "CSEMA:GAZ|1D"
+    ],
+    [
+      "CSEMA:HPS|1D"
+    ],
+    [
+      "CSEMA:IAM|1D"
+    ],
+    [
+      "CSEMA:IBC|1D"
+    ],
+    [
+      "CSEMA:IMO|1D"
+    ],
+    [
+      "CSEMA:INV|1D"
+    ],
+    [
+      "CSEMA:JET|1D"
+    ],
+    [
+      "CSEMA:LBV|1D"
+    ],
+    [
+      "CSEMA:LES|1D"
+    ],
+    [
+      "CSEMA:LHM|1D"
+    ],
+    [
+      "CSEMA:M2M|1D"
+    ],
+    [
+      "CSEMA:MAB|1D"
+    ],
+    [
+      "CSEMA:MDP|1D"
+    ],
+    [
+      "CSEMA:MIC|1D"
+    ],
+    [
+      "CSEMA:MLE|1D"
+    ],
+    [
+      "CSEMA:MNG|1D"
+    ],
+    [
+      "CSEMA:MOX|1D"
+    ],
+    [
+      "CSEMA:MSA|1D"
+    ],
+    [
+      "CSEMA:MUT|1D"
+    ],
+    [
+      "CSEMA:NEJ|1D"
+    ],
+    [
+      "CSEMA:NKL|1D"
+    ],
+    [
+      "CSEMA:OUL|1D"
+    ],
+    [
+      "CSEMA:PRO|1D"
+    ],
+    [
+      "CSEMA:RDS|1D"
+    ],
+    [
+      "CSEMA:REB|1D"
+    ],
+    [
+      "CSEMA:RIS|1D"
+    ],
+    [
+      "CSEMA:S2M|1D"
+    ],
+    [
+      "CSEMA:SAH|1D"
+    ],
+    [
+      "CSEMA:SAM|1D"
+    ],
+    [
+      "CSEMA:SBM|1D"
+    ],
+    [
+      "CSEMA:SID|1D"
+    ],
+    [
+      "CSEMA:SMI|1D"
+    ],
+    [
+      "CSEMA:SNA|1D"
+    ],
+    [
+      "CSEMA:SNP|1D"
+    ],
+    [
+      "CSEMA:SOT|1D"
+    ],
+    [
+      "CSEMA:SRM|1D"
+    ],
+    [
+      "CSEMA:STR|1D"
+    ],
+    [
+      "CSEMA:TGC|1D"
+    ],
+    [
+      "CSEMA:TMA|1D"
+    ],
+    [
+      "CSEMA:TQM|1D"
+    ],
+    [
+      "CSEMA:UMR|1D"
+    ],
+    [
+      "CSEMA:WAA|1D"
+    ],
+    [
+      "CSEMA:ZDJ|1D"
+    ],
+    [
+      "CSEMA:EQD|1D"
+    ]
+  ],
+  "chartOnly": false,
+  "width": "100%",
+  "height": 500,
+  "locale": "fr",
+  "colorTheme": "dark",
+  "isTransparent": true,
+  "autosize": false,
+  "showVolume": true,
+  "showMA": true,
+  "hideDateRanges": false,
+  "hideMarketStatus": false,
+  "hideSymbolLogo": false,
+  "scalePosition": "right",
+  "scaleMode": "Logarithmic",
+  "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+  "fontSize": "10",
+  "noTimeScale": false,
+  "valuesTracking": "2",
+  "changeMode": "price-and-percent",
+  "chartType": "area",
+  "maLineColor": "#2962FF",
+  "maLineWidth": 1,
+  "maLength": 200,
+  "headerFontSize": "medium",
+  "lineWidth": 2,
+  "lineType": 0,
+  "dateRanges": [
+    "1d|1",
+    "5d|5",
+    "1m|30",
+    "3m|60",
+    "12m|1D",
+    "60m|1W",
+    "all|1M"
+  ],
+  "dateFormat": "dd-MM-yyyy"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+
+
+<span class='artistic-text' style="color: white; display: block; text-align: left;">
+    La liste chaude est un répertoire de symboles ayant subi des variations significatives en termes de volume ou de prix sur une période donnée. Cet outil peut vous aider à identifier des opportunités de trading potentielles. Pour visualiser le graphique de chaque symbole, cliquez sur les chiffres associés
 </span>
 <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
@@ -1323,7 +1966,9 @@ function updateProgress() {
 
 requestAnimationFrame(updateProgress);
 </script>
-
+<span class="blue-text" style="visibility: hidden;">الله ، بارك،  ، بارك الله بارك</span>
+<span class="blue-text" style="visibility: hidden;">الله ، بارك،  ، بارك الله بارك</span>
+ <div class="text-3d">Casablanca</div>
 </div>
 </body>
 </html>
